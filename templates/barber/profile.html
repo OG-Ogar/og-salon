@@ -33,7 +33,7 @@
     </h1>
 
     <p class="barber-lede">
-        This is the information clients see about your hairdressing shop.
+        This is the information clients see about your salon.
     </p>
 
     <section class="barber-profile-card">
@@ -171,32 +171,6 @@
 
         </div>
 
-        <!-- Logout is intentionally only on the profile page. -->
-        <div class="barber-logout">
-
-            <h2 class="barber-logout-title">
-                Account
-            </h2>
-
-            <p class="barber-logout-text">
-                Finished using your barber account? You can safely log out here.
-            </p>
-
-            <form method="post"
-                  action="/barber/logout" class="ui-form">
-
-                <input type="hidden"
-                       name="csrf_token"
-                       value="{{.CSRF}}">
-
-                <button class="barber-button danger ui-control"
-                        type="submit">
-                    Log Out
-                </button>
-
-            </form>
-
-        </div>
 
     </section>
 

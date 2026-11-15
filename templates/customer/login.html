@@ -99,21 +99,7 @@
                 >
             </div>
 
-            <div class="auth-options">
-                <a href="/customer/forgot-password">
-                    Forgot your password?
-                </a>
-            </div>
-
-            <button class="auth-submit ui-control" type="submit">
-                Sign In
-            </button>
-
-        </form>
-
-        {{if .PasskeyAvailable}}
             <div class="auth-passkey" data-passkey-login-wrap hidden>
-                <div class="auth-divider" aria-hidden="true"><span>or use this device</span></div>
 
                 <button type="button"
                         class="auth-passkey-button"
@@ -126,14 +112,25 @@
                         </svg>
                     </span>
                     <span>
-                        <strong>Sign in with fingerprint</strong>
-                        <small>Use your phone's fingerprint, Face ID, or screen lock.</small>
+                        <strong>Use fingerprint</strong>
+                        <small>Use your fingerprint, Face ID, or screen lock.</small>
                     </span>
                 </button>
 
                 <p class="hint" data-passkey-status role="status" aria-live="polite"></p>
             </div>
-        {{end}}
+
+            <div class="auth-options">
+                <a href="/customer/forgot-password">
+                    Forgot your password?
+                </a>
+            </div>
+
+            <button class="auth-submit ui-control" type="submit">
+                Sign In
+            </button>
+
+        </form>
 
         <div class="auth-register">
             <span>Don't have an account?</span>

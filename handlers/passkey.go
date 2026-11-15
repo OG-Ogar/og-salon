@@ -444,7 +444,7 @@ func passkeyLoginBegin(w http.ResponseWriter, r *http.Request, role session.Role
 		return
 	}
 	if len(account.credentials) == 0 {
-		jsonError(w, http.StatusBadRequest, "No fingerprint is set up for this account yet. Sign in with your password, then add one from your dashboard.")
+		jsonError(w, http.StatusBadRequest, "No fingerprint is registered for this account yet. Sign in with your password to continue.")
 		return
 	}
 
