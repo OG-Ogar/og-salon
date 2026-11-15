@@ -33,7 +33,7 @@
     </h1>
 
     <p class="barber-lede">
-        This is the information customers see about your barber shop.
+        This is the information clients see about your barber shop.
     </p>
 
     <section class="barber-profile-card">
@@ -58,7 +58,7 @@
             {{if .PersonalImage}}
                 <img class="barber-personal-photo fullscreen-image"
                     src="{{.PersonalImage}}"
-                    alt="Your picture, as customers see it"
+                    alt="Your picture, as clients see it"
                     data-fullscreen-image srcset="{{imageSrcset .PersonalImage}}" sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px" width="640" height="480" loading="lazy" decoding="async">
 
                 <div>
@@ -67,7 +67,7 @@
                     </strong>
 
                     <p class="barber-hint">
-                        This is the picture customers see beside your name.
+                        This is the picture clients see beside your name.
                     </p>
                 </div>
             {{else}}
@@ -161,7 +161,7 @@
 
             <a class="barber-button"
                href="/explore/{{.ID}}" target="_blank" rel="noopener">
-                View Public Profile as Customer ↗
+                View Public Profile as Client ↗
             </a>
 
             <a class="barber-button"

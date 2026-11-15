@@ -66,7 +66,7 @@ func (c Config) BarberBookingsLink() (string, error) {
 func BookingEmailContent(origin string, n BookingNotification) (string, string) {
 	customerName := strings.TrimSpace(n.CustomerName)
 	if customerName == "" {
-		customerName = "Customer"
+		customerName = "Client"
 	}
 	serviceName := strings.TrimSpace(n.ServiceName)
 	if serviceName == "" {
@@ -125,16 +125,16 @@ func BookingEmailContent(origin string, n BookingNotification) (string, string) 
 You have received a new haircut booking request on OG's Salon!
 
 Booking Details:
-- Customer Name: %s
-- Customer Phone: %s
-- Customer Email: %s
+- Client Name: %s
+- Client Phone: %s
+- Client Email: %s
 - Service: %s
 - Price: %s
 - Duration: %s
 - Appointment Date: %s
 - Appointment Time: %s
 - Shop: %s
-- Customer Notes: %s
+- Client Notes: %s
 
 Please review, accept, or reject this request:
 %s
@@ -173,4 +173,3 @@ func (c Config) SendBookingNotification(ctx context.Context, n BookingNotificati
 
 	return c.sendSMTP(ctx, n.BarberEmail, subject, body)
 }
-

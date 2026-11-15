@@ -157,7 +157,7 @@ func TestPublicExploreRequiresLocationAndShowsMatchingBarber(t *testing.T) {
 	}
 	browser := newBrowser(t)
 	body := get(t, browser, server.URL+"/explore")
-	mustContain(t, "explore", body, "Where do you need a barber?")
+	mustContain(t, "explore", body, "Where do you need a barber or hair stylist?")
 	body = get(t, browser, server.URL+"/explore?state=Lagos&area=Ikeja")
 	mustContain(t, "filtered explore", body, "Ada Cuts")
 }

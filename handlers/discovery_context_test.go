@@ -88,7 +88,7 @@ func TestDiscoveryContextSurvivesAuthentication(t *testing.T) {
 	authenticated.AddCookie(sessionCookie)
 	signedIn := httptest.NewRecorder()
 	ExploreBarberHandler(signedIn, authenticated, id)
-	if signedIn.Code != 200 || strings.Contains(signedIn.Body.String(), ">Customer Login") || !strings.Contains(signedIn.Body.String(), "/customer/dashboard") {
+	if signedIn.Code != 200 || strings.Contains(signedIn.Body.String(), ">Client Login") || !strings.Contains(signedIn.Body.String(), "/customer/dashboard") {
 		t.Fatal("public profile ignores signed-in account")
 	}
 	customer, s, ok := requireCustomer(httptest.NewRecorder(), authenticated)

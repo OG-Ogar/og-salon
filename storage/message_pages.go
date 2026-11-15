@@ -90,7 +90,7 @@ func conversationPage(ctx context.Context, role string, id int, cursor PageCurso
 			join = "p.customer_id"
 			detail = "b.phone_number"
 			image = "b.profile_image"
-			fallback = "Customer"
+			fallback = "Client"
 		}
 		query := `with latest as (
    select m.barber_id,m.customer_id,max(m.id) as last_id from public.messages m where m.` + role + `_id=$1 group by m.barber_id,m.customer_id
@@ -147,7 +147,7 @@ func conversationPage(ctx context.Context, role string, id int, cursor PageCurso
 					card.Image = b.PersonalImage
 				}
 			} else {
-				card.Name = "Customer"
+				card.Name = "Client"
 				if c, ok := findCustomerByID(card.CustomerID); ok {
 					card.Name = c.FullName
 					card.Detail = c.PhoneNumber

@@ -213,11 +213,11 @@
         <div class="admin-ops-card">
             <div>
                 <div class="admin-card-header">
-                    <span class="admin-card-tag">Customer Base</span>
+                    <span class="admin-card-tag">Client Base</span>
                     <span class="badge Active">Verified</span>
                 </div>
                 <div class="admin-ops-stat">{{.Customers}}</div>
-                <p class="admin-ops-meta">Direct registered customer accounts</p>
+                <p class="admin-ops-meta">Direct registered client accounts</p>
             </div>
             <div class="ui-actions">
                 <a class="button small" href="/admin/customers">View directory</a>
@@ -266,11 +266,11 @@
                     <span class="badge Active">Live</span>
                 </div>
                 <div class="admin-ops-stat" style="font-size: 1.8rem; padding-top: 6px;">Live Views</div>
-                <p class="admin-ops-meta">Inspect storefront &amp; customer portals</p>
+                <p class="admin-ops-meta">Inspect storefront &amp; client portals</p>
             </div>
             <div class="ui-actions">
                 <a class="button small" href="/" target="_blank" rel="noopener">Landing ↗</a>
-                <a class="button small" href="/customer/dashboard" target="_blank" rel="noopener">Customer ↗</a>
+                <a class="button small" href="/customer/dashboard" target="_blank" rel="noopener">Client ↗</a>
             </div>
         </div>
 
@@ -356,9 +356,9 @@
     <!-- CUSTOMER DASHBOARD BACKGROUND SECTION (SIDE-BY-SIDE PREVIEW & GUIDELINES) -->
     <section class="panel ui-panel admin-media-section" aria-labelledby="heading-customer-asset">
 
-        <h2 id="heading-customer-asset" style="margin-top: 0;">Customer Dashboard Atmosphere Artwork</h2>
+        <h2 id="heading-customer-asset" style="margin-top: 0;">Client Dashboard Atmosphere Artwork</h2>
         <p class="lede">
-            Atmospheric backdrop rendered behind the customer authenticated dashboard workspace.
+            Atmospheric backdrop rendered behind the client authenticated dashboard workspace.
         </p>
 
         <div class="admin-media-grid">
@@ -367,18 +367,18 @@
             <div>
                 <h3 style="font-size: 1rem; margin-bottom: 10px; color: var(--ink);">Current Active Artwork</h3>
                 <div class="admin-preview-box">
-                    <span class="admin-preview-badge">Customer Portal</span>
+                    <span class="admin-preview-badge">Client Portal</span>
                     {{if .CustomerLandingImage}}
                         <img class="photo"
                              src="{{.CustomerLandingImage}}"
-                             alt="Current customer dashboard background"
+                             alt="Current client dashboard background"
                              data-fullscreen-image
                              srcset="{{imageSrcset .CustomerLandingImage}}"
                              sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 480px"
                              width="640" height="360" loading="lazy" decoding="async">
                     {{else}}
                         <p class="muted" style="padding: 24px; text-align: center;">
-                            No custom image uploaded.<br>Default customer backdrop active.
+                            No custom image uploaded.<br>Default client backdrop active.
                         </p>
                     {{end}}
                 </div>
@@ -417,10 +417,10 @@
 
                     <div class="actions ui-actions">
                         <button class="primary ui-control" type="submit">
-                            Upload Customer Backdrop
+                            Upload Client Backdrop
                         </button>
                         <a class="button" href="/customer/dashboard" target="_blank" rel="noopener">
-                            Inspect Customer Portal ↗
+                            Inspect Client Portal ↗
                         </a>
                     </div>
                 </form>

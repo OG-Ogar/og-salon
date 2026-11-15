@@ -234,7 +234,7 @@ func messagePush(senderName, text, image, audio, video, url string, messageID in
 func bookingPush(bookingID int, customerName, service, date, timeText string) pushNotification {
 	customerName = strings.TrimSpace(customerName)
 	if customerName == "" {
-		customerName = "a customer"
+		customerName = "a client"
 	}
 	service = strings.TrimSpace(service)
 	if service == "" {

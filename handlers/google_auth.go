@@ -75,7 +75,7 @@ func GoogleAuthStartHandler(w http.ResponseWriter, r *http.Request) {
 
 	role, ok := googleRole(r.URL.Query().Get("role"))
 	if !ok {
-		journeyError(w, "Choose whether to sign in as a customer or a barber.", http.StatusBadRequest)
+		journeyError(w, "Choose whether to sign in as a client or as a barber/hair stylist.", http.StatusBadRequest)
 		return
 	}
 	next := safeGoogleNext(role, r.URL.Query().Get("next"))

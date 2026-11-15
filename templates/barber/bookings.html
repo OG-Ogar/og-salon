@@ -36,7 +36,7 @@
             </h1>
 
             <p class="barber-lede">
-                Manage customer requests and your confirmed appointments.
+                Manage client requests and your confirmed appointments.
             </p>
         </div>
 
@@ -67,7 +67,7 @@
                 <table class="barber-table">
 
                     <caption class="visually-hidden">
-                        New requests from customers.
+                        New requests from clients.
                     </caption>
 
                     <thead>
@@ -75,7 +75,7 @@
                         <tr>
                             <th scope="col">Date</th>
                             <th scope="col">Time</th>
-                            <th scope="col">Customer</th>
+                            <th scope="col">Client</th>
                             <th scope="col">Hairstyle</th>
                             <th scope="col">Notes</th>
                             <th scope="col">Actions</th>
@@ -98,7 +98,7 @@
                                     {{.Time}}
                                 </td>
 
-                                <td data-label="Customer">
+                                <td data-label="Client">
                                     {{.CustomerName}}
                                     <br>
                                     <span class="barber-hint">
@@ -251,7 +251,7 @@
                         <tr>
                             <th scope="col">Date</th>
                             <th scope="col">Time</th>
-                            <th scope="col">Customer</th>
+                            <th scope="col">Client</th>
                             <th scope="col">Hairstyle</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -273,7 +273,7 @@
                                     {{.Time}}
                                 </td>
 
-                                <td data-label="Customer">
+                                <td data-label="Client">
                                     {{.CustomerName}}
                                     <br>
                                     <span class="barber-hint">
@@ -400,7 +400,7 @@
                         <tr>
                             <th scope="col">Date</th>
                             <th scope="col">Time</th>
-                            <th scope="col">Customer</th>
+                            <th scope="col">Client</th>
                             <th scope="col">Hairstyle</th>
                             <th scope="col">Status</th>
                         </tr>
@@ -422,7 +422,7 @@
                                     {{.Time}}
                                 </td>
 
-                                <td data-label="Customer">
+                                <td data-label="Client">
                                     {{.CustomerName}}
                                 </td>
 
@@ -483,7 +483,7 @@
 {{if .FollowUp}}
 <section class="barber-section" aria-labelledby="follow-up-heading">
     <h2 id="follow-up-heading">Needs follow-up</h2>
-    <p>These open appointments have reached their start time or their recorded time needs checking. Confirm the outcome with the customer. They are not automatically marked as no-shows.</p>
+    <p>These open appointments have reached their start time or their recorded time needs checking. Confirm the outcome with the client. They are not automatically marked as no-shows.</p>
     {{range .FollowUp}}
     <article class="barber-card">
     <div class="booking-hairstyle">
@@ -505,7 +505,7 @@
          </div>
         <h3>{{.CustomerName}} · {{.HairstyleName}}</h3>
         <p>{{.Date}} at {{.Time}} {{.BookingTimezone}} · {{template "domain-status" (domainStatus "booking" .Status)}}</p>
-        <a class="barber-button" href="/barber/chats/{{.CustomerID}}">Message customer</a>
+        <a class="barber-button" href="/barber/chats/{{.CustomerID}}">Message client</a>
         {{if eq .Status "Accepted"}}
         <form method="post" action="{{$.ActionURL}}{{.ID}}/complete" class="ui-form">
             <input type="hidden" name="csrf_token" value="{{$.CSRF}}">

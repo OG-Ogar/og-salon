@@ -42,7 +42,7 @@ func domainStatus(domain, value string) statusPresentation {
 }
 func availabilityStatus(available bool) statusPresentation {
 	if available {
-		return statusPresentation{"Available", "positive", "This listing is available to customers."}
+		return statusPresentation{"Available", "positive", "This listing is available to clients."}
 	}
-	return statusPresentation{"Hidden from customers", "muted", "This listing is hidden from customers."}
+	return statusPresentation{"Hidden from clients", "muted", "This listing is hidden from clients."}
 }
