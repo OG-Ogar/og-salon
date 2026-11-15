@@ -17,21 +17,21 @@
     <script src="/static/image-viewer.js" defer></script>
 </head>
 
-<body class="barber-page modern-role-page modern-hairdresser-page">
+<body class="hairdresser-page modern-role-page modern-hairdresser-page">
 
-{{template "role-header" (navigation "barber" "bookings" .)}}
+{{template "role-header" (navigation "hairdresser" "bookings" .)}}
 
-<main class="barber-main ui-page">
+<main class="hairdresser-main ui-page">
 
-    <div class="barber-dashboard-intro">
+    <div class="hairdressing-dashboard-intro">
         <div>
-            <p class="barber-breadcrumb">
+            <p class="hairdressing-breadcrumb">
                 <a href="/hairstylist/dashboard">Dashboard</a>
                 /
                 Bookings
             </p>
 
-            <h1 class="barber-title">
+            <h1 class="hairdresser-title">
                 Bookings
             </h1>
 
@@ -40,8 +40,8 @@
             </p>
         </div>
 
-        <div class="barber-actions ui-actions">
-            <a class="barber-button primary" href="/barber/schedule">
+        <div class="hairdressing-actions ui-actions">
+            <a class="hairdresser-button primary" href="/hairstylist/schedule">
                 Manage hours and time off
             </a>
         </div>
@@ -53,9 +53,9 @@
     {{$view := .}}
 
 
-    <section class="barber-section">
+    <section class="hairdressing-section">
 
-        <h2 class="barber-section-title">
+        <h2 class="hairdressing-section-title">
             1. Requests Waiting
         </h2>
 
@@ -101,7 +101,7 @@
                                 <td data-label="Client">
                                     {{.CustomerName}}
                                     <br>
-                                    <span class="barber-hint">
+                                    <span class="hairdresser-hint">
                                         {{.CustomerPhone}}
                                     </span>
                                 </td>
@@ -134,7 +134,7 @@
                                                 {{.HairstyleName}}
                                             </strong>
 
-                                            <span class="barber-hint">
+                                            <span class="hairdresser-hint">
                                                 {{.Duration}} min
                                                 &middot;
                                                 {{naira .Price}}
@@ -152,7 +152,7 @@
 
                                 <td data-label="Actions">
 
-                                    <div class="barber-actions ui-actions">
+                                    <div class="hairdressing-actions ui-actions">
 
                                         <form
                                             method="post"
@@ -166,7 +166,7 @@
                                             >
 
                                             <button
-                                                class="barber-button primary ui-control"
+                                                class="hairdresser-button primary ui-control"
                                                 type="submit"
                                             >
                                                 Accept
@@ -188,7 +188,7 @@
                                             >
 
                                             <button
-                                                class="barber-button danger ui-control"
+                                                class="hairdresser-button danger ui-control"
                                                 type="submit"
                                             >
                                                 Decline
@@ -198,8 +198,8 @@
 
 
                                         <a
-                                            class="barber-button"
-                                            href="/barber/chats/{{.CustomerID}}"
+                                            class="hairdresser-button"
+                                            href="/hairstylist/chats/{{.CustomerID}}"
                                         >
                                             Message
                                         </a>
@@ -229,9 +229,9 @@
     </section>
 
 
-    <section class="barber-section">
+    <section class="hairdressing-section">
 
-        <h2 class="barber-section-title">
+        <h2 class="hairdressing-section-title">
             2. Confirmed Schedule
         </h2>
 
@@ -276,7 +276,7 @@
                                 <td data-label="Client">
                                     {{.CustomerName}}
                                     <br>
-                                    <span class="barber-hint">
+                                    <span class="hairdresser-hint">
                                         {{.CustomerPhone}}
                                     </span>
                                 </td>
@@ -309,7 +309,7 @@
                                                 {{.HairstyleName}}
                                             </strong>
 
-                                            <span class="barber-hint">
+                                            <span class="hairdresser-hint">
                                                 {{.Duration}} min
                                                 &middot;
                                                 {{naira .Price}}
@@ -323,7 +323,7 @@
 
                                 <td data-label="Actions">
 
-                                    <div class="barber-actions ui-actions">
+                                    <div class="hairdressing-actions ui-actions">
 
                                         <form
                                             method="post"
@@ -337,7 +337,7 @@
                                             >
 
                                             <button
-                                                class="barber-button primary ui-control"
+                                                class="hairdresser-button primary ui-control"
                                                 type="submit"
                                             >
                                                 Mark Complete
@@ -347,8 +347,8 @@
 
 
                                         <a
-                                            class="barber-button"
-                                            href="/barber/chats/{{.CustomerID}}"
+                                            class="hairdresser-button"
+                                            href="/hairstylist/chats/{{.CustomerID}}"
                                         >
                                             Message
                                         </a>
@@ -380,9 +380,9 @@
 
     {{if .Finished}}
 
-        <section class="barber-section">
+        <section class="hairdressing-section">
 
-            <h2 class="barber-section-title">
+            <h2 class="hairdressing-section-title">
                 3. Finished
             </h2>
 
@@ -481,7 +481,7 @@
     {{end}}
 
 {{if .FollowUp}}
-<section class="barber-section" aria-labelledby="follow-up-heading">
+<section class="hairdressing-section" aria-labelledby="follow-up-heading">
     <h2 id="follow-up-heading">Needs follow-up</h2>
     <p>These open appointments have reached their start time or their recorded time needs checking. Confirm the outcome with the client. They are not automatically marked as no-shows.</p>
     {{range .FollowUp}}
@@ -505,16 +505,16 @@
          </div>
         <h3>{{.CustomerName}} · {{.HairstyleName}}</h3>
         <p>{{.Date}} at {{.Time}} {{.BookingTimezone}} · {{template "domain-status" (domainStatus "booking" .Status)}}</p>
-        <a class="barber-button" href="/barber/chats/{{.CustomerID}}">Message client</a>
+        <a class="hairdresser-button" href="/hairstylist/chats/{{.CustomerID}}">Message client</a>
         {{if eq .Status "Accepted"}}
         <form method="post" action="{{$.ActionURL}}{{.ID}}/complete" class="ui-form">
             <input type="hidden" name="csrf_token" value="{{$.CSRF}}">
-            <button class="barber-button primary ui-control" type="submit">Mark complete</button>
+            <button class="hairdresser-button primary ui-control" type="submit">Mark complete</button>
         </form>
         {{else}}
         <form method="post" action="{{$.ActionURL}}{{.ID}}/reject" class="ui-form">
             <input type="hidden" name="csrf_token" value="{{$.CSRF}}">
-            <button class="barber-button ui-control" type="submit">Reject request</button>
+            <button class="hairdresser-button ui-control" type="submit">Reject request</button>
         </form>
         {{end}}
     </article>

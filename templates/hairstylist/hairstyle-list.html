@@ -17,19 +17,19 @@
     <script src="/static/image-viewer.js" defer></script>
 </head>
 
-<body class="barber-page modern-role-page modern-hairdresser-page">
+<body class="hairdresser-page modern-role-page modern-hairdresser-page">
 
-{{template "role-header" (navigation "barber" "hairstyles" .)}}
+{{template "role-header" (navigation "hairdresser" "hairstyles" .)}}
 
-<main class="barber-main ui-page">
+<main class="hairdresser-main ui-page">
 
-    <p class="barber-breadcrumb">
+    <p class="hairdressing-breadcrumb">
         <a href="/hairstylist/dashboard">Dashboard</a>
         /
         Hairstyles
     </p>
 
-    <h1 class="barber-title">
+    <h1 class="hairdresser-title">
         Manage Hairstyles
     </h1>
     <p>Up to 24 items per page, oldest first.</p>
@@ -38,14 +38,14 @@
         Add, edit and manage the hairstyles and services clients can book at your shop.
     </p>
 
-    <div class="barber-actions ui-actions">
-        <a class="barber-button primary"
-           href="/barber/hairstyles/new">
+    <div class="hairdressing-actions ui-actions">
+        <a class="hairdresser-button primary"
+           href="/hairstylist/hairstyles/new">
             + Add a Hairstyle
         </a>
     </div>
 
-    <section class="barber-section">
+    <section class="hairdressing-section">
 
         {{if .Items}}
 
@@ -90,17 +90,17 @@
                             <div class="card-menu-panel">
 
                                 <a class="card-menu-item"
-                                   href="/barber/hairstyles/{{.ID}}">
+                                   href="/hairstylist/hairstyles/{{.ID}}">
                                     View
                                 </a>
 
                                 <a class="card-menu-item"
-                                   href="/barber/hairstyles/{{.ID}}/edit">
+                                   href="/hairstylist/hairstyles/{{.ID}}/edit">
                                     Edit
                                 </a>
 
                                 <a class="card-menu-item card-menu-item-danger"
-                                   href="/barber/hairstyles/{{.ID}}/delete">
+                                   href="/hairstylist/hairstyles/{{.ID}}/delete">
                                     Delete
                                 </a>
 
@@ -121,7 +121,7 @@
                         <div class="barber-hairstyle-content">
 
                             <h2 class="barber-hairstyle-name">
-                                <a href="/barber/hairstyles/{{.ID}}">
+                                <a href="/hairstylist/hairstyles/{{.ID}}">
                                     {{.Name}}
                                 </a>
                             </h2>
@@ -158,8 +158,8 @@
                 </p>
 
                 <p>
-                    <a class="barber-button primary"
-                       href="/barber/hairstyles/new">
+                    <a class="hairdresser-button primary"
+                       href="/hairstylist/hairstyles/new">
                         + Add Your First Hairstyle
                     </a>
                 </p>

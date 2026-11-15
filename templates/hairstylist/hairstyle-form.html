@@ -15,21 +15,21 @@
     <script src="/static/app.js" defer></script>
 </head>
 
-<body class="barber-page modern-role-page modern-hairdresser-page">
+<body class="hairdresser-page modern-role-page modern-hairdresser-page">
 
-{{template "role-header" (navigation "barber" "hairstyles" .)}}
+{{template "role-header" (navigation "hairdresser" "hairstyles" .)}}
 
-<main class="barber-main ui-page">
+<main class="hairdresser-main ui-page">
 
-    <p class="barber-breadcrumb">
+    <p class="hairdressing-breadcrumb">
         <a href="/hairstylist/dashboard">Dashboard</a>
         /
-        <a href="/barber/hairstyles">Hairstyles</a>
+        <a href="/hairstylist/hairstyles">Hairstyles</a>
         /
         Add
     </p>
 
-    <h1 class="barber-title">
+    <h1 class="hairdresser-title">
         Add a Hairstyle
     </h1>
 
@@ -39,16 +39,16 @@
 
     {{template "form-error" .Error}}
 
-    <form class="barber-form ui-form ui-panel"
+    <form class="hairdresser-form ui-form ui-panel"
           method="post"
-          action="/barber/hairstyles/new"
+          action="/hairstylist/hairstyles/new"
           enctype="multipart/form-data" {{if .Error}}aria-describedby="form-error"{{end}}>
 
         <input type="hidden"
                name="csrf_token"
                value="{{.CSRF}}">
 
-        <div class="barber-field ui-field">
+        <div class="hairdresser-field ui-field">
             <label for="name">
                 Style Name
             </label>
@@ -61,7 +61,7 @@
                    required>
         </div>
 
-        <div class="barber-field ui-field">
+        <div class="hairdresser-field ui-field">
             <label for="category">
                 Category
             </label>
@@ -74,12 +74,12 @@
                    required
                    aria-describedby="category-hint">
 
-            <p class="barber-hint" id="category-hint">
+            <p class="hairdresser-hint" id="category-hint">
                 For example: Fade, Braids or Beard trim.
             </p>
         </div>
 
-        <div class="barber-field ui-field">
+        <div class="hairdresser-field ui-field">
             <label for="description">
                 Description
             </label>
@@ -90,7 +90,7 @@
                       required>{{index .Values "description"}}</textarea>
         </div>
 
-        <div class="barber-field ui-field">
+        <div class="hairdresser-field ui-field">
             <label for="price">
                 Price (&#8358;)
             </label>
@@ -105,7 +105,7 @@
                    required>
         </div>
 
-        <div class="barber-field ui-field">
+        <div class="hairdresser-field ui-field">
             <label for="duration">
                 Duration (minutes)
             </label>
@@ -121,7 +121,7 @@
                    required>
         </div>
 
-        <div class="barber-field ui-field">
+        <div class="hairdresser-field ui-field">
             <label for="image">
                 Photo (optional)
             </label>
@@ -133,13 +133,13 @@
                    data-preview="photo"
                    aria-describedby="image-hint">
 
-            <p class="barber-hint" id="image-hint">
+            <p class="hairdresser-hint" id="image-hint">
                 JPG, PNG, GIF or WEBP, up to 32 MB.
                 Large pictures are resized automatically.
             </p>
         </div>
 
-        <div class="barber-field ui-field">
+        <div class="hairdresser-field ui-field">
             <label for="video">
                 Video (optional)
             </label>
@@ -150,13 +150,13 @@
                    accept=".mp4,.m4v,.mov,.webm,.3gp"
                    aria-describedby="video-hint">
 
-            <p class="barber-hint" id="video-hint">
+            <p class="hairdresser-hint" id="video-hint">
                 MP4, M4V, MOV, WEBM or 3GP, up to 50 MB.
                 Clients can watch the clip on your hairstyle page.
             </p>
         </div>
 
-        <div class="barber-field ui-field">
+        <div class="hairdresser-field ui-field">
             <label>
                 <input type="checkbox"
                        name="available"
@@ -165,14 +165,14 @@
             </label>
         </div>
 
-        <div class="barber-actions ui-actions">
-            <button class="barber-button primary ui-control"
+        <div class="hairdressing-actions ui-actions">
+            <button class="hairdresser-button primary ui-control"
                     type="submit">
                 Save Hairstyle
             </button>
 
-            <a class="barber-button"
-               href="/barber/hairstyles">
+            <a class="hairdresser-button"
+               href="/hairstylist/hairstyles">
                 Cancel
             </a>
         </div>

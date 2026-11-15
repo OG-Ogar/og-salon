@@ -21,7 +21,7 @@
 </head>
 
 
-<body class="barber-page modern-role-page modern-hairdresser-page messaging-page">
+<body class="hairdresser-page modern-role-page modern-hairdresser-page messaging-page">
 
 <main class="barber-messages-page ui-page">
 
@@ -32,7 +32,7 @@
              HEADER
              ================================================= -->
 
-        {{template "role-header" (navigation "barber" "chats" .)}}
+        {{template "role-header" (navigation "hairdresser" "chats" .)}}
 
 
 
@@ -69,7 +69,7 @@
 
                     <a
                         class="conversation-card"
-                        href="/barber/chats/{{.CustomerID}}"
+                        href="/hairstylist/chats/{{.CustomerID}}"
                     >
 
 

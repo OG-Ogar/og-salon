@@ -17,11 +17,11 @@
     <script src="/static/image-viewer.js" defer></script>
 </head>
 
-<body class="barber-page modern-role-page modern-hairdresser-page">
+<body class="hairdresser-page modern-role-page modern-hairdresser-page">
 
-{{template "role-header" (navigation "barber" "profile" .)}}
+{{template "role-header" (navigation "hairdresser" "profile" .)}}
 
-<main class="barber-edit-page ui-page">
+<main class="hairdresser-edit-page ui-page">
 
     <div class="barber-edit-heading">
         <p class="barber-profile-label">Profile Settings</p>
@@ -38,7 +38,7 @@
     <form
         class="barber-edit-card ui-panel ui-form"
         method="post"
-        action="/barber/profile/edit"
+        action="/hairstylist/profile/edit"
         enctype="multipart/form-data"
      {{if .Error}}aria-describedby="form-error"{{end}}>
 
@@ -54,7 +54,7 @@
 
         <section class="barber-edit-section">
 
-            <div class="barber-section-heading">
+            <div class="hairdressing-section-heading">
                 <h2>Personal Information</h2>
 
                 <p>
@@ -62,9 +62,9 @@
                 </p>
             </div>
 
-            <div class="barber-form-row barber-form-row-three ui-grid">
+            <div class="hairdresser-form-row hairdresser-form-row-three ui-grid">
 
-                <div class="barber-form-field ui-field">
+                <div class="hairdresser-form-field ui-field">
                     <label for="fullname">
                         Full name
                     </label>
@@ -79,7 +79,7 @@
                     >
                 </div>
 
-                <div class="barber-form-field ui-field">
+                <div class="hairdresser-form-field ui-field">
                     <label for="phone">
                         Phone number
                     </label>
@@ -94,7 +94,7 @@
                     >
                 </div>
 
-                <div class="barber-form-field ui-field">
+                <div class="hairdresser-form-field ui-field">
                     <label for="email">
                         Email address
                     </label>
@@ -119,7 +119,7 @@
 
         <section class="barber-edit-section">
 
-            <div class="barber-section-heading">
+            <div class="hairdressing-section-heading">
                 <h2>Shop Information</h2>
 
                 <p>
@@ -127,9 +127,9 @@
                 </p>
             </div>
 
-            <div class="barber-form-row barber-form-row-two ui-grid">
+            <div class="hairdresser-form-row hairdresser-form-row-two ui-grid">
 
-                <div class="barber-form-field ui-field">
+                <div class="hairdresser-form-field ui-field">
                     <label for="shopname">
                         Shop name
                     </label>
@@ -143,7 +143,7 @@
                     >
                 </div>
 
-                <div class="barber-form-field ui-field">
+                <div class="hairdresser-form-field ui-field">
                     <label for="shopaddress">
                         Shop address
                     </label>
@@ -157,12 +157,12 @@
                     >
                 </div>
 
-                <div class="barber-form-field ui-field">
+                <div class="hairdresser-form-field ui-field">
                     <label for="state">State</label>
                     {{template "geography-state" (index .Values "state")}}
                 </div>
 
-                <div class="barber-form-field ui-field">
+                <div class="hairdresser-form-field ui-field">
                     <label for="local_area">Local government area / area council</label>
                     {{template "geography-profile-area" .Values}}
                 </div>
@@ -176,7 +176,7 @@
 
         <section class="barber-edit-section">
 
-            <div class="barber-section-heading">
+            <div class="hairdressing-section-heading">
                 <h2>Shop Photo</h2>
 
                 <p>
@@ -232,7 +232,7 @@
 
         <section class="barber-edit-section">
 
-            <div class="barber-section-heading">
+            <div class="hairdressing-section-heading">
                 <h2>Personal Photo</h2>
 
                 <p>

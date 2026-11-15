@@ -15,11 +15,11 @@
     <script src="/static/image-viewer.js" defer></script>
     <script src="/static/passkey.js" defer></script>
 </head>
-<body class="barber-page modern-role-page modern-hairdresser-page">
-{{template "role-header" (navigation "barber" "account" .)}}
+<body class="hairdresser-page modern-role-page modern-hairdresser-page">
+{{template "role-header" (navigation "hairdresser" "account" .)}}
 
-<main class="barber-main ui-page">
-    <section class="barber-dashboard-intro barber-dashboard-hero">
+<main class="hairdresser-main ui-page">
+    <section class="hairdressing-dashboard-intro hairdressing-dashboard-hero">
         <div class="barber-dashboard-photo">
             {{if .PersonalImage}}
                 <a href="/hairstylist/profile" aria-label="View your profile">
@@ -38,16 +38,16 @@
 
         <div class="barber-hero-content">
             <div class="barber-hero-status-row">
-                <span class="barber-badge Active">Verified Hair Dressing Shop</span>
+                <span class="hairdresser-badge Active">Verified Hair Dressing Shop</span>
                 {{template "domain-status" (domainStatus "account" .Status)}}
             </div>
-            <h1 class="barber-title">Welcome, {{.FullName}}</h1>
+            <h1 class="hairdresser-title">Welcome, {{.FullName}}</h1>
             <p class="barber-lede">{{.ShopName}} &middot; {{.ShopAddress}}</p>
         </div>
 
         <div class="barber-hero-quick-actions ui-actions">
-            <a class="barber-button" href="/explore/{{.ID}}" target="_blank" rel="noopener">View Public Profile ↗</a>
-            <a class="barber-button primary" href="/barber/schedule">Manage Schedule</a>
+            <a class="hairdresser-button" href="/explore/{{.ID}}" target="_blank" rel="noopener">View Public Profile ↗</a>
+            <a class="hairdresser-button primary" href="/hairstylist/schedule">Manage Schedule</a>
         </div>
     </section>
 
@@ -55,22 +55,22 @@
         <article class="barber-stat-card">
             <div class="stat-card-header">
                 <span class="barber-stat-number">{{.PendingBookings}}</span>
-                {{if gt .PendingBookings 0}}<span class="barber-badge Suspended">Pending</span>{{end}}
+                {{if gt .PendingBookings 0}}<span class="hairdresser-badge Suspended">Pending</span>{{end}}
             </div>
             <span class="barber-stat-label">Booking requests</span>
-            <div class="barber-actions ui-actions">
-                <a class="barber-button primary" href="/hairstylist/bookings">Review</a>
+            <div class="hairdressing-actions ui-actions">
+                <a class="hairdresser-button primary" href="/hairstylist/bookings">Review</a>
             </div>
         </article>
 
         <article class="barber-stat-card">
             <div class="stat-card-header">
                 <span class="barber-stat-number">{{.UpcomingBookings}}</span>
-                {{if gt .UpcomingBookings 0}}<span class="barber-badge Active">Confirmed</span>{{end}}
+                {{if gt .UpcomingBookings 0}}<span class="hairdresser-badge Active">Confirmed</span>{{end}}
             </div>
             <span class="barber-stat-label">Confirmed appointments</span>
-            <div class="barber-actions ui-actions">
-                <a class="barber-button" href="/hairstylist/bookings">Schedule</a>
+            <div class="hairdressing-actions ui-actions">
+                <a class="hairdresser-button" href="/hairstylist/bookings">Schedule</a>
             </div>
         </article>
 
@@ -79,8 +79,8 @@
                 <span class="barber-stat-number">{{.Hairstyles}}</span>
             </div>
             <span class="barber-stat-label">Hairstyles listed</span>
-            <div class="barber-actions ui-actions">
-                <a class="barber-button" href="/barber/hairstyles">Manage</a>
+            <div class="hairdressing-actions ui-actions">
+                <a class="hairdresser-button" href="/hairstylist/hairstyles">Manage</a>
             </div>
         </article>
 
@@ -89,8 +89,8 @@
                 <span class="barber-stat-number">{{.Conversations}}</span>
             </div>
             <span class="barber-stat-label">Client conversations</span>
-            <div class="barber-actions ui-actions">
-                <a class="barber-button" href="/hairstylist/chats">Messages</a>
+            <div class="hairdressing-actions ui-actions">
+                <a class="hairdresser-button" href="/hairstylist/chats">Messages</a>
             </div>
         </article>
     </section>

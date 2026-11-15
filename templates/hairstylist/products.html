@@ -18,22 +18,22 @@
     <script src="/static/image-viewer.js" defer></script>
 </head>
 
-<body class="barber-page modern-role-page modern-hairdresser-page">
+<body class="hairdresser-page modern-role-page modern-hairdresser-page">
 
-{{template "role-header" (navigation "barber" "products" .)}}
+{{template "role-header" (navigation "hairdresser" "products" .)}}
 
-<main class="barber-main ui-page">
+<main class="hairdresser-main ui-page">
 
-    <p class="barber-breadcrumb">
+    <p class="hairdressing-breadcrumb">
         <a href="/hairstylist/dashboard">Dashboard</a>
         /
         Products
     </p>
 
-    <section class="barber-dashboard-intro">
+    <section class="hairdressing-dashboard-intro">
 
         <div>
-            <h1 class="barber-title">
+            <h1 class="hairdresser-title">
                 Products
             </h1>
             <p>Up to 24 items per page, oldest first.</p>
@@ -43,10 +43,10 @@
             </p>
         </div>
 
-        <div class="barber-actions ui-actions">
+        <div class="hairdressing-actions ui-actions">
             <a
-                class="barber-button primary"
-                href="/barber/products/new"
+                class="hairdresser-button primary"
+                href="/hairstylist/products/new"
             >
                 + Add Product
             </a>
@@ -99,17 +99,17 @@
 
                         <div class="card-menu-panel">
 
-                            <a class="card-menu-item" href="/barber/products/{{.ID}}">
+                            <a class="card-menu-item" href="/hairstylist/products/{{.ID}}">
                                 View
                             </a>
 
-                            <a class="card-menu-item" href="/barber/products/{{.ID}}/edit">
+                            <a class="card-menu-item" href="/hairstylist/products/{{.ID}}/edit">
                                 Edit
                             </a>
 
                             <form
                                 method="post"
-                                action="/barber/products/{{.ID}}/delete"
+                                action="/hairstylist/products/{{.ID}}/delete"
                                 class="card-menu-form ui-form"
                                 data-confirm="Delete {{.Name}}?"
                             >
@@ -195,8 +195,8 @@
 
             <p>
                 <a
-                    class="barber-button primary"
-                    href="/barber/products/new"
+                    class="hairdresser-button primary"
+                    href="/hairstylist/products/new"
                 >
                     + Add Your First Product
                 </a>

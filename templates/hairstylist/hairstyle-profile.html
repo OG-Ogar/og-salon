@@ -17,25 +17,25 @@
     <script src="/static/image-viewer.js" defer></script>
 </head>
 
-<body class="barber-page modern-role-page modern-hairdresser-page">
+<body class="hairdresser-page modern-role-page modern-hairdresser-page">
 
-{{template "role-header" (navigation "barber" "hairstyles" .)}}
+{{template "role-header" (navigation "hairdresser" "hairstyles" .)}}
 
-<main class="barber-main ui-page">
+<main class="hairdresser-main ui-page">
 
-    <p class="barber-breadcrumb">
+    <p class="hairdressing-breadcrumb">
         <a href="/hairstylist/dashboard">
             Dashboard
         </a>
         /
-        <a href="/barber/hairstyles">
+        <a href="/hairstylist/hairstyles">
             Hairstyles
         </a>
         /
         {{.Name}}
     </p>
 
-    <h1 class="barber-title">
+    <h1 class="hairdresser-title">
         {{.Name}}
     </h1>
 
@@ -124,20 +124,20 @@
 
         </table>
 
-        <div class="barber-actions ui-actions">
+        <div class="hairdressing-actions ui-actions">
 
-            <a class="barber-button primary"
-               href="/barber/hairstyles/{{.ID}}/edit">
+            <a class="hairdresser-button primary"
+               href="/hairstylist/hairstyles/{{.ID}}/edit">
                 Edit Hairstyle
             </a>
 
-            <a class="barber-button"
-               href="/barber/hairstyles">
+            <a class="hairdresser-button"
+               href="/hairstylist/hairstyles">
                 Back to Hairstyles
             </a>
 
-            <a class="barber-button danger"
-               href="/barber/hairstyles/{{.ID}}/delete">
+            <a class="hairdresser-button danger"
+               href="/hairstylist/hairstyles/{{.ID}}/delete">
                 Delete Hairstyle
             </a>
 

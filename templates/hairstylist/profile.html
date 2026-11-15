@@ -16,19 +16,19 @@
     <script src="/static/app.js" defer></script>
 </head>
 
-<body class="barber-page modern-role-page modern-hairdresser-page">
+<body class="hairdresser-page modern-role-page modern-hairdresser-page">
 
-{{template "role-header" (navigation "barber" "profile" .)}}
+{{template "role-header" (navigation "hairdresser" "profile" .)}}
 
-<main class="barber-main ui-page">
+<main class="hairdresser-main ui-page">
 
-    <p class="barber-breadcrumb">
+    <p class="hairdressing-breadcrumb">
         <a href="/hairstylist/dashboard">Dashboard</a>
         /
         My Profile
     </p>
 
-    <h1 class="barber-title">
+    <h1 class="hairdresser-title">
         My Profile
     </h1>
 
@@ -48,7 +48,7 @@
                 sizes="(max-width: 600px) 100vw, 700px"
                 width="640" height="480" loading="lazy" decoding="async">
         {{else}}
-            <p class="barber-hint">
+            <p class="hairdresser-hint">
                 You have not added a shop photo yet.
             </p>
         {{end}}
@@ -66,7 +66,7 @@
                         {{.FullName}}
                     </strong>
 
-                    <p class="barber-hint">
+                    <p class="hairdresser-hint">
                         This is the picture clients see beside your name.
                     </p>
                 </div>
@@ -76,7 +76,7 @@
                         {{.FullName}}
                     </strong>
 
-                    <p class="barber-hint">
+                    <p class="hairdresser-hint">
                         You have not added a personal picture yet.
                     </p>
                 </div>
@@ -152,19 +152,19 @@
 
         </table>
 
-        <div class="barber-actions ui-actions">
+        <div class="hairdressing-actions ui-actions">
 
-            <a class="barber-button primary"
+            <a class="hairdresser-button primary"
                href="/hairstylist/profile/edit">
                 Edit My Details
             </a>
 
-            <a class="barber-button"
+            <a class="hairdresser-button"
                href="/explore/{{.ID}}" target="_blank" rel="noopener">
                 View Public Profile as Client ↗
             </a>
 
-            <a class="barber-button"
+            <a class="hairdresser-button"
                href="/hairstylist/dashboard">
                 Back to Dashboard
             </a>
@@ -189,7 +189,7 @@
                        name="csrf_token"
                        value="{{.CSRF}}">
 
-                <button class="barber-button danger ui-control"
+                <button class="hairdresser-button danger ui-control"
                         type="submit">
                     Log Out
                 </button>

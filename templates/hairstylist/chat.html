@@ -18,9 +18,9 @@
     <script src="/static/chat-message-actions.js" defer></script>
 </head>
 
-<body class="barber-page modern-role-page modern-hairdresser-page messaging-page">
+<body class="hairdresser-page modern-role-page modern-hairdresser-page messaging-page">
 
-{{template "role-header" (navigation "barber" "chats" .)}}
+{{template "role-header" (navigation "hairdresser" "chats" .)}}
 
 <main class="barber-chat-page ui-page">
 
@@ -93,7 +93,7 @@
 
                         {{range .Messages}}
 
-                            <div class="bubble {{if .FromBarber}}mine message-own{{end}}"{{if .FromBarber}} data-message-own data-message-id="{{.ID}}" data-message-edit-url="{{$.Action}}/messages/{{.ID}}/edit" data-message-delete-url="{{$.Action}}/messages/{{.ID}}/delete" data-message-has-media="{{if or .Image .Audio .Video}}true{{else}}false{{end}}" data-message-text="{{.Text}}"{{end}}>
+                            <div class="bubble {{if .FromHairdresser}}mine message-own{{end}}"{{if .FromHairdresser}} data-message-own data-message-id="{{.ID}}" data-message-edit-url="{{$.Action}}/messages/{{.ID}}/edit" data-message-delete-url="{{$.Action}}/messages/{{.ID}}/delete" data-message-has-media="{{if or .Image .Audio .Video}}true{{else}}false{{end}}" data-message-text="{{.Text}}"{{end}}>
 
                                 <span class="who">
                                     {{.SenderName}}
@@ -138,7 +138,7 @@
                                     <span class="when">
                                         {{.SentAt.Format "2 Jan 2006, 15:04"}}
                                     </span>
-                                    {{if .FromBarber}}
+                                    {{if .FromHairdresser}}
                                         <button
                                             type="button"
                                             class="bubble-menu-trigger"

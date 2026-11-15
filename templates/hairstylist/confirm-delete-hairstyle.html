@@ -11,21 +11,21 @@
     <link rel="stylesheet" href="/static/theme.css">
     <script src="/static/app.js" defer></script>
 </head>
-<body class="barber-page modern-role-page modern-hairdresser-page">
+<body class="hairdresser-page modern-role-page modern-hairdresser-page">
 
-{{template "role-header" (navigation "barber" "hairstyles" .)}}
+{{template "role-header" (navigation "hairdresser" "hairstyles" .)}}
 
-<main class="barber-main wrap ui-page ui-confirmation">
+<main class="hairdresser-main wrap ui-page ui-confirmation">
 
-    <p class="barber-breadcrumb">
+    <p class="hairdressing-breadcrumb">
         <a href="/hairstylist/dashboard">Dashboard</a>
         /
-        <a href="/barber/hairstyles">Hairstyles</a>
+        <a href="/hairstylist/hairstyles">Hairstyles</a>
         /
         Delete
     </p>
 
-    <h1 class="barber-title">{{.Title}}</h1>
+    <h1 class="hairdresser-title">{{.Title}}</h1>
 
     <div class="panel ui-panel barber-card">
 

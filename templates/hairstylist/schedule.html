@@ -15,19 +15,19 @@
     <script src="/static/app.js" defer></script>
 </head>
 
-<body class="barber-page modern-role-page modern-hairdresser-page">
+<body class="hairdresser-page modern-role-page modern-hairdresser-page">
 
-{{template "role-header" (navigation "barber" "schedule" .)}}
+{{template "role-header" (navigation "hairdresser" "schedule" .)}}
 
-<main class="barber-main calendar-page ui-page">
+<main class="hairdresser-main calendar-page ui-page">
 
-    <p class="barber-breadcrumb">
+    <p class="hairdressing-breadcrumb">
         <a href="/hairstylist/dashboard">Dashboard</a>
         /
         Schedule
     </p>
 
-    <h1 class="barber-title">
+    <h1 class="hairdresser-title">
         Operating Schedule
     </h1>
 
@@ -37,13 +37,13 @@
 
     {{template "form-error" .Error}}
 
-    <form method="post" action="/barber/schedule" class="ui-form schedule-editor-form" {{if .Error}}aria-describedby="form-error"{{end}}>
+    <form method="post" action="/hairstylist/schedule" class="ui-form schedule-editor-form" {{if .Error}}aria-describedby="form-error"{{end}}>
 
         <input type="hidden" name="csrf_token" value="{{.CSRF}}">
 
         <!-- Booking Rules & Lead Time -->
         <section class="barber-card ui-panel schedule-config-card">
-            <h2 class="barber-section-title">General Booking Rules</h2>
+            <h2 class="hairdressing-section-title">General Booking Rules</h2>
 
             <div class="schedule-rules-grid">
                 <div class="field ui-field">
@@ -67,8 +67,8 @@
 
         <!-- Weekly Days Schedule Grid -->
         <section class="schedule-days-section">
-            <h2 class="barber-section-title">Weekly Working Hours</h2>
-            <p class="barber-hint">Toggle open days and set your operating and break intervals.</p>
+            <h2 class="hairdressing-section-title">Weekly Working Hours</h2>
+            <p class="hairdresser-hint">Toggle open days and set your operating and break intervals.</p>
 
             <div class="calendar-days-grid">
                 {{range .Days}}
@@ -114,15 +114,15 @@
 
         <!-- Time Off Section -->
         <section class="barber-card ui-panel time-off-section">
-            <h2 class="barber-section-title">Scheduled Time Off</h2>
+            <h2 class="hairdressing-section-title">Scheduled Time Off</h2>
             <label for="time-off">Time off entries</label>
             <p id="time-off-help" class="hint">One period per line: date, start, end. For example: <code>2026-12-24 08:00 20:00</code>. Remove a line to cancel that period. Times use your timezone.</p>
             <textarea id="time-off" name="time_off" rows="6" maxlength="3000" aria-describedby="time-off-help">{{.TimeOff}}</textarea>
         </section>
 
-        <div class="barber-actions ui-actions">
-            <button type="submit" class="barber-button primary ui-control">Save schedule</button>
-            <a href="/hairstylist/dashboard" class="barber-button">Back to Dashboard</a>
+        <div class="hairdressing-actions ui-actions">
+            <button type="submit" class="hairdresser-button primary ui-control">Save schedule</button>
+            <a href="/hairstylist/dashboard" class="hairdresser-button">Back to Dashboard</a>
         </div>
 
     </form>
