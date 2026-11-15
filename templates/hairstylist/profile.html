@@ -36,6 +36,10 @@
         This is the information clients see about your hairdressing shop.
     </p>
 
+    <p class="hairdresser-hint">
+        <a class="ui-button" href="/hairstylist/profile/edit#shop-photo">Upload or change your salon photo</a>
+    </p>
+
     <section class="barber-profile-card">
 
         {{if .ProfileImage}}
@@ -47,10 +51,6 @@
                 srcset="{{imageSrcset .Barber.ProfileImage}}"
                 sizes="(max-width: 600px) 100vw, 700px"
                 width="640" height="480" loading="lazy" decoding="async">
-        {{else}}
-            <p class="hairdresser-hint">
-                You have not added a shop photo yet.
-            </p>
         {{end}}
 
         <div class="barber-personal-area">

@@ -43,7 +43,7 @@
             {{else if eq .AuthorRole "customer"}}{{$authorProfile = printf "/people/%d" .AuthorID}}{{end}}
             <header class="social-post-author">
               {{if $authorProfile}}<a class="social-author-avatar" href="{{$authorProfile}}" aria-label="Open {{.AuthorName}}'s profile">{{if .AuthorImage}}<img src="{{.AuthorImage}}" alt="" loading="lazy">{{else}}<span>{{printf "%.1s" .AuthorName}}</span>{{end}}</a>{{else}}<div class="social-author-avatar">{{if .AuthorImage}}<img src="{{.AuthorImage}}" alt="" loading="lazy">{{else}}<span>{{printf "%.1s" .AuthorName}}</span>{{end}}</div>{{end}}
-              <div><strong>{{if $authorProfile}}<a class="social-author-name" href="{{$authorProfile}}">{{.AuthorName}}</a>{{else}}{{.AuthorName}}{{end}}</strong><span>{{if eq .AuthorRole "barber"}}Barber{{else}}Client{{end}} &middot; <time>{{.CreatedAt.Format "Jan 2, 2006 · 3:04 PM"}}</time></span></div>
+              <div><strong>{{if $authorProfile}}<a class="social-author-name" href="{{$authorProfile}}">{{.AuthorName}}</a>{{else}}{{.AuthorName}}{{end}}</strong><span>{{if eq .AuthorRole "barber"}}Barber / Hair Stylist{{else}}Client{{end}} &middot; <time>{{.CreatedAt.Format "Jan 2, 2006 · 3:04 PM"}}</time></span></div>
             </header>
             {{if .Text}}<p class="social-post-text {{if eq .TextStyle "bold"}}is-bold{{else if eq .TextStyle "italic"}}is-italic{{end}}" style="background-color:{{.BackgroundColor}}">{{.Text}}</p>{{end}}
             {{if .Image}}
