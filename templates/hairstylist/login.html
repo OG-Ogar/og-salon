@@ -52,7 +52,7 @@
 
         <form class="auth-form ui-form"
               method="post"
-              action="/barber/login" {{if .Error}}aria-describedby="form-error"{{end}}>
+              action="/hairstylist/login" {{if .Error}}aria-describedby="form-error"{{end}}>
 
             {{if .RememberedEmail}}
                 <input type="hidden" name="email" value="{{.RememberedEmail}}">
@@ -98,7 +98,7 @@
             </div>
 
             <div class="auth-options">
-                <a href="/hairstylist/forgot-password">
+                <a href="/barber/forgot-password">
                     Forgot your password?
                 </a>
             </div>
@@ -135,7 +135,7 @@
 
         <div class="auth-register">
             <span>Don't have an account?</span>
-            <a href="/hairstylist/register">
+            <a href="/barber/register">
                 Create an account
             </a>
         </div>
