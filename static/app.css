@@ -56,6 +56,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .landing-media{display:block;width:100%;height:100%;object-fit:contain}
 .landing-visual-placeholder{display:grid;place-items:center;width:100%;height:100%;background:var(--signal);color:#fff;font-size:clamp(3rem,8vw,6rem);font-weight:900;letter-spacing:-.06em}
 
+@media(max-width:1000px){
+  .landing-header{flex-wrap:wrap}
+  .landing-nav{flex-wrap:wrap;justify-content:flex-end}
+}
 @media(max-width:850px){
   .landing-hero{grid-template-columns:1fr;min-height:auto;padding:56px 0}
   .landing-visual{max-width:280px;aspect-ratio:16/9;width:100%;justify-self:center}

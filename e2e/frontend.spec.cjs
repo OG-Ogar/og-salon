@@ -98,7 +98,7 @@ test('customer journeys, public sessions and narrow navigation',async({page},tes
   }
  }
  await page.goto('/');
- await expect(page.getByRole('link',{name:'Customer dashboard',exact:true})).toBeVisible();
+ await expect(page.getByRole('link',{name:'Client dashboard',exact:true})).toBeVisible();
  await page.goto('/explore');
  await expect(page.getByRole('link',{name:'Dashboard',exact:true})).toBeVisible();
  const response404=await page.goto('/missing-page');

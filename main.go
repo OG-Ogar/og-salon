@@ -199,6 +199,8 @@ func run() error {
 	mux.HandleFunc("/", handlers.HomeHandler)
 	mux.HandleFunc("/admin/", handlers.AdminRouter)
 	mux.HandleFunc("/barber/", handlers.BarberRouter)
+	mux.HandleFunc("/hairstylist", handlers.HairstylistRouter)
+	mux.HandleFunc("/hairstylist/", handlers.HairstylistRouter)
 	mux.HandleFunc("/customer/", handlers.CustomerRouter)
 
 	// Uploaded images are served read-only from their own directory. Go's

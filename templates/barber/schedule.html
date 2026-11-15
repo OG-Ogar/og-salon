@@ -54,13 +54,13 @@
                 <div class="field ui-field">
                     <label for="lead">Minimum notice (minutes)</label>
                     <input id="lead" type="number" name="lead" min="0" max="10080" value="{{.Calendar.LeadMinutes}}" required>
-                    <p class="hint">Minimum notice required before a customer can book.</p>
+                    <p class="hint">Minimum notice required before a client can book.</p>
                 </div>
 
                 <div class="field ui-field">
                     <label for="horizon">Booking horizon (days ahead)</label>
                     <input id="horizon" type="number" name="horizon" min="1" max="365" value="{{.Calendar.HorizonDays}}" required>
-                    <p class="hint">How far into the future customers can book appointments.</p>
+                    <p class="hint">How far into the future clients can book appointments.</p>
                 </div>
             </div>
         </section>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Accounts - OG's Salon Admin</title>
+    <title>Client Accounts - OG's Salon Admin</title>
     <script src="/static/theme-switch.js"></script>
     <link rel="stylesheet" href="/static/app.css">
     <link rel="stylesheet" href="/static/ui.css">
@@ -96,9 +96,9 @@
     <div class="admin-page-header">
         <div>
             <p class="crumbs">
-                <a href="/admin/dashboard">Dashboard</a> / Customers
+                <a href="/admin/dashboard">Dashboard</a> / Clients
             </p>
-            <h1>Customer Accounts Directory</h1>
+            <h1>Client Accounts Directory</h1>
             <p class="lede">
                 Registered consumer accounts across Nigeria with historical booking activity and verified contact details.
             </p>
@@ -110,7 +110,7 @@
         <form method="get" action="/admin/customers" class="ui-form" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end;">
             <div class="ui-field" style="flex: 1 1 280px; margin-bottom: 0;">
                 <label for="customer-search" style="font-weight: 700; font-size: 0.88rem; margin-bottom: 6px;">
-                    Search customers
+                    Search clients
                 </label>
                 <input id="customer-search"
                        name="q"
@@ -134,11 +134,11 @@
     {{if .Items}}
         <div class="admin-table-container">
             <table>
-                <caption>Registered customer accounts (24 per page, newest first).</caption>
+                <caption>Registered client accounts (24 per page, newest first).</caption>
                 <thead>
                     <tr>
                         <th scope="col" style="width: 80px;">Account ID</th>
-                        <th scope="col">Customer Name</th>
+                        <th scope="col">Client Name</th>
                         <th scope="col">Email Address</th>
                         <th scope="col">Phone Contact</th>
                         <th scope="col" style="text-align: right;">Appointment Volume</th>
@@ -158,7 +158,7 @@
                                         <details class="mobile-disclosure">
                                             <summary>Account details</summary>
                                             <p class="muted" style="font-size: 0.78rem; margin: 4px 0 0;">
-                                                Registered customer &middot; ID #{{.ID}}
+                                                Registered client &middot; ID #{{.ID}}
                                             </p>
                                         </details>
                                     </div>
@@ -193,13 +193,13 @@
     {{else}}
         <div class="empty" style="text-align: center; padding: 48px 24px;">
             <p style="font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 8px;">
-                No customer accounts found
+                No client accounts found
             </p>
             <p class="muted" style="margin-bottom: 20px;">
                 {{if .Query}}
-                    No customer accounts match the filter "{{.Query}}".
+                    No client accounts match the filter "{{.Query}}".
                 {{else}}
-                    No customer accounts have registered yet. Customers register via the public sign-up portal.
+                    No client accounts have registered yet. Clients register via the public sign-up portal.
                 {{end}}
             </p>
             {{if .Query}}

@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OG's Salon — Find and book a barber</title>
+    <title>OG's Salon — Find and book a barber or hair stylist</title>
     <script src="/static/theme-switch.js"></script>
     <link rel="stylesheet" href="/static/app.css">
 <link rel="stylesheet" href="/static/ui.css">
 <link rel="stylesheet" href="/static/theme.css">
     <script src="/static/app.js" defer></script>
-{{template "public-metadata" (publicMetadata "/" "OG's Salon — Find and book a barber" "Find nearby barbers, compare services and book an appointment." .LandingImage "OG's Salon barber booking" "website" "summary_large_image" (websiteSchema "/"))}}
+{{template "public-metadata" (publicMetadata "/" "OG's Salon — Find and book a barber or hair stylist" "Find nearby barbers and hair stylists, compare services and book an appointment." .LandingImage "OG's Salon barber and hair stylist booking" "website" "summary_large_image" (websiteSchema "/"))}}
 </head>
 <body class="landing-page">
 <main class="landing">
@@ -18,24 +18,26 @@
             <span class="landing-brand-mark" aria-hidden="true">OG's</span>
             <span class="landing-brand-copy">
                 <span class="landing-brand-name">OG's Salon</span>
-                <span class="landing-brand-tagline">Barber booking made simple</span>
+                <span class="landing-brand-tagline">Barber and hair stylist booking made simple</span>
             </span>
         </a>
         <nav class="landing-nav" aria-label="Main navigation">
             <a class="landing-nav-link" href="/explore">Find a Barber</a>
-            {{if .CustomerSignedIn}}<a class="landing-nav-link" href="/customer/dashboard">Customer dashboard</a>{{end}}
+            <a class="landing-nav-link" href="/explore">Find a Hair Stylist</a>
+            {{if .CustomerSignedIn}}<a class="landing-nav-link" href="/customer/dashboard">Client dashboard</a>{{end}}
 {{if .AdminSignedIn}}<a class="landing-nav-link" href="/admin/dashboard">Admin dashboard</a>{{end}}
-{{if .BarberSignedIn}}<a class="landing-nav-cta" href="/barber/dashboard">Barber dashboard</a>{{else}}<a class="landing-nav-cta" href="/barber/login">Barber login</a>{{end}}
+{{if .BarberSignedIn}}<a class="landing-nav-cta" href="/barber/dashboard">Barber dashboard</a>{{else}}<a class="landing-nav-cta" href="/barber/login">Barber login</a><a class="landing-nav-link" href="/hairstylist/login">Hair Stylist login</a>{{end}}
         </nav>
     </header>
 
     <section class="landing-hero" aria-labelledby="landing-title">
         <div class="landing-hero-copy">
-            <p class="landing-eyebrow">Simple barber booking</p>
-            <h1 id="landing-title">Find your barber. <em>Book your next cut.</em></h1>
-            <p class="landing-lead">Browse nearby barbers, compare services and book an appointment.</p>
+            <p class="landing-eyebrow">Barbers and hair stylists, one place</p>
+            <h1 id="landing-title">Find your barber or hair stylist. <em>Book your next look.</em></h1>
+            <p class="landing-lead">Browse nearby barbers and hair stylists, compare services and book an appointment.</p>
             <div class="landing-actions">
                 <a class="landing-button" href="/explore">Find a Barber</a>
+                <a class="landing-secondary-button" href="/explore">Find a Hair Stylist</a>
                 {{if .CustomerSignedIn}}<a class="landing-secondary-button" href="/customer/dashboard">My dashboard</a>{{else}}<a class="landing-secondary-button" href="/customer/register">Create account</a>{{end}}
             </div>
         </div>

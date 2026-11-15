@@ -30,7 +30,7 @@
         </div>
 
         <nav class="auth-role-switch" aria-label="Registration role">
-            <a href="/customer/register{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill">Customer</a>
+            <a href="/customer/register{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill">Client</a>
             <a href="/barber/register{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill active" aria-current="page">Barber Shop</a>
         </nav>
 
@@ -166,7 +166,7 @@
                 <div class="auth-section-header">
                     <span class="auth-section-step">Step 2</span>
                     <h2 class="auth-section-title">Shop & Location</h2>
-                    <p class="auth-section-desc">Where customers can locate and visit your salon.</p>
+                    <p class="auth-section-desc">Where clients can locate and visit your salon.</p>
                 </div>
 
                 <div class="auth-field ui-field">
@@ -222,7 +222,7 @@
                     <div class="photo-role-card">
                         <span class="photo-role-badge">Required Now</span>
                         <strong>Personal Photo</strong>
-                        <p>A clear portrait of yourself so customers recognize their stylist.</p>
+                        <p>A clear portrait of yourself so clients recognize their stylist.</p>
                     </div>
                     <div class="photo-role-card hint-card">
                         <span class="photo-role-badge outline">After Signup</span>
@@ -271,7 +271,7 @@
                 ← Back to OG's Salon
             </a>
             <a href="/customer/register">
-                Customer registration →
+                Client registration →
             </a>
         </div>
 

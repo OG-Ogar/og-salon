@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+
+    <title>Hair Stylist Login - OG's Salon</title>
+
+    <script src="/static/theme-switch.js"></script>
+    <link rel="stylesheet" href="/static/app.css">
+    <link rel="stylesheet" href="/static/login.css">
+    <link rel="stylesheet" href="/static/passkey.css">
+    <link rel="stylesheet" href="/static/ui.css">
+    <link rel="stylesheet" href="/static/theme.css">
+
+    <script src="/static/app.js" defer></script>
+    <script src="/static/passkey.js" defer></script>
+</head>
+
+<body class="auth-page hairstylist-auth modern-barber-page">
+
+<main class="auth-layout">
+
+    <section class="auth-card">
+
+        <div class="auth-brand">
+            <a class="site-brand" href="/" aria-label="OG's Salon home">
+                <span class="site-brand-mark" aria-hidden="true">OG's</span>
+                <span class="auth-brand-name">OG's Salon</span>
+            </a>
+        </div>
+
+        <nav class="auth-role-switch" aria-label="Sign-in role">
+            <a href="/customer/login{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill">Client</a>
+            <a href="/barber/login{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill">Barber Shop</a>
+            <a href="/hairstylist/login{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill active" aria-current="page">Hair Stylist</a>
+        </nav>
+
+        <div class="auth-header">
+            <h1>Hair Stylist Login</h1>
+            <p>Welcome back. Sign in to your hair stylist account to manage your business.</p>
+        </div>
+
+        {{if .Notice}}
+            <p class="auth-message auth-notice" role="status">
+                {{.Notice}}
+            </p>
+        {{end}}
+
+        {{template "form-error" .Error}}
+
+        <form class="auth-form ui-form"
+              method="post"
+              action="/hairstylist/login" {{if .Error}}aria-describedby="form-error"{{end}}>
+
+            {{if .RememberedEmail}}
+                <input type="hidden" name="email" value="{{.RememberedEmail}}">
+                <input type="hidden" name="remembered" value="1">
+                <input type="hidden" name="passkey_available" value="{{if .PasskeyAvailable}}1{{else}}0{{end}}">
+
+                <div class="auth-remembered" aria-label="Remembered account">
+                    <span class="auth-remembered-label">Signing in as</span>
+                    <strong class="auth-remembered-email">{{.RememberedEmail}}</strong>
+                    <a class="auth-remembered-switch" href="/hairstylist/login?switch=1">
+                        Use another account
+                    </a>
+                </div>
+
+            {{else}}
+                <div class="auth-field ui-field">
+                    <label for="email">Email</label>
+
+                    <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        value="{{index .Values "email"}}"
+                        autocomplete="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+            {{end}}
+
+            <div class="auth-field ui-field">
+                <label for="password">Password</label>
+
+                <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    autocomplete="current-password"
+                    placeholder="Enter your password"
+                    {{if .RememberedEmail}}autofocus{{end}}
+                    required
+                >
+            </div>
+
+            <div class="auth-options">
+                <a href="/barber/forgot-password">
+                    Forgot your password?
+                </a>
+            </div>
+
+            <button class="auth-submit ui-control" type="submit">
+                Sign In
+            </button>
+
+        </form>
+
+        {{if .PasskeyAvailable}}
+            <div class="auth-passkey" data-passkey-login-wrap hidden>
+                <div class="auth-divider" aria-hidden="true"><span>or use this device</span></div>
+
+                <button type="button"
+                        class="auth-passkey-button"
+                        data-passkey-login
+                        data-role="barber"
+                        data-next="/barber/dashboard">
+                    <span class="auth-passkey-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false">
+                            <path d="M12 3.5c-3.1 0-5.7 2.4-6 5.4M12 3.5c3.1 0 5.7 2.4 6 5.4M5.4 12.5c.1 1.6.6 3.1 1.5 4.4M18.6 12.5c-.1 1.6-.6 3.1-1.5 4.4M8 20c.7-1 1.2-2.1 1.4-3.3M16 20c-.7-1-1.2-2.1-1.4-3.3M12 7.5a3.2 3.2 0 0 0-3.2 3.2v1.8c0 2.3.9 4.4 2.3 6M12 7.5a3.2 3.2 0 0 1 3.2 3.2v1.8c0 2.3-.9 4.4-2.3 6M12 11v3.5"/>
+                        </svg>
+                    </span>
+                    <span>
+                        <strong>Sign in with fingerprint</strong>
+                        <small>Use your phone's fingerprint, Face ID, or screen lock.</small>
+                    </span>
+                </button>
+
+                <p class="hint" data-passkey-status role="status" aria-live="polite"></p>
+            </div>
+        {{end}}
+
+        <div class="auth-register">
+            <span>Don't have an account?</span>
+            <a href="/barber/register">
+                Create an account
+            </a>
+        </div>
+
+        <div class="auth-footer">
+            <a href="/">
+                ← Back to OG's Salon
+            </a>
+            <a href="/customer/login">
+                Client sign in →
+            </a>
+        </div>
+
+    </section>
+
+</main>
+
+{{template "public-footer" .}}
+</body>
+</html>

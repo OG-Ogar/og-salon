@@ -96,13 +96,13 @@ func TestBookingEmailContentDefaults(t *testing.T) {
 
 	subject, body := BookingEmailContent(origin, n)
 
-	if subject != "New Haircut Booking Request: Customer - Haircut" {
+	if subject != "New Haircut Booking Request: Client - Haircut" {
 		t.Fatalf("default subject = %q", subject)
 	}
 
 	for _, want := range []string{
 		"Hello,",
-		"Customer Name: Customer",
+		"Client Name: Client",
 		"Phone: Not provided",
 		"Email: Not provided",
 		"Service: Haircut",
@@ -111,7 +111,7 @@ func TestBookingEmailContentDefaults(t *testing.T) {
 		"Appointment Date: Unspecified",
 		"Appointment Time: Unspecified",
 		"Shop: OG's Salon",
-		"Customer Notes: None",
+		"Client Notes: None",
 		"https://salon.example.com/barber/bookings",
 	} {
 		if !strings.Contains(body, want) {
@@ -234,4 +234,3 @@ func TestSendBookingNotificationSMTP(t *testing.T) {
 		}
 	}
 }
-

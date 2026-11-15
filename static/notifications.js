@@ -331,7 +331,7 @@
             var one = bookings[0];
             buildCard(
                 "\ud83d\udd14",
-                "New booking from " + (one.customer || "a customer"),
+                "New booking from " + (one.customer || "a client"),
                 serviceText(one) + " \u00b7 " + whenText(one),
                 naira(one.price),
                 "/barber/bookings",
@@ -344,7 +344,7 @@
         buildCard(
             "\ud83d\udd14",
             bookings.length + " new bookings",
-            "Latest: " + (first.customer || "a customer") + " \u00b7 " + serviceText(first) + " \u00b7 " + whenText(first),
+            "Latest: " + (first.customer || "a client") + " \u00b7 " + serviceText(first) + " \u00b7 " + whenText(first),
             "Open Bookings to accept or decline them.",
             "/barber/bookings",
             "Dismiss booking alerts"
@@ -402,7 +402,7 @@
         showBookingBanner(bookings);
         var first = bookings[0];
         var title = bookings.length === 1
-            ? "New booking from " + (first.customer || "a customer")
+            ? "New booking from " + (first.customer || "a client")
             : bookings.length + " new bookings";
         systemNotify(title, serviceText(first) + " \u00b7 " + whenText(first), "/barber/bookings", "booking-" + first.id);
     }
@@ -641,8 +641,8 @@
         var closedApp = Boolean(pushPublicKey) && pushSupported();
         if (role === "barber") {
             message.textContent = closedApp
-                ? "Get an alert when a customer books or messages you, even when the app is closed."
-                : "Get a sound and notification alert when a customer books or messages you while this page is open.";
+                ? "Get an alert when a client books or messages you, even when the app is closed."
+                : "Get a sound and notification alert when a client books or messages you while this page is open.";
         } else {
             message.textContent = closedApp
                 ? "Get an alert when a barber replies, even when the app is closed."

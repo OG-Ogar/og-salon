@@ -9,12 +9,39 @@ import (
 	"barber-booking/storage"
 )
 
+// accountLoginPage identifies the branded sign-in page a provider uses.
+// Barbers and hair stylists share one account system, so the only
+// difference is which page is shown and where "use another account"
+// returns to.
+type accountLoginPage struct {
+	Template string
+	Path     string
+}
+
+var (
+	barberLoginPage      = accountLoginPage{Template: "barber/login.html", Path: "/barber/login"}
+	hairstylistLoginPage = accountLoginPage{Template: "hairstylist/login.html", Path: "/hairstylist/login"}
+)
+
 // BarberLoginHandler shows and processes the barber login.
+func BarberLoginHandler(w http.ResponseWriter, r *http.Request) {
+	accountLoginHandler(w, r, barberLoginPage)
+}
+
+// HairstylistLoginHandler shows and processes the hair stylist login.
 //
-// Like the customer form, a browser that has signed in before is asked only
+// Hair stylists use the same accounts, dashboard and tools as barbers;
+// this page only gives them their own branded entry point.
+func HairstylistLoginHandler(w http.ResponseWriter, r *http.Request) {
+	accountLoginHandler(w, r, hairstylistLoginPage)
+}
+
+// accountLoginHandler shows and processes a provider login.
+//
+// Like the client form, a browser that has signed in before is asked only
 // for the password. The remembered account still has to pass the password (or
 // passkey) check before a session is created.
-func BarberLoginHandler(w http.ResponseWriter, r *http.Request) {
+func accountLoginHandler(w http.ResponseWriter, r *http.Request, page accountLoginPage) {
 	switch r.Method {
 
 	case http.MethodGet:
@@ -23,7 +50,7 @@ func BarberLoginHandler(w http.ResponseWriter, r *http.Request) {
 				serverError(w, "forget barber device", err)
 				return
 			}
-			http.Redirect(w, r, "/barber/login", http.StatusSeeOther)
+			http.Redirect(w, r, page.Path, http.StatusSeeOther)
 			return
 		}
 
@@ -50,7 +77,7 @@ func BarberLoginHandler(w http.ResponseWriter, r *http.Request) {
 			view.Notice = "Your password has been changed. Sign in with it now."
 		}
 
-		render(w, "barber/login.html", view)
+		render(w, page.Template, view)
 
 	case http.MethodPost:
 		if !beginAuthAttempt(w, r, "login") {
@@ -72,7 +99,7 @@ func BarberLoginHandler(w http.ResponseWriter, r *http.Request) {
 				view.RememberedEmail = email
 				view.PasskeyAvailable = passkeyAvailable
 			}
-			renderStatus(w, http.StatusUnauthorized, "barber/login.html", view)
+			renderStatus(w, http.StatusUnauthorized, page.Template, view)
 		}
 
 		if email == "" || password == "" {

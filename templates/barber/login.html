@@ -32,8 +32,9 @@
         </div>
 
         <nav class="auth-role-switch" aria-label="Sign-in role">
-            <a href="/customer/login{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill">Customer</a>
+            <a href="/customer/login{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill">Client</a>
             <a href="/barber/login{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill active" aria-current="page">Barber Shop</a>
+            <a href="/hairstylist/login{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill">Hair Stylist</a>
         </nav>
 
         <div class="auth-header">
@@ -144,7 +145,7 @@
                 ← Back to OG's Salon
             </a>
             <a href="/customer/login">
-                Customer sign in →
+                Client sign in →
             </a>
         </div>
 
