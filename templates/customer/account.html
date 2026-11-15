@@ -21,17 +21,17 @@
             <h1>Hello, {{.FullName}}</h1>
             <p class="welcome-text">
                 Book your next haircut, manage your appointments,
-                and stay connected with your barber.
+                and stay connected with your barber or stylist.
             </p>
-            <a class="hero-button" href="/customer/barbers">Find a barber</a>
+            <a class="hero-button" href="/customer/barbers">Find a barber / stylist</a>
         </section>
 
-        <section class="barber-search" aria-label="Find a barber">
-            <p class="eyebrow">Find a barber</p>
-            <h2>Where do you need a barber?</h2>
+        <section class="barber-search" aria-label="Find a barber or stylist">
+            <p class="eyebrow">Find a barber / stylist</p>
+            <h2>Where do you need a barber or stylist?</h2>
             <form method="get" action="/customer/barbers" class="barber-search-form ui-form">
                 <div class="barber-search-field barber-search-wide">
-                    <label for="q">Barber or shop name <span>Optional</span></label>
+                    <label for="q">Barber, stylist or shop name <span>Optional</span></label>
                     <input id="q" name="q" type="search" placeholder="e.g. og's salon Cuts" maxlength="80">
                 </div>
                 <div class="barber-search-field">
@@ -42,14 +42,14 @@
                     <label for="area">LGA / area council <span>Optional</span></label>
                     {{template "geography-discovery-area" .}}
                 </div>
-                <button type="submit" class="hero-button">Find barbers &rarr;</button>
+                <button type="submit" class="hero-button">Find barbers / stylists &rarr;</button>
             </form>
         </section>
 
         <section class="customer-stats" aria-label="Dashboard summary">
             <article class="stat-card">
                 <span class="stat-number">{{.Barbers}}</span>
-                <span class="stat-label">Barbers available</span>
+                <span class="stat-label">Barbers and stylists available</span>
             </article>
             <article class="stat-card">
                 <span class="stat-number">{{.Pending}}</span>
@@ -97,8 +97,8 @@
             {{else}}
                 <div class="empty-appointments">
                     <h3>No appointments yet</h3>
-                    <p>Find a barber and book your first haircut.</p>
-                    <a class="hero-button" href="/customer/barbers">Browse barbers</a>
+                    <p>Find a barber or stylist and book your first service.</p>
+                    <a class="hero-button" href="/customer/barbers">Browse barbers / stylists</a>
                 </div>
             {{end}}
         </section>
@@ -108,7 +108,7 @@
         <div class="ui-panel" style="padding:1.25rem;border-radius:16px;background:var(--surface,#193129);border:1px solid var(--border,#355348);">
             <p class="eyebrow" style="margin-top:0">Quick Actions</p>
             <div style="display:flex;flex-direction:column;gap:0.75rem;margin-top:0.75rem;">
-                <a class="hero-button" href="/customer/barbers" style="text-align:center;text-decoration:none;display:block;">Find a Barber &rarr;</a>
+                <a class="hero-button" href="/customer/barbers" style="text-align:center;text-decoration:none;display:block;">Find a Barber / Stylist &rarr;</a>
                 <a class="section-link" href="/customer/products" style="text-align:center;text-decoration:none;display:block;padding:0.7rem;border:1px solid var(--border,#355348);border-radius:8px;color:var(--ink,#f8f5e9);">Shop Accessories</a>
                 <a class="section-link" href="/customer/bookings?group=upcoming" style="text-align:center;text-decoration:none;display:block;padding:0.7rem;border:1px solid var(--border,#355348);border-radius:8px;color:var(--ink,#f8f5e9);">View All Bookings</a>
                 <a class="section-link" href="/customer/orders" style="text-align:center;text-decoration:none;display:block;padding:0.7rem;border:1px solid var(--border,#355348);border-radius:8px;color:var(--ink,#f8f5e9);">View All Orders</a>
@@ -116,7 +116,7 @@
         </div>
         <div class="ui-panel" style="padding:1.25rem;border-radius:16px;background:var(--surface,#193129);border:1px solid var(--border,#355348);">
             <p class="eyebrow" style="margin-top:0">OG Standard</p>
-            <p style="margin:0.5rem 0 0;font-size:0.85rem;color:var(--ink-muted,#c2d4c7);line-height:1.5;">Direct messaging with verified master barbers, transparent Naira pricing, and guaranteed appointment slots across all 36 states and FCT.</p>
+            <p style="margin:0.5rem 0 0;font-size:0.85rem;color:var(--ink-muted,#c2d4c7);line-height:1.5;">Direct messaging with verified barbers and stylists, transparent Naira pricing, and appointment slots across all 36 states and FCT.</p>
         </div>
     </aside>
 </main>

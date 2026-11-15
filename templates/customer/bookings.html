@@ -124,7 +124,7 @@
                             <div class="booking-detail">
 
                                 <span>
-                                    Barber
+                                    Barber / Stylist
                                 </span>
 
                                 <strong>
@@ -322,7 +322,7 @@
                             <div class="booking-detail">
 
                                 <span>
-                                    Barber
+                                    Barber / Stylist
                                 </span>
 
                                 <strong>
@@ -391,12 +391,12 @@
 {{if .FollowUp}}
 <section class="customer-section" aria-labelledby="follow-up-heading">
     <h2 id="follow-up-heading">Needs follow-up</h2>
-    <p>These open appointments have reached their start time or their recorded time needs checking. Contact your barber to confirm the outcome. They are not automatically marked as no-shows.</p>
+    <p>These open appointments have reached their start time or their recorded time needs checking. Contact your barber or stylist to confirm the outcome. They are not automatically marked as no-shows.</p>
     {{range .FollowUp}}
     <article class="booking-card">
         <h3>{{.HairstyleName}} with {{.BarberName}}</h3>
         <p>{{.Date}} at {{.Time}} {{.BookingTimezone}} · {{template "domain-status" (domainStatus "booking" .Status)}}</p>
-        <a href="/customer/chats/{{.BarberID}}">Message barber</a>
+        <a href="/customer/chats/{{.BarberID}}">Message barber / stylist</a>
         <form method="post" action="{{$.ActionURL}}{{.ID}}/cancel" class="ui-form">
             <input type="hidden" name="csrf_token" value="{{$.CSRF}}">
             <button type="submit" class="ui-control">Cancel appointment</button>

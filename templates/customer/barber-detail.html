@@ -42,7 +42,7 @@
     <a class="back-link"
        href="{{.ResultsLink}}">
 
-        &larr; Back to barbers
+        &larr; Back to barbers and stylists
 
     </a>
 
@@ -81,7 +81,7 @@
         <div class="barber-details">
 
             <p class="eyebrow">
-                Barber Shop
+                Barber / Stylist
             </p>
 
             <h1>
@@ -115,7 +115,7 @@
 
                 <a class="message-button"
                    href="{{.ChatLink}}">
-                    Message Barber
+                    Message Barber / Stylist
                 </a>
 
                 {{if .Hairstyles}}
@@ -126,7 +126,7 @@
                 {{else}}
                 <span class="book-button hero-cta-btn disabled"
                       aria-disabled="true"
-                      title="This barber has not listed any hairstyles yet">
+                      title="This barber or stylist has not listed any services yet">
                     Booking Unavailable
                 </span>
                 {{end}}
@@ -421,7 +421,7 @@
                             id="notes"
                             name="notes"
                             maxlength="2000"
-                            placeholder="Add a note for the barber...">{{index .Values "notes"}}</textarea>
+                            placeholder="Add a note for the barber or stylist...">{{index .Values "notes"}}</textarea>
 
                     </div>
 
@@ -437,7 +437,7 @@
                             </strong>
 
                             <p>
-                                The barber will review your request.
+                                The barber or stylist will review your request.
                             </p>
 
                         </div>
@@ -473,12 +473,12 @@
                 </h2>
 
                 <p>
-                    This barber has not listed any hairstyles yet.
+                    This barber or stylist has not listed any services yet.
                 </p>
 
                 <a class="message-button"
                    href="{{.ChatLink}}">
-                    Message Barber
+                    Message Barber / Stylist
                 </a>
 
             </div>
@@ -488,7 +488,7 @@
     </section>
 
 
-    <p><a class="message-button" href="/customer/products?barber={{.Barber.ID}}">Shop this barber’s products</a></p>
+    <p><a class="message-button" href="/customer/products?barber={{.Barber.ID}}">Shop this barber’s or stylist’s products</a></p>
 
 </main>
 

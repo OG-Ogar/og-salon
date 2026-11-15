@@ -6,7 +6,7 @@
 
     <script src="/static/theme-switch.js"></script>
     <link rel="stylesheet" href="/static/app.css">
-    <title>Find a Barber - OG's Salon</title>
+    <title>Find a Barber or Stylist - OG's Salon</title>
 
     <link rel="stylesheet" href="/static/customer-barbers.css">
     <script src="/static/app.js" defer></script>
@@ -34,15 +34,15 @@
         <section class="page-intro">
 
             <p class="eyebrow">
-                Discover your barber
+                Discover your barber or stylist
             </p>
 
             <h1>
-                Find a Barber
+                Find a Barber / Stylist
             </h1>
 
             <p class="intro-text">
-                Browse available barbers, explore their hairstyles,
+                Browse available barbers or stylists, explore their services,
                 check their prices, and book your next haircut.
             </p>
 
@@ -50,15 +50,15 @@
 
 
         <section class="location-panel customer-location-panel">
-            <div class="location-copy"><span class="step-number">01</span><div><p class="eyebrow">Location first</p><h2>Where do you need a barber?</h2><p>Choose your state and optionally narrow the results to your LGA or area council.</p></div></div>
+            <div class="location-copy"><span class="step-number">01</span><div><p class="eyebrow">Location first</p><h2>Where do you need a barber or stylist?</h2><p>Choose your state and optionally narrow the results to your LGA or area council.</p></div></div>
             <form class="location-form ui-form" method="get" action="/customer/barbers">
-                <div class="location-field ui-field"><label for="q">Barber or shop name <span>Optional</span></label>
+                <div class="location-field ui-field"><label for="q">Barber, stylist or shop name <span>Optional</span></label>
                 <input id="q" name="q" type="search" value="{{.Query}}" placeholder="e.g. og's salon Cuts" maxlength="80"></div>
                 <div class="location-field ui-field"><label for="state">State</label>
                 {{template "geography-state" .SelectedState}}</div>
                 <div class="location-field ui-field"><label for="area">LGA / area council <span>Optional</span></label>
                 {{template "geography-discovery-area" .}}</div>
-                <button class="book-button find-submit ui-control" type="submit">Find barbers <span>&rarr;</span></button>
+                <button class="book-button find-submit ui-control" type="submit">Find a barber / stylist <span>&rarr;</span></button>
             </form>
         </section>
 
@@ -71,14 +71,14 @@
                 <div class="barber-filter-box">
 
                     <label for="filter">
-                        Search barbers
+                        Search barbers and stylists
                     </label>
 
                     <input
                         id="filter"
                         type="search"
                         data-filter=".barber-grid .barber-card"
-                        placeholder="Search by shop, barber or location..."
+                        placeholder="Search by shop, barber, stylist or location..."
                         autocomplete="off">
 
                 </div>
@@ -103,7 +103,7 @@
                         </p>
 
                         <h2>
-                            Choose your barber
+                            Choose a barber or stylist
                         </h2>
                     </div>
 
@@ -157,7 +157,7 @@
                             <div class="barber-information">
 
                                 <p class="card-label">
-                                    BARBER SHOP
+                                    BARBER / STYLIST
                                 </p>
 
                                 <h3>
@@ -244,7 +244,7 @@
 
                                     <a class="book-button"
                                        href="{{discoveryCardPath "/customer/barbers" .ID $.SelectedState $.SelectedArea $.Pagination.After $.Pagination.Before}}">
-                                        View Barber
+                                        View barber / stylist
                                         <span>&rarr;</span>
                                     </a>
 
@@ -274,12 +274,12 @@
             <section class="empty-state">
                 {{if .SelectedState}}
                 <p class="eyebrow">No match in this location</p>
-                <h2>No registered barbers matched your selection.</h2>
+                <h2>No barbers or stylists matched your selection.</h2>
                 <p>Try the state without an LGA/area council, or choose another location.</p>
                 <a class="back-button" href="/customer/barbers?state={{urlquery .SelectedState}}">Search whole state</a>
                 {{else}}
                 <p class="eyebrow">Choose your location</p>
-                <h2>Find a barber near you.</h2>
+                <h2>Find a barber or stylist near you.</h2>
                 <p>Select a state above to see its active shops. Add a local area to narrow the results.</p>
                 {{end}}
             </section>
