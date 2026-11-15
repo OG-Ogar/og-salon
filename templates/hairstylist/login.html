@@ -18,7 +18,7 @@
     <script src="/static/passkey.js" defer></script>
 </head>
 
-<body class="auth-page hairstylist-auth modern-barber-page">
+<body class="auth-page hairstylist-auth modern-hairdresser-page">
 
 <main class="auth-layout">
 
@@ -33,7 +33,7 @@
 
         <nav class="auth-role-switch" aria-label="Sign-in role">
             <a href="/customer/login{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill">Client</a>
-            <a href="/barber/login{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill">Barber Shop</a>
+            <a href="/barber/login{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill">Hair Dressing Shop</a>
             <a href="/hairstylist/login{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill active" aria-current="page">Hair Stylist</a>
         </nav>
 
@@ -116,7 +116,7 @@
                 <button type="button"
                         class="auth-passkey-button"
                         data-passkey-login
-                        data-role="barber"
+                        data-role="hairdresser"
                         data-next="/barber/dashboard">
                     <span class="auth-passkey-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" focusable="false">
@@ -136,7 +136,7 @@
         <div class="auth-register">
             <span>Don't have an account?</span>
             <a href="/barber/register">
-                Create an account
+                Create a hairdressing account
             </a>
         </div>
 
