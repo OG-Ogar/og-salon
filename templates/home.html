@@ -22,11 +22,8 @@
             </span>
         </a>
         <nav class="landing-nav" aria-label="Main navigation">
-            <a class="landing-nav-link" href="/explore">Find a Barber</a>
-            <a class="landing-nav-link" href="/explore">Find a Hair Stylist</a>
-            {{if .CustomerSignedIn}}<a class="landing-nav-link" href="/customer/dashboard">Client dashboard</a>{{end}}
-{{if .AdminSignedIn}}<a class="landing-nav-link" href="/admin/dashboard">Admin dashboard</a>{{end}}
-{{if .BarberSignedIn}}<a class="landing-nav-cta" href="/barber/dashboard">Barber dashboard</a>{{else}}<a class="landing-nav-cta" href="/barber/login">Barber login</a><a class="landing-nav-link" href="/hairstylist/login">Hair Stylist login</a>{{end}}
+            {{if .BarberSignedIn}}<a class="landing-nav-cta" href="/barber/dashboard">Barber dashboard</a>{{else}}<a class="landing-nav-cta" href="/barber/login">Barber login</a>{{end}}
+            <a class="landing-nav-link" href="/hairstylist/login">Hair Stylist login</a>
         </nav>
     </header>
 
