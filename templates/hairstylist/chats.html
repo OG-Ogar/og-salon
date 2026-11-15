@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Messages - OG's Salon</title>
+
+    <script src="/static/theme-switch.js"></script>
+    <link rel="stylesheet" href="/static/app.css">
+    <script src="/static/app.js" defer></script>
+
+    
+
+<link rel="stylesheet" href="/static/messages.css">
+<link rel="stylesheet" href="/static/ui.css">
+<link rel="stylesheet" href="/static/theme.css">
+<link rel="stylesheet" href="/static/image-viewer.css">
+<script src="/static/image-viewer.js" defer></script>
+</head>
+
+
+<body class="barber-page modern-role-page modern-hairdresser-page messaging-page">
+
+<main class="barber-messages-page ui-page">
+
+    <div class="barber-messages">
+
+
+        <!-- =================================================
+             HEADER
+             ================================================= -->
+
+        {{template "role-header" (navigation "barber" "chats" .)}}
+
+
+
+        <!-- =================================================
+             TITLE
+             ================================================= -->
+
+        <section class="messages-title-box">
+
+            <h1>
+                Client Messages
+            </h1>
+
+            <p>
+                Your conversations with clients.
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CONVERSATIONS
+             ================================================= -->
+
+        {{if .Items}}
+
+            <section
+                class="conversation-list"
+                aria-label="Client conversations"
+            >
+
+                {{range .Items}}
+
+                    <a
+                        class="conversation-card"
+                        href="/barber/chats/{{.CustomerID}}"
+                    >
+
+
+                        <!-- CUSTOMER PHOTO -->
+
+                        <div>
+
+                            {{if .CustomerImage}}
+
+                                <img
+                                    class="customer-photo"
+                                    src="{{.CustomerImage}}"
+                                    alt="{{.Name}}"
+                                    data-fullscreen-image
+                                 srcset="{{imageSrcset .CustomerImage}}" sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px" width="640" height="480" loading="lazy" decoding="async">
+
+                            {{else}}
+
+                                <div
+                                    class="customer-photo-placeholder"
+                                    aria-hidden="true"
+                                >
+                                    {{printf "%.1s" .Name}}
+                                </div>
+
+                            {{end}}
+
+                        </div>
+
+
+
+                        <!-- CUSTOMER NAME -->
+
+                        <h2 class="customer-name">
+                            {{.Name}}
+                        </h2>
+
+
+                        <!-- CUSTOMER PHONE -->
+
+                        {{if .Detail}}
+
+                            <p class="customer-phone">
+                                {{.Detail}}
+                            </p>
+
+                        {{end}}
+
+
+
+                        <!-- LAST MESSAGE -->
+
+                        <div class="last-message">
+
+                            <span class="last-message-label">
+                                Last message
+                            </span>
+
+                            <p class="last-message-text">
+                                {{.LastText}}
+                            </p>
+
+                        </div>
+
+
+
+                        <!-- DETAILS -->
+
+                        <div class="conversation-details">
+
+                            <span>
+                                {{.LastAt}}
+                            </span>
+
+                            <span>
+                                {{.Count}} messages
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- OPEN CHAT -->
+
+                        <span class="open-chat-button">
+                            Open Chat
+                        </span>
+
+
+                    </a>
+
+                {{end}}
+
+            </section>
+
+        {{else}}
+
+            <div class="empty-messages">
+
+                No conversations yet.
+
+            </div>
+
+        {{end}}
+
+
+    </div>
+
+</main>
+
+{{template "list-pagination" .Pagination}}
+{{template "public-footer" .}}
+</body>
+
+</html>

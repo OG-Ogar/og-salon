@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}} - OG's Salon</title>
+    <script src="/static/theme-switch.js"></script>
+    <link rel="stylesheet" href="/static/app.css">
+    <link rel="stylesheet" href="/static/barber.css">
+    <link rel="stylesheet" href="/static/ui.css">
+    <link rel="stylesheet" href="/static/theme.css">
+    <script src="/static/app.js" defer></script>
+</head>
+<body class="barber-page modern-role-page modern-hairdresser-page">
+
+{{template "role-header" (navigation "barber" "hairstyles" .)}}
+
+<main class="barber-main wrap ui-page ui-confirmation">
+
+    <p class="barber-breadcrumb">
+        <a href="/hairstylist/dashboard">Dashboard</a>
+        /
+        <a href="/barber/hairstyles">Hairstyles</a>
+        /
+        Delete
+    </p>
+
+    <h1 class="barber-title">{{.Title}}</h1>
+
+    <div class="panel ui-panel barber-card">
+
+        <p>{{.Message}}</p>
+
+        {{template "confirmation-actions" (confirmation .Action .CSRF "Yes, delete it" .Cancel "No, keep it")}}
+
+    </div>
+
+</main>
+
+{{template "public-footer" .}}
+</body>
+</html>

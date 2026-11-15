@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Hairstyles - OG's Salon</title>
+
+    <script src="/static/theme-switch.js"></script>
+    <link rel="stylesheet" href="/static/app.css">
+    <link rel="stylesheet" href="/static/barber.css">
+    <link rel="stylesheet" href="/static/image-viewer.css">
+    <link rel="stylesheet" href="/static/ui.css">
+    <link rel="stylesheet" href="/static/theme.css">
+
+    <script src="/static/app.js" defer></script>
+    <script src="/static/image-viewer.js" defer></script>
+</head>
+
+<body class="barber-page modern-role-page modern-hairdresser-page">
+
+{{template "role-header" (navigation "barber" "hairstyles" .)}}
+
+<main class="barber-main ui-page">
+
+    <p class="barber-breadcrumb">
+        <a href="/hairstylist/dashboard">Dashboard</a>
+        /
+        Hairstyles
+    </p>
+
+    <h1 class="barber-title">
+        Manage Hairstyles
+    </h1>
+    <p>Up to 24 items per page, oldest first.</p>
+
+    <p class="barber-lede">
+        Add, edit and manage the hairstyles and services clients can book at your shop.
+    </p>
+
+    <div class="barber-actions ui-actions">
+        <a class="barber-button primary"
+           href="/barber/hairstyles/new">
+            + Add a Hairstyle
+        </a>
+    </div>
+
+    <section class="barber-section">
+
+        {{if .Items}}
+
+            <div class="barber-hairstyle-grid">
+
+                {{range .Items}}
+
+                    <article class="barber-hairstyle-card">
+
+                        <div class="barber-hairstyle-media-wrap">
+                            {{if .Image}}
+                                <img class="barber-hairstyle-image"
+                                     src="{{.Image}}"
+                                     alt="{{.Name}}"
+                                     data-fullscreen-image
+                                     srcset="{{imageSrcset .Image}}" sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px" width="640" height="480" loading="lazy" decoding="async">
+                            {{else}}
+                                <div class="barber-hairstyle-no-image">
+                                    No photo
+                                </div>
+                            {{end}}
+
+                            <span class="barber-duration-badge" aria-label="Duration">
+                                ⏱ {{.Duration}} min
+                            </span>
+                        </div>
+
+                        <!-- The actions wait behind the three dots at the top
+                             right of the photo. -->
+                        <details class="card-menu">
+
+                            <summary class="card-menu-toggle">
+
+                                <span class="visually-hidden">
+                                    Actions for {{.Name}}
+                                </span>
+
+                                <span aria-hidden="true">&#8942;</span>
+
+                            </summary>
+
+                            <div class="card-menu-panel">
+
+                                <a class="card-menu-item"
+                                   href="/barber/hairstyles/{{.ID}}">
+                                    View
+                                </a>
+
+                                <a class="card-menu-item"
+                                   href="/barber/hairstyles/{{.ID}}/edit">
+                                    Edit
+                                </a>
+
+                                <a class="card-menu-item card-menu-item-danger"
+                                   href="/barber/hairstyles/{{.ID}}/delete">
+                                    Delete
+                                </a>
+
+                            </div>
+
+                        </details>
+
+                        {{if .Video}}
+                            <video class="catalogue-video"
+                                   src="{{.Video}}"
+                                   controls
+                                   preload="none"
+                                   poster="{{.Image}}"
+                                   aria-label="Video of {{.Name}}">
+                            </video>
+                        {{end}}
+
+                        <div class="barber-hairstyle-content">
+
+                            <h2 class="barber-hairstyle-name">
+                                <a href="/barber/hairstyles/{{.ID}}">
+                                    {{.Name}}
+                                </a>
+                            </h2>
+
+                            <span class="barber-category">
+                                {{.Category}}
+                            </span>
+
+                            <p class="barber-card-pricing">
+                                <strong class="barber-price">
+                                    {{naira .Price}}
+                                </strong>
+                            </p>
+
+                            <p class="barber-description">
+                                {{.Description}}
+                            </p>
+
+                        </div>
+
+                    </article>
+
+                {{end}}
+
+            </div>
+
+            {{template "list-pagination" .Pagination}}
+
+        {{else}}
+
+            <div class="barber-card ui-panel">
+                <p>
+                    You have not added any hairstyles yet.
+                </p>
+
+                <p>
+                    <a class="barber-button primary"
+                       href="/barber/hairstyles/new">
+                        + Add Your First Hairstyle
+                    </a>
+                </p>
+            </div>
+
+        {{end}}
+
+    </section>
+
+</main>
+
+{{template "public-footer" .}}
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{.Name}} - OG's Salon</title>
+
+    <script src="/static/theme-switch.js"></script>
+    <link rel="stylesheet" href="/static/app.css">
+    <link rel="stylesheet" href="/static/barber.css">
+    <link rel="stylesheet" href="/static/ui.css">
+    <link rel="stylesheet" href="/static/theme.css">
+
+    <script src="/static/app.js" defer></script>
+    <link rel="stylesheet" href="/static/image-viewer.css">
+    <script src="/static/image-viewer.js" defer></script>
+</head>
+
+<body class="barber-page modern-role-page modern-hairdresser-page">
+
+{{template "role-header" (navigation "barber" "hairstyles" .)}}
+
+<main class="barber-main ui-page">
+
+    <p class="barber-breadcrumb">
+        <a href="/hairstylist/dashboard">
+            Dashboard
+        </a>
+        /
+        <a href="/barber/hairstyles">
+            Hairstyles
+        </a>
+        /
+        {{.Name}}
+    </p>
+
+    <h1 class="barber-title">
+        {{.Name}}
+    </h1>
+
+    <p class="barber-lede">
+        <span class="barber-category">{{.Category}}</span> &middot; {{.Duration}} minutes &middot; {{naira .Price}}
+    </p>
+
+    <section class="barber-profile-card ui-panel">
+
+        {{if .Image}}
+            <div class="barber-showcase-media">
+                <img class="barber-shop-photo"
+                     src="{{.Image}}"
+                     alt="Photo of {{.Name}}"
+                     data-fullscreen-image srcset="{{imageSrcset .Image}}" sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px" width="640" height="480" loading="lazy" decoding="async">
+            </div>
+        {{end}}
+
+        {{if .Video}}
+            <div class="barber-showcase-media">
+                <video class="portfolio-video"
+                       src="{{.Video}}"
+                       controls
+                       preload="none"
+                       poster="{{.Image}}"
+                       aria-label="Video of {{.Name}}">
+                </video>
+            </div>
+        {{end}}
+
+        <table class="barber-profile-table">
+
+            <tbody>
+
+                <tr>
+                    <th scope="row">
+                        Price
+                    </th>
+
+                    <td class="barber-price">
+                        <strong>{{naira .Price}}</strong>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="row">
+                        Duration
+                    </th>
+
+                    <td>
+                        {{.Duration}} minutes
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="row">
+                        Category
+                    </th>
+
+                    <td>
+                        {{.Category}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="row">
+                        Description
+                    </th>
+
+                    <td>
+                        {{.Description}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="row">
+                        Status
+                    </th>
+
+                    <td>
+                        {{template "domain-status" (availabilityStatus .IsAvailable)}}
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+        <div class="barber-actions ui-actions">
+
+            <a class="barber-button primary"
+               href="/barber/hairstyles/{{.ID}}/edit">
+                Edit Hairstyle
+            </a>
+
+            <a class="barber-button"
+               href="/barber/hairstyles">
+                Back to Hairstyles
+            </a>
+
+            <a class="barber-button danger"
+               href="/barber/hairstyles/{{.ID}}/delete">
+                Delete Hairstyle
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+{{template "public-footer" .}}
+</body>
+</html>

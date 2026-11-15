@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with {{.Title}} - OG's Salon</title>
+    <script src="/static/theme-switch.js"></script>
+    <link rel="stylesheet" href="/static/app.css">
+    <script src="/static/app.js" defer></script>
+
+    <link rel="stylesheet" href="/static/messages.css">
+    <link rel="stylesheet" href="/static/ui.css">
+    <link rel="stylesheet" href="/static/theme.css">
+    <link rel="stylesheet" href="/static/image-viewer.css">
+    <link rel="stylesheet" href="/static/chat-attachments.css">
+    <script src="/static/image-viewer.js" defer></script>
+    <script src="/static/chat-attachments.js" defer></script>
+    <script src="/static/chat-message-actions.js" defer></script>
+</head>
+
+<body class="barber-page modern-role-page modern-hairdresser-page messaging-page">
+
+{{template "role-header" (navigation "barber" "chats" .)}}
+
+<main class="barber-chat-page ui-page">
+
+    <div class="barber-chat">
+
+        <div class="chat-split-container">
+
+            <!-- Desktop Left Sidebar: Customer Context -->
+            <aside class="chat-partner-sidebar">
+                <a class="chat-back-link" href="{{.BackLink}}">
+                    ← All Conversations
+                </a>
+
+                <section class="customer-card ui-panel chat-partner-card">
+                    {{if .CustomerImage}}
+                        <img
+                            class="customer-photo"
+                            src="{{.CustomerImage}}"
+                            alt="{{.Title}}"
+                            data-fullscreen-image
+                            srcset="{{imageSrcset .CustomerImage}}" sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px" width="640" height="480" loading="lazy" decoding="async">
+                    {{else}}
+                        <div
+                            class="customer-photo-placeholder"
+                            aria-hidden="true">
+                            {{printf "%.1s" .Title}}
+                        </div>
+                    {{end}}
+
+                    <div class="partner-meta">
+                        <span class="partner-online-badge">
+                            <span class="online-dot" aria-hidden="true"></span>
+                            Client
+                        </span>
+                        <h1 class="customer-name">
+                            {{.Title}}
+                        </h1>
+
+                        {{if .Subtitle}}
+                            <p class="customer-phone">
+                                {{.Subtitle}}
+                            </p>
+                        {{end}}
+                    </div>
+                </section>
+
+                <div class="chat-tips-card">
+                    <strong>Client Communication</strong>
+                    <p>Keep your clients updated on seat availability, appointments running late, or styling recommendations.</p>
+                </div>
+            </aside>
+
+            <!-- Right Pane: Active Message Stream -->
+            <section class="chat-stream-pane">
+
+                {{template "form-error" .Error}}
+
+                <div class="chat-stream-header">
+                    <p class="message-refresh-note">
+                        New messages appear when you refresh or send. Each page shows up to 100 messages in time order.
+                        <a href="{{.Action}}">Refresh conversation</a>
+                    </p>
+                </div>
+
+                {{template "list-pagination" .Pagination}}
+
+                <section class="thread" tabindex="0" aria-label="Conversation">
+
+                    {{if .Messages}}
+
+                        {{range .Messages}}
+
+                            <div class="bubble {{if .FromBarber}}mine message-own{{end}}"{{if .FromBarber}} data-message-own data-message-id="{{.ID}}" data-message-edit-url="{{$.Action}}/messages/{{.ID}}/edit" data-message-delete-url="{{$.Action}}/messages/{{.ID}}/delete" data-message-has-media="{{if or .Image .Audio .Video}}true{{else}}false{{end}}" data-message-text="{{.Text}}"{{end}}>
+
+                                <span class="who">
+                                    {{.SenderName}}
+                                </span>
+
+                                {{if .Image}}
+                                    <a class="chat-photo-link" href="{{.Image}}" target="_blank" rel="noopener">
+                                        <img class="chat-photo" src="{{.Image}}"
+                                             alt="Photo sent by {{.SenderName}}" loading="lazy" decoding="async">
+                                    </a>
+                                {{end}}
+
+                                {{if .Video}}
+                                    <video class="chat-video" controls preload="metadata" playsinline
+                                           src="{{.Video}}"
+                                           aria-label="Video sent by {{.SenderName}}"></video>
+                                {{end}}
+
+                                {{if .Audio}}
+                                    <div class="chat-audio-wrap">
+                                        <audio class="chat-audio" controls preload="metadata" src="{{.Audio}}"></audio>
+
+                                        <a class="chat-audio-download"
+                                           href="{{.Audio}}"
+                                           download
+                                           target="_blank"
+                                           rel="noopener">Download</a>
+
+                                        <p class="chat-audio-warning" hidden>
+                                            This device cannot play the voice note. Download it to listen.
+                                        </p>
+                                    </div>
+                                {{end}}
+
+                                {{if .Text}}
+                                    <p class="text">
+                                        {{.Text}}
+                                    </p>
+                                {{end}}
+
+                                <div class="bubble-meta">
+                                    <span class="when">
+                                        {{.SentAt.Format "2 Jan 2006, 15:04"}}
+                                    </span>
+                                    {{if .FromBarber}}
+                                        <button
+                                            type="button"
+                                            class="bubble-menu-trigger"
+                                            data-message-menu-trigger
+                                            aria-label="Message options"
+                                            aria-haspopup="dialog"
+                                            title="Message options (or long press this message)">⋯</button>
+                                        <span class="bubble-status" title="Delivered">✓✓</span>
+                                    {{end}}
+                                </div>
+
+                            </div>
+
+                        {{end}}
+
+                    {{else}}
+
+                        <p class="empty-message">
+                            No messages yet.
+                        </p>
+
+                    {{end}}
+
+                </section>
+
+                <!-- Quick Response Template Chips for Barber -->
+                <div class="chat-quick-responses" aria-label="Suggested quick replies">
+                    <button type="button" class="quick-reply-chip" data-reply="I'm ready for you now, please come in!">Ready for you now</button>
+                    <button type="button" class="quick-reply-chip" data-reply="Running about 10 minutes late, apologies!">Running 10m late</button>
+                    <button type="button" class="quick-reply-chip" data-reply="Please take a seat in our waiting lounge, almost done!">Take a seat</button>
+                    <button type="button" class="quick-reply-chip" data-reply="Thanks for booking, looking forward to your session!">Thanks, see you soon</button>
+                </div>
+
+                <form
+                    class="send chat-composer"
+                    method="post"
+                    action="{{.Action}}"
+                    enctype="multipart/form-data"
+                    data-chat-composer
+                    {{if .Error}}aria-describedby="form-error"{{end}}>
+
+                    <input
+                        type="hidden"
+                        name="csrf_token"
+                        value="{{.CSRF}}"
+                    >
+
+                    <div class="composer-recording" data-recording-bar hidden role="status">
+                        <span class="rec-dot" aria-hidden="true"></span>
+                        <span data-recording-time>0:00</span>
+                        <span class="rec-hint">Release to send · slide away to cancel</span>
+                    </div>
+
+                    <div class="composer-row">
+
+                        <label class="composer-plus" for="chat-photo" title="Add a photo or video">
+                            <span aria-hidden="true">+</span>
+                            <span class="visually-hidden">Add a photo or video</span>
+                        </label>
+                        <input
+                            id="chat-photo"
+                            class="visually-hidden"
+                            type="file"
+                            name="photo"
+                            accept="image/jpeg,image/png,image/gif,image/webp,video/mp4,video/webm,video/quicktime,video/x-m4v,video/3gpp"
+                            data-chat-attachment
+                            data-photo-input>
+
+                        <div class="composer-input">
+                            <div class="composer-preview" data-photo-preview hidden>
+                                <img alt="Selected attachment" data-photo-preview-img hidden>
+                                <video data-photo-preview-video muted playsinline preload="metadata" hidden></video>
+                                <span class="composer-preview-badge" data-photo-preview-badge hidden>Video</span>
+                                <button type="button" class="composer-preview-remove" data-photo-remove aria-label="Remove attachment">×</button>
+                            </div>
+
+                            <label class="visually-hidden" for="text">Your message</label>
+                            <textarea
+                                id="text"
+                                name="text"
+                                maxlength="1000"
+                                rows="1"
+                                placeholder="Reply to this client (Press Enter to send)"
+                            ></textarea>
+                        </div>
+
+                        <button type="button" class="composer-mic" data-mic aria-label="Hold to record a voice message" title="Hold to record">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="12" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0"></path><line x1="12" y1="18" x2="12" y2="22"></line></svg>
+                        </button>
+
+                        <button
+                            class="primary ui-control composer-send"
+                            type="submit"
+                            data-send>
+                            Send
+                        </button>
+
+                    </div>
+
+                    <p class="composer-status" data-composer-status role="status" hidden></p>
+
+                </form>
+
+            </section>
+
+        </div>
+
+    </div>
+
+</main>
+
+{{template "message-actions" .}}
+
+{{template "public-footer" .}}
+</body>
+</html>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, follow">
 
-    <title>Hair Stylist Login - OG's Salon</title>
+    <title>Barber Login - OG's Salon</title>
 
     <script src="/static/theme-switch.js"></script>
     <link rel="stylesheet" href="/static/app.css">
@@ -18,7 +18,7 @@
     <script src="/static/passkey.js" defer></script>
 </head>
 
-<body class="auth-page hairstylist-auth modern-hairdresser-page">
+<body class="auth-page barber-auth modern-hairdresser-page">
 
 <main class="auth-layout">
 
@@ -33,13 +33,13 @@
 
         <nav class="auth-role-switch" aria-label="Sign-in role">
             <a href="/customer/login{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill">Client</a>
-            <a href="/barber/login{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill">Hair Dressing Shop</a>
-            <a href="/hairstylist/login{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill active" aria-current="page">Hair Stylist</a>
+            <a href="/barber/login{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill active" aria-current="page">Hair Dressing Shop</a>
+            <a href="/hairstylist/login{{if index .Values "next"}}?next={{urlquery (index .Values "next")}}{{end}}" class="role-pill">Hair Stylist</a>
         </nav>
 
         <div class="auth-header">
             <h1>Hair Stylist Login</h1>
-            <p>Welcome back. Sign in to your hair stylist account to manage your business.</p>
+            <p>Welcome back. Sign in to your barber account to manage your business.</p>
         </div>
 
         {{if .Notice}}
@@ -52,7 +52,7 @@
 
         <form class="auth-form ui-form"
               method="post"
-              action="/hairstylist/login" {{if .Error}}aria-describedby="form-error"{{end}}>
+              action="/barber/login" {{if .Error}}aria-describedby="form-error"{{end}}>
 
             {{if .RememberedEmail}}
                 <input type="hidden" name="email" value="{{.RememberedEmail}}">
@@ -62,7 +62,7 @@
                 <div class="auth-remembered" aria-label="Remembered account">
                     <span class="auth-remembered-label">Signing in as</span>
                     <strong class="auth-remembered-email">{{.RememberedEmail}}</strong>
-                    <a class="auth-remembered-switch" href="/hairstylist/login?switch=1">
+                    <a class="auth-remembered-switch" href="/barber/login?switch=1">
                         Use another account
                     </a>
                 </div>
@@ -98,7 +98,7 @@
             </div>
 
             <div class="auth-options">
-                <a href="/barber/forgot-password">
+                <a href="/hairstylist/forgot-password">
                     Forgot your password?
                 </a>
             </div>
@@ -116,7 +116,7 @@
                 <button type="button"
                         class="auth-passkey-button"
                         data-passkey-login
-                        data-role="hairdresser"
+                        data-role="barber"
                         data-next="/barber/dashboard">
                     <span class="auth-passkey-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24" focusable="false">
@@ -135,8 +135,8 @@
 
         <div class="auth-register">
             <span>Don't have an account?</span>
-            <a href="/barber/register">
-                Create a hairdressing account
+            <a href="/hairstylist/register">
+                Create an account
             </a>
         </div>
 

@@ -1,0 +1,529 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bookings - OG's Salon</title>
+
+    <script src="/static/theme-switch.js"></script>
+    <link rel="stylesheet" href="/static/app.css">
+    <link rel="stylesheet" href="/static/barber.css">
+    <link rel="stylesheet" href="/static/booking-images.css">
+    <link rel="stylesheet" href="/static/image-viewer.css">
+<link rel="stylesheet" href="/static/ui.css">
+<link rel="stylesheet" href="/static/theme.css">
+
+    <script src="/static/app.js" defer></script>
+    <script src="/static/image-viewer.js" defer></script>
+</head>
+
+<body class="barber-page modern-role-page modern-hairdresser-page">
+
+{{template "role-header" (navigation "barber" "bookings" .)}}
+
+<main class="barber-main ui-page">
+
+    <div class="barber-dashboard-intro">
+        <div>
+            <p class="barber-breadcrumb">
+                <a href="/hairstylist/dashboard">Dashboard</a>
+                /
+                Bookings
+            </p>
+
+            <h1 class="barber-title">
+                Bookings
+            </h1>
+
+            <p class="barber-lede">
+                Manage client requests and your confirmed appointments.
+            </p>
+        </div>
+
+        <div class="barber-actions ui-actions">
+            <a class="barber-button primary" href="/barber/schedule">
+                Manage hours and time off
+            </a>
+        </div>
+    </div>
+
+    {{template "booking-filter" .Group}}
+
+
+    {{$view := .}}
+
+
+    <section class="barber-section">
+
+        <h2 class="barber-section-title">
+            1. Requests Waiting
+        </h2>
+
+
+        {{if .Pending}}
+
+            <div class="barber-table-wrapper">
+
+                <table class="barber-table">
+
+                    <caption class="visually-hidden">
+                        New requests from clients.
+                    </caption>
+
+                    <thead>
+
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Client</th>
+                            <th scope="col">Hairstyle</th>
+                            <th scope="col">Notes</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {{range .Pending}}
+
+                            <tr>
+
+                                <td data-label="Date">
+                                    {{.Date}}
+                                </td>
+
+                                <td data-label="Time">
+                                    {{.Time}}
+                                </td>
+
+                                <td data-label="Client">
+                                    {{.CustomerName}}
+                                    <br>
+                                    <span class="barber-hint">
+                                        {{.CustomerPhone}}
+                                    </span>
+                                </td>
+
+                                <td data-label="Hairstyle">
+
+                                    <div class="booking-hairstyle">
+
+                                        <div class="booking-hairstyle-image">
+
+                                            {{if .HairstyleImage}}
+
+                                                <img
+                                                    src="{{.HairstyleImage}}"
+                                                    alt="Photo of {{.HairstyleName}}"
+                                                    data-fullscreen-image
+                                                 srcset="{{imageSrcset .HairstyleImage}}" sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px" width="640" height="480" loading="lazy" decoding="async">
+
+                                            {{else}}
+
+                                                <span>OG's</span>
+
+                                            {{end}}
+
+                                        </div>
+
+                                        <div class="booking-hairstyle-info">
+
+                                            <strong>
+                                                {{.HairstyleName}}
+                                            </strong>
+
+                                            <span class="barber-hint">
+                                                {{.Duration}} min
+                                                &middot;
+                                                {{naira .Price}}
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td data-label="Notes">
+                                    {{.Notes}}
+                                </td>
+
+                                <td data-label="Actions">
+
+                                    <div class="barber-actions ui-actions">
+
+                                        <form
+                                            method="post"
+                                            action="{{$view.ActionURL}}{{.ID}}/accept"
+                                         class="ui-form">
+
+                                            <input
+                                                type="hidden"
+                                                name="csrf_token"
+                                                value="{{$view.CSRF}}"
+                                            >
+
+                                            <button
+                                                class="barber-button primary ui-control"
+                                                type="submit"
+                                            >
+                                                Accept
+                                            </button>
+
+                                        </form>
+
+
+                                        <form
+                                            method="post"
+                                            action="{{$view.ActionURL}}{{.ID}}/reject"
+                                            data-confirm="Decline {{.CustomerName}}'s request for {{.Date}} at {{.Time}}?"
+                                         class="ui-form">
+
+                                            <input
+                                                type="hidden"
+                                                name="csrf_token"
+                                                value="{{$view.CSRF}}"
+                                            >
+
+                                            <button
+                                                class="barber-button danger ui-control"
+                                                type="submit"
+                                            >
+                                                Decline
+                                            </button>
+
+                                        </form>
+
+
+                                        <a
+                                            class="barber-button"
+                                            href="/barber/chats/{{.CustomerID}}"
+                                        >
+                                            Message
+                                        </a>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        {{end}}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        {{else}}
+
+            <div class="barber-empty">
+                No booking requests are waiting.
+            </div>
+
+        {{end}}
+
+    </section>
+
+
+    <section class="barber-section">
+
+        <h2 class="barber-section-title">
+            2. Confirmed Schedule
+        </h2>
+
+
+        {{if .Upcoming}}
+
+            <div class="barber-table-wrapper">
+
+                <table class="barber-table">
+
+                    <caption class="visually-hidden">
+                        Appointments you have accepted.
+                    </caption>
+
+                    <thead>
+
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Client</th>
+                            <th scope="col">Hairstyle</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {{range .Upcoming}}
+
+                            <tr>
+
+                                <td data-label="Date">
+                                    {{.Date}}
+                                </td>
+
+                                <td data-label="Time">
+                                    {{.Time}}
+                                </td>
+
+                                <td data-label="Client">
+                                    {{.CustomerName}}
+                                    <br>
+                                    <span class="barber-hint">
+                                        {{.CustomerPhone}}
+                                    </span>
+                                </td>
+
+                                <td data-label="Hairstyle">
+
+                                    <div class="booking-hairstyle">
+
+                                        <div class="booking-hairstyle-image">
+
+                                            {{if .HairstyleImage}}
+
+                                                <img
+                                                    src="{{.HairstyleImage}}"
+                                                    alt="Photo of {{.HairstyleName}}"
+                                                    data-fullscreen-image
+                                                 srcset="{{imageSrcset .HairstyleImage}}" sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px" width="640" height="480" loading="lazy" decoding="async">
+
+                                            {{else}}
+
+                                                <span>OG's</span>
+
+                                            {{end}}
+
+                                        </div>
+
+                                        <div class="booking-hairstyle-info">
+
+                                            <strong>
+                                                {{.HairstyleName}}
+                                            </strong>
+
+                                            <span class="barber-hint">
+                                                {{.Duration}} min
+                                                &middot;
+                                                {{naira .Price}}
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td data-label="Actions">
+
+                                    <div class="barber-actions ui-actions">
+
+                                        <form
+                                            method="post"
+                                            action="{{$view.ActionURL}}{{.ID}}/complete"
+                                         class="ui-form">
+
+                                            <input
+                                                type="hidden"
+                                                name="csrf_token"
+                                                value="{{$view.CSRF}}"
+                                            >
+
+                                            <button
+                                                class="barber-button primary ui-control"
+                                                type="submit"
+                                            >
+                                                Mark Complete
+                                            </button>
+
+                                        </form>
+
+
+                                        <a
+                                            class="barber-button"
+                                            href="/barber/chats/{{.CustomerID}}"
+                                        >
+                                            Message
+                                        </a>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        {{end}}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        {{else}}
+
+            <div class="barber-empty">
+                Nothing is confirmed yet.
+            </div>
+
+        {{end}}
+
+    </section>
+
+
+    {{if .Finished}}
+
+        <section class="barber-section">
+
+            <h2 class="barber-section-title">
+                3. Finished
+            </h2>
+
+
+            <div class="barber-table-wrapper">
+
+                <table class="barber-table">
+
+                    <caption class="visually-hidden">
+                        Completed, declined and cancelled bookings.
+                    </caption>
+
+                    <thead>
+
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Client</th>
+                            <th scope="col">Hairstyle</th>
+                            <th scope="col">Status</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {{range .Finished}}
+
+                            <tr>
+
+                                <td data-label="Date">
+                                    {{.Date}}
+                                </td>
+
+                                <td data-label="Time">
+                                    {{.Time}}
+                                </td>
+
+                                <td data-label="Client">
+                                    {{.CustomerName}}
+                                </td>
+
+                                <td data-label="Hairstyle">
+
+                                    <div class="booking-hairstyle">
+
+                                        <div class="booking-hairstyle-image">
+
+                                            {{if .HairstyleImage}}
+
+                                                <img
+                                                    src="{{.HairstyleImage}}"
+                                                    alt="Photo of {{.HairstyleName}}"
+                                                    data-fullscreen-image
+                                                 srcset="{{imageSrcset .HairstyleImage}}" sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px" width="640" height="480" loading="lazy" decoding="async">
+
+                                            {{else}}
+
+                                                <span>OG's</span>
+
+                                            {{end}}
+
+                                        </div>
+
+                                        <div class="booking-hairstyle-info">
+
+                                            <strong>
+                                                {{.HairstyleName}}
+                                            </strong>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+                                <td data-label="Status">
+
+                                    {{template "domain-status" (domainStatus "booking" .Status)}}
+
+                                </td>
+
+                            </tr>
+
+                        {{end}}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    {{end}}
+
+{{if .FollowUp}}
+<section class="barber-section" aria-labelledby="follow-up-heading">
+    <h2 id="follow-up-heading">Needs follow-up</h2>
+    <p>These open appointments have reached their start time or their recorded time needs checking. Confirm the outcome with the client. They are not automatically marked as no-shows.</p>
+    {{range .FollowUp}}
+    <article class="barber-card">
+    <div class="booking-hairstyle">
+        <div class="booking-hairstyle-image">
+            {{if .HairstyleImage}}
+                <img src="{{.HairstyleImage}}"
+                     alt="Photo of {{.HairstyleName}}"
+                     data-fullscreen-image
+                     srcset="{{imageSrcset .HairstyleImage}}"
+                     sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px"
+                     width="640" height="480" loading="lazy" decoding="async">
+            {{else}}
+                <span>OG's</span>
+            {{end}}
+        </div>
+        <div class="booking-hairstyle-info">
+            <h3>{{.CustomerName}} · {{.HairstyleName}}</h3>
+        </div>
+         </div>
+        <h3>{{.CustomerName}} · {{.HairstyleName}}</h3>
+        <p>{{.Date}} at {{.Time}} {{.BookingTimezone}} · {{template "domain-status" (domainStatus "booking" .Status)}}</p>
+        <a class="barber-button" href="/barber/chats/{{.CustomerID}}">Message client</a>
+        {{if eq .Status "Accepted"}}
+        <form method="post" action="{{$.ActionURL}}{{.ID}}/complete" class="ui-form">
+            <input type="hidden" name="csrf_token" value="{{$.CSRF}}">
+            <button class="barber-button primary ui-control" type="submit">Mark complete</button>
+        </form>
+        {{else}}
+        <form method="post" action="{{$.ActionURL}}{{.ID}}/reject" class="ui-form">
+            <input type="hidden" name="csrf_token" value="{{$.CSRF}}">
+            <button class="barber-button ui-control" type="submit">Reject request</button>
+        </form>
+        {{end}}
+    </article>
+    {{end}}
+</section>
+{{end}}
+</main>
+
+{{template "list-pagination" .Pagination}}
+{{template "public-footer" .}}
+</body>
+</html>
