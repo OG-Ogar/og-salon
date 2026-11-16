@@ -97,31 +97,27 @@
 
 .social-tool[hidden]{display:none}
 .provider-dashboard-shortcuts {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 10px;
+    display: flex;
+    gap: 14px;
     margin: 14px 0 22px;
+    overflow-x: auto;
+    padding: 2px 2px 8px;
 }
 .provider-dashboard-shortcut {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
-    min-width: 0;
-    padding: 10px 12px;
+    gap: 14px;
+    flex: 1 0 170px;
+    min-height: 76px;
+    padding: 16px 18px;
     border: 1px solid var(--border, #355348);
     border-radius: 10px;
     color: var(--ink, #f8f5e9);
     background: var(--surface, #14251f);
     text-decoration: none;
-    font-size: .85rem;
+    font-size: .95rem;
 }
 .provider-dashboard-shortcut:hover,
 .provider-dashboard-shortcut:focus-visible { border-color: var(--signal, #f4cb78); }
-.provider-dashboard-shortcut strong { color: var(--signal, #f4cb78); font-size: 1rem; }
-@media (max-width: 720px) {
-    .provider-dashboard-shortcuts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 380px) {
-    .provider-dashboard-shortcuts { grid-template-columns: 1fr; }
-}
+.provider-dashboard-shortcut strong { color: var(--signal, #f4cb78); font-size: 1.15rem; }
