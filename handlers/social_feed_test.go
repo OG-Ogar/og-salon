@@ -81,7 +81,7 @@ func TestHomeFeedShowsProviderRoleUnderAuthorName(t *testing.T) {
 
 	body := response.Body.String()
 	mustContain(t, "barber role label", body, "Feed Barber</a></strong><span>Barber &middot;")
-	mustContain(t, "stylist role label", body, "Feed Stylist</a></strong><span>Hair Stylist &middot;")
+	mustContain(t, "stylist role label", body, "Feed Stylist</a></strong><span>Stylist &middot;")
 }
 
 func TestSocialComposerOmitsSoundtrackPicker(t *testing.T) {

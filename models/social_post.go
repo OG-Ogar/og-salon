@@ -28,7 +28,7 @@ func (p SocialPost) AuthorLabel() string {
 		return "Client"
 	}
 	if NormalizeProviderType(p.AuthorType) == ProviderHairstylist {
-		return "Hair Stylist"
+		return "Stylist"
 	}
 	return "Barber"
 }
