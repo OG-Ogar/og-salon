@@ -6,6 +6,11 @@
     </a>
     <div><p class="social-kicker">OG's Salon community</p><h1>Home</h1></div>
   </div>
+  {{if .DashboardItems}}
+  <nav class="provider-dashboard-shortcuts" aria-label="Provider dashboard shortcuts">
+    {{range .DashboardItems}}<a class="provider-dashboard-shortcut" href="{{.Path}}"><span>{{.Label}}</span><strong>{{.Count}}</strong></a>{{end}}
+  </nav>
+  {{end}}
 
   <div class="social-feed-layout">
     <main class="social-feed-main">

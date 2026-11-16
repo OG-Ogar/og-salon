@@ -1,7 +1,9 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
+	"strings"
 	"time"
 
 	"barber-booking/models"
@@ -52,6 +54,46 @@ func BarberDashboardHandler(
 	if err != nil {
 		serverError(w, "load social home feed", err)
 		return
+	}
+	counts, err := storage.DashboardTotals(r.Context(), storage.BookingFilter{BarberID: barber.ID, Now: time.Now(), LegacyTimezone: BookingTimezone()})
+	if err != nil {
+		serverError(w, "load provider dashboard totals", err)
+		return
+	}
+	bookings, err := storage.ListBookingsByBarberResult(r.Context(), barber.ID)
+	if err != nil {
+		serverError(w, "load provider bookings count", err)
+		return
+	}
+	products, err := storage.ListProductsByBarber(r.Context(), barber.ID)
+	if err != nil {
+		serverError(w, "load provider products count", err)
+		return
+	}
+	orders, err := storage.ListProductOrderItemsByBarber(r.Context(), barber.ID)
+	if err != nil {
+		serverError(w, "load provider orders count", err)
+		return
+	}
+	conversations, err := storage.ConversationCountForBarber(r.Context(), barber.ID)
+	if err != nil {
+		serverError(w, "load provider messages count", err)
+		return
+	}
+	customers := map[string]bool{}
+	for _, order := range orders {
+		key := strings.TrimSpace(order.CustomerEmail)
+		if key == "" {
+			key = fmt.Sprintf("%s|%s", order.CustomerName, order.CustomerPhone)
+		}
+		customers[key] = true
+	}
+	feed.DashboardItems = []dashboardItem{
+		{Label: "Bookings", Path: "/barber/bookings", Count: len(bookings)},
+		{Label: "Product orders", Path: "/barber/orders", Count: len(customers)},
+		{Label: "Products", Path: "/barber/products", Count: len(products)},
+		{Label: "Hairstyles", Path: "/barber/hairstyles", Count: counts.Hairstyles},
+		{Label: "Messages", Path: "/barber/chats", Count: conversations},
 	}
 
 	// The password hash must never reach the template.

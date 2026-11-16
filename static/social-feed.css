@@ -96,3 +96,32 @@
 }
 
 .social-tool[hidden]{display:none}
+.provider-dashboard-shortcuts {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+    margin: 14px 0 22px;
+}
+.provider-dashboard-shortcut {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-width: 0;
+    padding: 10px 12px;
+    border: 1px solid var(--border, #355348);
+    border-radius: 10px;
+    color: var(--ink, #f8f5e9);
+    background: var(--surface, #14251f);
+    text-decoration: none;
+    font-size: .85rem;
+}
+.provider-dashboard-shortcut:hover,
+.provider-dashboard-shortcut:focus-visible { border-color: var(--signal, #f4cb78); }
+.provider-dashboard-shortcut strong { color: var(--signal, #f4cb78); font-size: 1rem; }
+@media (max-width: 720px) {
+    .provider-dashboard-shortcuts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 380px) {
+    .provider-dashboard-shortcuts { grid-template-columns: 1fr; }
+}

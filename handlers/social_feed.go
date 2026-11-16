@@ -16,16 +16,22 @@ import (
 const socialAttachmentLimit = mediastore.MaxFileBytes
 
 type socialFeedView struct {
-	Role        string
-	ActorID     int
-	ActorName   string
-	ActorPhoto  string
-	ProfilePath string
-	CSRF        string
-	PostAction  string
-	Posts       []models.SocialPost
-	Statuses    []models.HairstyleStatus
-	Error       string
+	Role           string
+	ActorID        int
+	ActorName      string
+	ActorPhoto     string
+	ProfilePath    string
+	CSRF           string
+	PostAction     string
+	Posts          []models.SocialPost
+	Statuses       []models.HairstyleStatus
+	Error          string
+	DashboardItems []dashboardItem
+}
+
+type dashboardItem struct {
+	Label, Path string
+	Count       int
 }
 
 func loadSocialFeed(r *http.Request, role string, actorID int, actorName, actorPhoto, csrf string) (socialFeedView, error) {
