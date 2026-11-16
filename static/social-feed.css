@@ -97,27 +97,31 @@
 
 .social-tool[hidden]{display:none}
 .provider-dashboard-shortcuts {
-    display: flex;
-    gap: 14px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 6px;
     margin: 14px 0 22px;
-    overflow-x: auto;
-    padding: 2px 2px 8px;
+    min-width: 0;
 }
 .provider-dashboard-shortcut {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-    flex: 1 0 170px;
-    min-height: 76px;
-    padding: 16px 18px;
+    justify-content: center;
+    gap: 3px;
+    min-width: 0;
+    min-height: 56px;
+    padding: 6px 3px;
     border: 1px solid var(--border, #355348);
     border-radius: 10px;
     color: var(--ink, #f8f5e9);
     background: var(--surface, #14251f);
     text-decoration: none;
-    font-size: .95rem;
+    text-align: center;
+    line-height: 1.15;
+    font-size: clamp(.55rem, 2.2vw, .78rem);
+    overflow-wrap: anywhere;
 }
 .provider-dashboard-shortcut:hover,
 .provider-dashboard-shortcut:focus-visible { border-color: var(--signal, #f4cb78); }
-.provider-dashboard-shortcut strong { color: var(--signal, #f4cb78); font-size: 1.15rem; }
+.provider-dashboard-shortcut strong { color: var(--signal, #f4cb78); font-size: clamp(.75rem, 2.8vw, .95rem); }
