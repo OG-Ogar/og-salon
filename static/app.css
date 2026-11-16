@@ -308,13 +308,13 @@ var(--void)!important;color:var(--ink)!important;font-family:var(--font)}
    ========================================================= */
 .site-navigation-drawer{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;padding:.6rem 1.25rem;background:var(--base);border-bottom:1px solid var(--border)}
 .site-nav-toggle{display:none}
-.js-drawer .site-nav-toggle{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:44px;height:44px;padding:0;border:1px solid var(--border-hi);border-radius:var(--control-radius,.5rem);background:rgba(var(--surface-rgb),.85);color:var(--ink);cursor:pointer;transition:border-color .15s ease,color .15s ease}
-.js-drawer .site-nav-toggle:hover{border-color:var(--signal);color:var(--signal)}
-.site-nav-toggle-glyph{position:relative;display:block;width:18px;height:14px}
+.js-drawer .site-nav-toggle{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:44px;height:44px;padding:0;border:0;border-radius:0;background:transparent;color:var(--ink);cursor:pointer;transition:color .15s ease}
+.js-drawer .site-nav-toggle:hover{color:var(--signal)}
+.js-drawer .site-nav-toggle:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+.site-nav-toggle-glyph{position:relative;display:block;width:18px;height:14px;background:linear-gradient(currentColor,currentColor) center/18px 2px no-repeat}
 .site-nav-toggle-glyph::before,.site-nav-toggle-glyph::after{content:"";position:absolute;left:0;width:18px;height:2px;border-radius:2px;background:currentColor}
-.site-nav-toggle-glyph::before,.site-nav-toggle-glyph::after{box-shadow:0 5px 0 currentColor}
-.site-nav-toggle-glyph::before{top:1px}
-.site-nav-toggle-glyph::after{top:11px}
+.site-nav-toggle-glyph::before{top:0}
+.site-nav-toggle-glyph::after{bottom:0}
 .js-drawer .site-navigation-drawer{position:fixed;top:var(--nav-drawer-top,4rem);bottom:0;left:0;z-index:60;display:flex;flex-direction:column;align-items:stretch;gap:.35rem;width:min(78vw,17rem);margin:0;padding:.9rem .75rem calc(.9rem + env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior:contain;background:var(--surface);border-right:1px solid var(--border-hi);box-shadow:0 0 48px rgba(0,0,0,.45);transform:translateX(-100%);transition:transform .2s ease}
 .js-drawer .site-navigation-drawer.is-open{transform:translateX(0)}
 .js-drawer .site-navigation-drawer .site-nav-link{flex:0 0 auto;justify-content:flex-start;width:100%;min-height:44px;padding:.6rem .9rem;border-radius:var(--control-radius,.5rem);font-size:.95rem;text-align:left}
