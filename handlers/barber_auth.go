@@ -4,23 +4,22 @@ import (
 	"errors"
 	"net/http"
 
+	"barber-booking/models"
 	"barber-booking/security"
 	"barber-booking/session"
 	"barber-booking/storage"
 )
 
-// accountLoginPage identifies the branded sign-in page a provider uses.
-// Barbers and hair stylists share one account system, so the only
-// difference is which page is shown and where "use another account"
-// returns to.
+// accountLoginPage identifies a provider's sign-in page and account type.
 type accountLoginPage struct {
-	Template string
-	Path     string
+	Template     string
+	Path         string
+	ProviderType string
 }
 
 var (
-	barberLoginPage      = accountLoginPage{Template: "barber/login.html", Path: "/barber/login"}
-	hairstylistLoginPage = accountLoginPage{Template: "hairstylist/login.html", Path: "/hairstylist/login"}
+	barberLoginPage      = accountLoginPage{Template: "barber/login.html", Path: "/barber/login", ProviderType: models.ProviderBarber}
+	hairstylistLoginPage = accountLoginPage{Template: "hairstylist/login.html", Path: "/hairstylist/login", ProviderType: models.ProviderHairstylist}
 )
 
 // BarberLoginHandler shows and processes the barber login.
@@ -30,8 +29,8 @@ func BarberLoginHandler(w http.ResponseWriter, r *http.Request) {
 
 // HairstylistLoginHandler shows and processes the hair stylist login.
 //
-// Hair stylists use the same accounts, dashboard and tools as barbers;
-// this page only gives them their own branded entry point.
+// Hair stylists share the provider account store but can only sign in with
+// accounts registered as hair stylists.
 func HairstylistLoginHandler(w http.ResponseWriter, r *http.Request) {
 	accountLoginHandler(w, r, hairstylistLoginPage)
 }
@@ -112,7 +111,7 @@ func accountLoginHandler(w http.ResponseWriter, r *http.Request, page accountLog
 			serverError(w, "look up barber login", err)
 			return
 		}
-		if errors.Is(err, storage.ErrNotFound) {
+		if errors.Is(err, storage.ErrNotFound) || models.NormalizeProviderType(barber.ProviderType) != page.ProviderType {
 			// Burn the same work a real check would, so the response
 			// time does not reveal which emails are registered.
 			security.DummyVerify(password)
