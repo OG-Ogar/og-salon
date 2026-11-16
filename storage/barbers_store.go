@@ -19,7 +19,7 @@ func ListBarbers() []models.Barber {
 	defer cancel()
 
 	if databaseEnabled() {
-		rows, err := db.QueryContext(ctx, "select id, full_name, phone_number, email, password_hash, shop_name, shop_address, state, local_area, profile_image, personal_image, status from public.barbers order by id limit 1000")
+		rows, err := db.QueryContext(ctx, "select id, full_name, phone_number, email, password_hash, shop_name, shop_address, state, local_area, profile_image, personal_image, provider_type, status from public.barbers order by id limit 1000")
 		if err != nil {
 			log.Printf("list barbers: %v", err)
 			return nil
@@ -28,7 +28,7 @@ func ListBarbers() []models.Barber {
 		var out []models.Barber
 		for rows.Next() {
 			var b models.Barber
-			if err := rows.Scan(&b.ID, &b.FullName, &b.PhoneNumber, &b.Email, &b.PasswordHash, &b.ShopName, &b.ShopAddress, &b.State, &b.LocalArea, &b.ProfileImage, &b.PersonalImage, &b.Status); err != nil {
+			if err := rows.Scan(&b.ID, &b.FullName, &b.PhoneNumber, &b.Email, &b.PasswordHash, &b.ShopName, &b.ShopAddress, &b.State, &b.LocalArea, &b.ProfileImage, &b.PersonalImage, &b.ProviderType, &b.Status); err != nil {
 				log.Printf("scan barber: %v", err)
 				return nil
 			}
@@ -53,7 +53,7 @@ func ListActiveBarbers() []models.Barber {
 	defer cancel()
 
 	if databaseEnabled() {
-		rows, err := db.QueryContext(ctx, "select id, full_name, phone_number, email, password_hash, shop_name, shop_address, state, local_area, profile_image, personal_image, status from public.barbers where status='Active' order by id limit 1000")
+		rows, err := db.QueryContext(ctx, "select id, full_name, phone_number, email, password_hash, shop_name, shop_address, state, local_area, profile_image, personal_image, provider_type, status from public.barbers where status='Active' order by id limit 1000")
 		if err != nil {
 			log.Printf("list active barbers: %v", err)
 			return nil
@@ -62,7 +62,7 @@ func ListActiveBarbers() []models.Barber {
 		var active []models.Barber
 		for rows.Next() {
 			var b models.Barber
-			if err := rows.Scan(&b.ID, &b.FullName, &b.PhoneNumber, &b.Email, &b.PasswordHash, &b.ShopName, &b.ShopAddress, &b.State, &b.LocalArea, &b.ProfileImage, &b.PersonalImage, &b.Status); err != nil {
+			if err := rows.Scan(&b.ID, &b.FullName, &b.PhoneNumber, &b.Email, &b.PasswordHash, &b.ShopName, &b.ShopAddress, &b.State, &b.LocalArea, &b.ProfileImage, &b.PersonalImage, &b.ProviderType, &b.Status); err != nil {
 				log.Printf("scan active barber: %v", err)
 				return nil
 			}
@@ -95,7 +95,7 @@ func FindBarberByID(id int) (models.Barber, bool) {
 
 	if databaseEnabled() {
 		var b models.Barber
-		err := db.QueryRowContext(ctx, "select id, full_name, phone_number, email, password_hash, shop_name, shop_address, state, local_area, profile_image, personal_image, status from public.barbers where id=$1", id).Scan(&b.ID, &b.FullName, &b.PhoneNumber, &b.Email, &b.PasswordHash, &b.ShopName, &b.ShopAddress, &b.State, &b.LocalArea, &b.ProfileImage, &b.PersonalImage, &b.Status)
+		err := db.QueryRowContext(ctx, "select id, full_name, phone_number, email, password_hash, shop_name, shop_address, state, local_area, profile_image, personal_image, provider_type, status from public.barbers where id=$1", id).Scan(&b.ID, &b.FullName, &b.PhoneNumber, &b.Email, &b.PasswordHash, &b.ShopName, &b.ShopAddress, &b.State, &b.LocalArea, &b.ProfileImage, &b.PersonalImage, &b.ProviderType, &b.Status)
 		return b, err == nil
 	}
 	mu.RLock()
@@ -122,7 +122,7 @@ func FindBarberByEmail(email string) (models.Barber, bool) {
 
 	if databaseEnabled() {
 		var b models.Barber
-		err := db.QueryRowContext(ctx, "select id, full_name, phone_number, email, password_hash, shop_name, shop_address, state, local_area, profile_image, personal_image, status from public.barbers where lower(email)=lower($1)", email).Scan(&b.ID, &b.FullName, &b.PhoneNumber, &b.Email, &b.PasswordHash, &b.ShopName, &b.ShopAddress, &b.State, &b.LocalArea, &b.ProfileImage, &b.PersonalImage, &b.Status)
+		err := db.QueryRowContext(ctx, "select id, full_name, phone_number, email, password_hash, shop_name, shop_address, state, local_area, profile_image, personal_image, provider_type, status from public.barbers where lower(email)=lower($1)", email).Scan(&b.ID, &b.FullName, &b.PhoneNumber, &b.Email, &b.PasswordHash, &b.ShopName, &b.ShopAddress, &b.State, &b.LocalArea, &b.ProfileImage, &b.PersonalImage, &b.ProviderType, &b.Status)
 		return b, err == nil
 	}
 	mu.RLock()
@@ -146,6 +146,7 @@ func CreateBarber(barber models.Barber) (models.Barber, error) {
 
 func CreateBarberContext(ctx context.Context, barber models.Barber) (models.Barber, error) {
 	barber.State, barber.LocalArea = geography.NormalizeLegacy(barber.State, barber.LocalArea)
+	barber.ProviderType = models.NormalizeProviderType(barber.ProviderType)
 	ctx, cancel := databaseContext(ctx)
 	defer cancel()
 	if err := ctx.Err(); err != nil {
@@ -156,7 +157,7 @@ func CreateBarberContext(ctx context.Context, barber models.Barber) (models.Barb
 		if barber.Status == "" {
 			barber.Status = models.BarberActive
 		}
-		err := db.QueryRowContext(ctx, "insert into public.barbers(full_name,phone_number,email,password_hash,shop_name,shop_address,state,local_area,profile_image,personal_image,status) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) returning id", barber.FullName, barber.PhoneNumber, barber.Email, barber.PasswordHash, barber.ShopName, barber.ShopAddress, barber.State, barber.LocalArea, barber.ProfileImage, barber.PersonalImage, barber.Status).Scan(&barber.ID)
+		err := db.QueryRowContext(ctx, "insert into public.barbers(full_name,phone_number,email,password_hash,shop_name,shop_address,state,local_area,profile_image,personal_image,provider_type,status) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) returning id", barber.FullName, barber.PhoneNumber, barber.Email, barber.PasswordHash, barber.ShopName, barber.ShopAddress, barber.State, barber.LocalArea, barber.ProfileImage, barber.PersonalImage, models.NormalizeProviderType(barber.ProviderType), barber.Status).Scan(&barber.ID)
 		if err != nil {
 			if strings.Contains(strings.ToLower(err.Error()), "unique") {
 				return models.Barber{}, ErrEmailTaken
@@ -185,6 +186,7 @@ func CreateBarberContext(ctx context.Context, barber models.Barber) (models.Barb
 	if barber.Status == "" {
 		barber.Status = models.BarberActive
 	}
+	barber.ProviderType = models.NormalizeProviderType(barber.ProviderType)
 
 	barbers = append(barbers, barber)
 
@@ -230,6 +232,7 @@ func UpdateBarber(barber models.Barber) error {
 
 func UpdateBarberContext(ctx context.Context, barber models.Barber) error {
 	barber.State, barber.LocalArea = geography.NormalizeLegacy(barber.State, barber.LocalArea)
+	barber.ProviderType = models.NormalizeProviderType(barber.ProviderType)
 	ctx, cancel := databaseContext(ctx)
 	defer cancel()
 	if err := ctx.Err(); err != nil {
@@ -237,7 +240,7 @@ func UpdateBarberContext(ctx context.Context, barber models.Barber) error {
 	}
 
 	if databaseEnabled() {
-		result, err := db.ExecContext(ctx, "update public.barbers set full_name=$1,phone_number=$2,email=$3,shop_name=$4,shop_address=$5,state=$6,local_area=$7,profile_image=$8,personal_image=$9,status=$10 where id=$11 and status<>'Archived'", barber.FullName, barber.PhoneNumber, barber.Email, barber.ShopName, barber.ShopAddress, barber.State, barber.LocalArea, barber.ProfileImage, barber.PersonalImage, barber.Status, barber.ID)
+		result, err := db.ExecContext(ctx, "update public.barbers set full_name=$1,phone_number=$2,email=$3,shop_name=$4,shop_address=$5,state=$6,local_area=$7,profile_image=$8,personal_image=$9,provider_type=$10,status=$11 where id=$12 and status<>'Archived'", barber.FullName, barber.PhoneNumber, barber.Email, barber.ShopName, barber.ShopAddress, barber.State, barber.LocalArea, barber.ProfileImage, barber.PersonalImage, models.NormalizeProviderType(barber.ProviderType), barber.Status, barber.ID)
 		if err != nil {
 			if strings.Contains(strings.ToLower(err.Error()), "unique") {
 				return ErrEmailTaken

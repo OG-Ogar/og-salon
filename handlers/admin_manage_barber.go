@@ -13,26 +13,28 @@ import (
 
 // barberForm is the profile data the admin add/edit form submits.
 type barberForm struct {
-	FullName    string
-	Phone       string
-	Email       string
-	ShopName    string
-	ShopAddress string
-	State       string
-	LocalArea   string
+	FullName     string
+	Phone        string
+	Email        string
+	ShopName     string
+	ShopAddress  string
+	State        string
+	LocalArea    string
+	ProviderType string
 }
 
 // readBarberForm pulls the fields out of a request and returns a
 // validation message when something is missing.
 func readBarberForm(r *http.Request) (barberForm, string) {
 	form := barberForm{
-		FullName:    trimmedField(r.PostFormValue("fullname")),
-		Phone:       trimmedField(r.PostFormValue("phone")),
-		Email:       normalisedEmail(r.PostFormValue("email")),
-		ShopName:    trimmedField(r.PostFormValue("shopname")),
-		ShopAddress: trimmedField(r.PostFormValue("shopaddress")),
-		State:       trimmedField(r.PostFormValue("state")),
-		LocalArea:   trimmedField(r.PostFormValue("local_area")),
+		FullName:     trimmedField(r.PostFormValue("fullname")),
+		Phone:        trimmedField(r.PostFormValue("phone")),
+		Email:        normalisedEmail(r.PostFormValue("email")),
+		ShopName:     trimmedField(r.PostFormValue("shopname")),
+		ShopAddress:  trimmedField(r.PostFormValue("shopaddress")),
+		State:        trimmedField(r.PostFormValue("state")),
+		LocalArea:    trimmedField(r.PostFormValue("local_area")),
+		ProviderType: models.NormalizeProviderType(trimmedField(r.PostFormValue("provider_type"))),
 	}
 
 	if form.FullName == "" ||
@@ -72,13 +74,14 @@ func readBarberForm(r *http.Request) (barberForm, string) {
 // values renders the form back into the map the template reads.
 func (f barberForm) values() map[string]string {
 	return map[string]string{
-		"fullname":    f.FullName,
-		"phone":       f.Phone,
-		"email":       f.Email,
-		"shopname":    f.ShopName,
-		"shopaddress": f.ShopAddress,
-		"state":       f.State,
-		"local_area":  f.LocalArea,
+		"fullname":      f.FullName,
+		"phone":         f.Phone,
+		"email":         f.Email,
+		"shopname":      f.ShopName,
+		"shopaddress":   f.ShopAddress,
+		"state":         f.State,
+		"local_area":    f.LocalArea,
+		"provider_type": models.NormalizeProviderType(f.ProviderType),
 	}
 }
 

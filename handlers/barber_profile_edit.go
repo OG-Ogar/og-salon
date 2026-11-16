@@ -69,6 +69,7 @@ func EditProfileHandler(
 		barber.ShopAddress = form.ShopAddress
 		barber.State = form.State
 		barber.LocalArea = form.LocalArea
+		barber.ProviderType = form.ProviderType
 		barber.ProfileImage = shop
 		barber.PersonalImage = personal
 
@@ -133,13 +134,14 @@ func replacePhoto(
 // formFromBarber pre-fills the edit form with the stored values.
 func formFromBarber(barber models.Barber) barberForm {
 	return barberForm{
-		FullName:    barber.FullName,
-		Phone:       barber.PhoneNumber,
-		Email:       barber.Email,
-		ShopName:    barber.ShopName,
-		ShopAddress: barber.ShopAddress,
-		State:       barber.State,
-		LocalArea:   barber.LocalArea,
+		FullName:     barber.FullName,
+		Phone:        barber.PhoneNumber,
+		Email:        barber.Email,
+		ShopName:     barber.ShopName,
+		ShopAddress:  barber.ShopAddress,
+		State:        barber.State,
+		LocalArea:    barber.LocalArea,
+		ProviderType: models.NormalizeProviderType(barber.ProviderType),
 	}
 }
 

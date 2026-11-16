@@ -80,6 +80,17 @@
                 </div>
 
                 <div class="hairdresser-form-field ui-field">
+                    <label for="provider_type">
+                        I work as
+                    </label>
+
+                    <select id="provider_type" name="provider_type">
+                        <option value="barber"{{if eq (index .Values "provider_type") "barber"}} selected{{end}}>Barber</option>
+                        <option value="hairstylist"{{if ne (index .Values "provider_type") "barber"}} selected{{end}}>Hair Stylist</option>
+                    </select>
+                </div>
+
+                <div class="hairdresser-form-field ui-field">
                     <label for="phone">
                         Phone number
                     </label>

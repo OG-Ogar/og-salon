@@ -15,6 +15,8 @@ create table if not exists public.barbers (
   local_area text not null default '',
   profile_image text not null default '',
   personal_image text not null default '',
+  provider_type text not null default 'barber'
+    check (provider_type in ('barber', 'hairstylist')),
   status text not null default 'Active'
     check (status in ('Active', 'Suspended'))
 );

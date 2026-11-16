@@ -93,6 +93,17 @@
                 </div>
 
                 <div class="auth-field ui-field">
+                    <label for="provider_type">
+                        I am registering as
+                    </label>
+
+                    <select id="provider_type" name="provider_type">
+                        <option value="barber"{{if ne (index .Values "provider_type") "hairstylist"}} selected{{end}}>Barber</option>
+                        <option value="hairstylist"{{if eq (index .Values "provider_type") "hairstylist"}} selected{{end}}>Hair Stylist</option>
+                    </select>
+                </div>
+
+                <div class="auth-field ui-field">
                     <label for="phone">
                         Phone
                     </label>

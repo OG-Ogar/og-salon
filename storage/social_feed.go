@@ -97,6 +97,7 @@ func HomeFeed(ctx context.Context, role string, actorID int) ([]models.SocialPos
 	if databaseEnabled() {
 		query := `select p.id,p.author_role,p.customer_id,p.barber_id,
  coalesce(c.full_name,b.full_name,''),coalesce(nullif(c.profile_image,''),nullif(b.personal_image,''),b.profile_image,''),
+ coalesce(b.provider_type,'barber'),
  p.body,p.background_color,p.text_style,p.image,p.video,p.music,p.created_at,
  (select count(*) from public.social_post_likes l where l.post_id=p.id),
  exists(select 1 from public.social_post_likes l where l.post_id=p.id and (($1='customer' and l.customer_id=$2) or ($1='barber' and l.barber_id=$2))),
@@ -120,7 +121,7 @@ func HomeFeed(ctx context.Context, role string, actorID int) ([]models.SocialPos
 			var customerID, barberID sql.NullInt64
 			var comments []byte
 			err := rows.Scan(&post.ID, &post.AuthorRole, &customerID, &barberID, &post.AuthorName, &post.AuthorImage,
-				&post.Text, &post.BackgroundColor, &post.TextStyle, &post.Image, &post.Video, &post.Music, &post.CreatedAt,
+				&post.AuthorType, &post.Text, &post.BackgroundColor, &post.TextStyle, &post.Image, &post.Video, &post.Music, &post.CreatedAt,
 				&post.LikeCount, &post.LikedByMe, &comments)
 			if err != nil {
 				return post, err
@@ -154,6 +155,13 @@ func HomeFeed(ctx context.Context, role string, actorID int) ([]models.SocialPos
 		for i := len(socialComments) - 1; i >= 0 && len(post.Comments) < 3; i-- {
 			if socialComments[i].PostID == post.ID {
 				post.Comments = append(post.Comments, socialComments[i])
+			}
+		}
+		if post.AuthorRole == models.SenderBarber {
+			if author, found := findBarberByID(post.AuthorID); found {
+				post.AuthorType = models.NormalizeProviderType(author.ProviderType)
+			} else {
+				post.AuthorType = models.ProviderBarber
 			}
 		}
 		posts = append(posts, post)

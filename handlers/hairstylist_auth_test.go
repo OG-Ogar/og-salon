@@ -38,7 +38,7 @@ func TestHairstylistRouterRedirectsToLoginAndSharedAccountPages(t *testing.T) {
 		location string
 	}{
 		{"/hairstylist", "/hairstylist/login"},
-		{"/hairstylist/register", "/barber/register"},
+		{"/hairstylist/register", "/barber/register?provider=hairstylist"},
 		{"/hairstylist/forgot-password", "/barber/forgot-password"},
 		{"/hairstylist/reset-password?token=abc", "/barber/reset-password?token=abc"},
 	} {

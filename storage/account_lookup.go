@@ -76,13 +76,14 @@ func FindBarberByIDContext(ctx context.Context, id int) (models.Barber, error) {
 	}
 	if databaseEnabled() {
 		var barber models.Barber
-		err := db.QueryRowContext(ctx, "select id, full_name, phone_number, email, password_hash, shop_name, shop_address, state, local_area, profile_image, personal_image, status from public.barbers where id=$1", id).Scan(&barber.ID, &barber.FullName, &barber.PhoneNumber, &barber.Email, &barber.PasswordHash, &barber.ShopName, &barber.ShopAddress, &barber.State, &barber.LocalArea, &barber.ProfileImage, &barber.PersonalImage, &barber.Status)
+		err := db.QueryRowContext(ctx, "select id, full_name, phone_number, email, password_hash, shop_name, shop_address, state, local_area, profile_image, personal_image, provider_type, status from public.barbers where id=$1", id).Scan(&barber.ID, &barber.FullName, &barber.PhoneNumber, &barber.Email, &barber.PasswordHash, &barber.ShopName, &barber.ShopAddress, &barber.State, &barber.LocalArea, &barber.ProfileImage, &barber.PersonalImage, &barber.ProviderType, &barber.Status)
 		if errors.Is(err, sql.ErrNoRows) {
 			return models.Barber{}, ErrNotFound
 		}
 		if err != nil {
 			return models.Barber{}, err
 		}
+		barber.ProviderType = models.NormalizeProviderType(barber.ProviderType)
 		return barber, nil
 	}
 	mu.RLock()
@@ -104,13 +105,14 @@ func FindBarberByEmailResult(ctx context.Context, email string) (models.Barber, 
 	}
 	if databaseEnabled() {
 		var barber models.Barber
-		err := db.QueryRowContext(ctx, "select id, full_name, phone_number, email, password_hash, shop_name, shop_address, state, local_area, profile_image, personal_image, status from public.barbers where lower(email)=lower($1)", email).Scan(&barber.ID, &barber.FullName, &barber.PhoneNumber, &barber.Email, &barber.PasswordHash, &barber.ShopName, &barber.ShopAddress, &barber.State, &barber.LocalArea, &barber.ProfileImage, &barber.PersonalImage, &barber.Status)
+		err := db.QueryRowContext(ctx, "select id, full_name, phone_number, email, password_hash, shop_name, shop_address, state, local_area, profile_image, personal_image, provider_type, status from public.barbers where lower(email)=lower($1)", email).Scan(&barber.ID, &barber.FullName, &barber.PhoneNumber, &barber.Email, &barber.PasswordHash, &barber.ShopName, &barber.ShopAddress, &barber.State, &barber.LocalArea, &barber.ProfileImage, &barber.PersonalImage, &barber.ProviderType, &barber.Status)
 		if errors.Is(err, sql.ErrNoRows) {
 			return models.Barber{}, ErrNotFound
 		}
 		if err != nil {
 			return models.Barber{}, err
 		}
+		barber.ProviderType = models.NormalizeProviderType(barber.ProviderType)
 		return barber, nil
 	}
 	mu.RLock()

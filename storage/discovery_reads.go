@@ -16,9 +16,9 @@ func ListBarbersResult(ctx context.Context) ([]models.Barber, error) {
 	if !databaseEnabled() {
 		return ListBarbers(), nil
 	}
-	return queryRecords(ctx, "select id,full_name,phone_number,email,password_hash,shop_name,shop_address,state,local_area,profile_image,personal_image,status from public.barbers order by id limit 1000", func(rows *sql.Rows) (models.Barber, error) {
+	return queryRecords(ctx, "select id,full_name,phone_number,email,password_hash,shop_name,shop_address,state,local_area,profile_image,personal_image,provider_type,status from public.barbers order by id limit 1000", func(rows *sql.Rows) (models.Barber, error) {
 		var v models.Barber
-		err := rows.Scan(&v.ID, &v.FullName, &v.PhoneNumber, &v.Email, &v.PasswordHash, &v.ShopName, &v.ShopAddress, &v.State, &v.LocalArea, &v.ProfileImage, &v.PersonalImage, &v.Status)
+		err := rows.Scan(&v.ID, &v.FullName, &v.PhoneNumber, &v.Email, &v.PasswordHash, &v.ShopName, &v.ShopAddress, &v.State, &v.LocalArea, &v.ProfileImage, &v.PersonalImage, &v.ProviderType, &v.Status)
 		return v, err
 	})
 }
@@ -33,9 +33,9 @@ func ListActiveBarbersResult(ctx context.Context) ([]models.Barber, error) {
 	if !databaseEnabled() {
 		return ListActiveBarbers(), nil
 	}
-	return queryRecords(ctx, "select id,full_name,phone_number,email,password_hash,shop_name,shop_address,state,local_area,profile_image,personal_image,status from public.barbers where status='Active' order by id limit 1000", func(rows *sql.Rows) (models.Barber, error) {
+	return queryRecords(ctx, "select id,full_name,phone_number,email,password_hash,shop_name,shop_address,state,local_area,profile_image,personal_image,provider_type,status from public.barbers where status='Active' order by id limit 1000", func(rows *sql.Rows) (models.Barber, error) {
 		var v models.Barber
-		err := rows.Scan(&v.ID, &v.FullName, &v.PhoneNumber, &v.Email, &v.PasswordHash, &v.ShopName, &v.ShopAddress, &v.State, &v.LocalArea, &v.ProfileImage, &v.PersonalImage, &v.Status)
+		err := rows.Scan(&v.ID, &v.FullName, &v.PhoneNumber, &v.Email, &v.PasswordHash, &v.ShopName, &v.ShopAddress, &v.State, &v.LocalArea, &v.ProfileImage, &v.PersonalImage, &v.ProviderType, &v.Status)
 		return v, err
 	})
 }

@@ -1,5 +1,7 @@
 package models
 
+import "strings"
+
 // Barber account statuses. A suspended barber cannot log in and is
 // hidden from customers.
 const (
@@ -7,6 +9,24 @@ const (
 	BarberSuspended = "Suspended"
 	BarberArchived  = "Archived"
 )
+
+// Provider types. Barbers and hair stylists share the same account and
+// workspace, so the type is only used to label them correctly in public
+// places such as the home feed.
+const (
+	ProviderBarber      = "barber"
+	ProviderHairstylist = "hairstylist"
+)
+
+// NormalizeProviderType keeps stored and submitted values inside the two
+// supported provider types. Anything unknown is treated as a barber so old
+// accounts created before the distinction continue to work.
+func NormalizeProviderType(value string) string {
+	if strings.EqualFold(strings.TrimSpace(value), ProviderHairstylist) {
+		return ProviderHairstylist
+	}
+	return ProviderBarber
+}
 
 // Barber is a shop owner who publishes hairstyles and takes bookings.
 type Barber struct {
@@ -32,10 +52,23 @@ type Barber struct {
 	ProfileImage  string
 	PersonalImage string
 
+	// ProviderType distinguishes barbers from hair stylists. Both use the
+	// same account and workspace; the type only changes the label shown to
+	// clients.
+	ProviderType string
+
 	Status string
 }
 
 // IsActive reports whether the barber may log in and receive bookings.
 func (b Barber) IsActive() bool {
 	return b.Status == BarberActive
+}
+
+// ProviderLabel is the public role label for this account.
+func (b Barber) ProviderLabel() string {
+	if NormalizeProviderType(b.ProviderType) == ProviderHairstylist {
+		return "Hair Stylist"
+	}
+	return "Barber"
 }

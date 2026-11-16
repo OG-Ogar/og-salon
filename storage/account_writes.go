@@ -74,7 +74,7 @@ func UpdateBarberProfile(ctx context.Context, barber models.Barber) error {
 		return err
 	}
 	if databaseEnabled() {
-		return updateAccountRow(ctx, `update public.barbers set full_name=$1,phone_number=$2,email=$3,shop_name=$4,shop_address=$5,state=$6,local_area=$7,profile_image=$8,personal_image=$9 where id=$10 and status<>'Archived'`, barber.FullName, barber.PhoneNumber, barber.Email, barber.ShopName, barber.ShopAddress, barber.State, barber.LocalArea, barber.ProfileImage, barber.PersonalImage, barber.ID)
+		return updateAccountRow(ctx, `update public.barbers set full_name=$1,phone_number=$2,email=$3,shop_name=$4,shop_address=$5,state=$6,local_area=$7,profile_image=$8,personal_image=$9,provider_type=$10 where id=$11 and status<>'Archived'`, barber.FullName, barber.PhoneNumber, barber.Email, barber.ShopName, barber.ShopAddress, barber.State, barber.LocalArea, barber.ProfileImage, barber.PersonalImage, models.NormalizeProviderType(barber.ProviderType), barber.ID)
 	}
 	mu.Lock()
 	defer mu.Unlock()

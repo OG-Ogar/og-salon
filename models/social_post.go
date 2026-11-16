@@ -9,6 +9,7 @@ type SocialPost struct {
 	AuthorID        int             `json:"author_id"`
 	AuthorName      string          `json:"author_name"`
 	AuthorImage     string          `json:"author_image"`
+	AuthorType      string          `json:"author_type"`
 	Text            string          `json:"text"`
 	BackgroundColor string          `json:"background_color"`
 	TextStyle       string          `json:"text_style"`
@@ -19,6 +20,17 @@ type SocialPost struct {
 	LikeCount       int             `json:"like_count"`
 	LikedByMe       bool            `json:"liked_by_me"`
 	Comments        []SocialComment `json:"comments"`
+}
+
+// AuthorLabel is the role shown under a post's author name.
+func (p SocialPost) AuthorLabel() string {
+	if p.AuthorRole != SenderBarber {
+		return "Client"
+	}
+	if NormalizeProviderType(p.AuthorType) == ProviderHairstylist {
+		return "Hair Stylist"
+	}
+	return "Barber"
 }
 
 // SocialComment is a short, plain-text reply on a feed post.

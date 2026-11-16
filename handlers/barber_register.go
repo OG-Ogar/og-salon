@@ -15,7 +15,9 @@ func BarberRegisterHandler(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 
 	case http.MethodGet:
-		render(w, "barber/register.html", newFormView(""))
+		view := newFormView("")
+		view.Values["provider_type"] = models.NormalizeProviderType(r.URL.Query().Get("provider"))
+		render(w, "barber/register.html", view)
 
 	case http.MethodPost:
 		extendUploadDeadline(w)
@@ -88,6 +90,7 @@ func BarberRegisterHandler(w http.ResponseWriter, r *http.Request) {
 			ShopAddress:   form.ShopAddress,
 			State:         form.State,
 			LocalArea:     form.LocalArea,
+			ProviderType:  form.ProviderType,
 			PersonalImage: personalImage,
 			Status:        models.BarberActive,
 		})

@@ -24,7 +24,7 @@ func HairstylistRouter(w http.ResponseWriter, r *http.Request) {
 			return
 
 		case "register":
-			http.Redirect(w, r, "/barber/register", http.StatusSeeOther)
+			http.Redirect(w, r, "/barber/register?provider=hairstylist", http.StatusSeeOther)
 
 			return
 
