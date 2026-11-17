@@ -129,7 +129,7 @@ func registerBarber(
 		"email":    {email},
 		"password": {password},
 	})
-	mustContain(t, "barber login", login, "Dashboard")
+	mustContain(t, "barber login", login, "Home")
 
 	barber, found := storage.FindBarberByEmail(email)
 	if !found {

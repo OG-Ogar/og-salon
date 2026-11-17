@@ -90,7 +90,7 @@ test('customer journeys, public sessions and narrow navigation',async({page},tes
    await menu.click();
    await expect(page.getByRole('button',{name:'Close the customer menu'})).toBeVisible();
    await expect.poll(()=>panel.evaluate(el=>el.getBoundingClientRect().left)).toBeGreaterThanOrEqual(0);
-   await expect(page.getByRole('navigation',{name:'customer navigation'}).getByRole('link',{name:'Dashboard',exact:true})).toBeVisible();
+   await expect(page.getByRole('navigation',{name:'customer navigation'}).getByRole('link',{name:'Home',exact:true})).toBeVisible();
    await page.keyboard.press('Escape');
    await expect(page.getByRole('button',{name:'Open the customer menu'})).toBeVisible();
    await expect.poll(()=>panel.evaluate(el=>el.getBoundingClientRect().right)).toBeLessThanOrEqual(0);
@@ -98,9 +98,9 @@ test('customer journeys, public sessions and narrow navigation',async({page},tes
   }
  }
  await page.goto('/');
- await expect(page.getByRole('link',{name:'Client dashboard',exact:true})).toBeVisible();
+ await expect(page.getByRole('link',{name:'My home',exact:true})).toBeVisible();
  await page.goto('/explore');
- await expect(page.getByRole('link',{name:'Dashboard',exact:true})).toBeVisible();
+ await expect(page.getByRole('link',{name:'Home',exact:true})).toBeVisible();
  const response404=await page.goto('/missing-page');
  expect(response404.status()).toBe(404);
  await expect(page.getByRole('navigation',{name:'Recovery options'})).toBeVisible();

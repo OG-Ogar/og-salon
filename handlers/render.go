@@ -415,10 +415,7 @@ func viewString(data any, name string) string {
 }
 func navigation(role, active string, data any) navigationView {
 	view := navigationView{Role: role, CSRF: viewString(data, "CSRF")}
-	homeLabel := "Dashboard"
-	if role == "customer" || role == "barber" {
-		homeLabel = "Home"
-	}
+	homeLabel := "Home"
 	destinations := [][2]string{{"dashboard", homeLabel}}
 	switch role {
 	case "customer":
@@ -439,8 +436,8 @@ func navigation(role, active string, data any) navigationView {
 			}
 		}
 		link := navigationLink{Path: path, Label: item[1], Active: item[0] == active}
-		if item[0] == "dashboard" && homeLabel == "Home" {
-			link.AriaLabel = "Dashboard home"
+		if item[0] == "dashboard" {
+			link.AriaLabel = "Home"
 		}
 		view.Links = append(view.Links, link)
 	}
@@ -472,7 +469,7 @@ var journeyErrorTemplate = template.Must(template.New("journey-error").Parse(`<!
 <body class="modern-role-page"><main class="journey-error-card">
 <a href="/">OG's Salon</a><p>{{.Status}}</p><h1>{{.Title}}</h1><p role="alert">{{.Message}}</p>
 <p>You can return to your workspace or sign in again to continue.</p>
-<nav aria-label="Recovery options"><a href="/customer/dashboard">Customer dashboard</a><a href="/barber/dashboard">Barber dashboard</a><a href="/explore">Find a Barber</a><a href="/">Home</a></nav>
+<nav aria-label="Recovery options"><a href="/customer/dashboard">Customer home</a><a href="/barber/dashboard">Barber home</a><a href="/explore">Find a Barber</a><a href="/">Home</a></nav>
 </main></body></html>`))
 
 func journeyError(w http.ResponseWriter, message string, status int) {

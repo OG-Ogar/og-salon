@@ -7,7 +7,7 @@
     <div><p class="social-kicker">OG's Salon community</p><h1>Home</h1></div>
   </div>
   {{if .DashboardItems}}
-  <nav class="provider-dashboard-shortcuts" aria-label="Provider dashboard shortcuts">
+  <nav class="provider-dashboard-shortcuts" aria-label="Provider home shortcuts">
     {{range .DashboardItems}}<a class="provider-dashboard-shortcut" data-shortcut="{{.Key}}" href="{{.Path}}"><span>{{.Label}}</span><strong>{{.Count}}</strong></a>{{end}}
   </nav>
   {{end}}

@@ -32,7 +32,7 @@ func BarberOrderItemActionHandler(w http.ResponseWriter, r *http.Request, barber
 		journeyError(w, "Page not found.", http.StatusNotFound)
 		return
 	case errors.Is(err, storage.ErrInvalidTransition):
-		journeyError(w, "This item changed or is already closed. Refresh the dashboard before trying again.", http.StatusConflict)
+		journeyError(w, "This item changed or is already closed. Refresh the home page before trying again.", http.StatusConflict)
 		return
 	case err != nil:
 		serverError(w, "fulfill seller order item", err)

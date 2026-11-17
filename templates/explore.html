@@ -17,7 +17,7 @@
 <header class="barber-header">
 <a class="brand-box" href="/" aria-label="OG's Salon home"><span class="brand-mark" aria-hidden="true">OG's</span><span><span class="brand-title">OG's Salon</span><span class="brand-subtitle">OG's Salon</span></span></a>
 <nav class="customer-navigation" aria-label="Account navigation">
-{{if .CustomerSignedIn}}<a class="nav-box" href="/customer/dashboard">Dashboard</a>{{else}}<a class="nav-box" href="{{.LoginLink}}">Client Login</a>{{end}}
+{{if .CustomerSignedIn}}<a class="nav-box" href="/customer/dashboard">Home</a>{{else}}<a class="nav-box" href="{{.LoginLink}}">Client Login</a>{{end}}
 <a class="nav-box" href="/hairstylist/login">For Hair Stylists <span aria-hidden="true">→</span></a>
 <a class="nav-box nav-primary" href="/barber/login">For Barbers <span aria-hidden="true">→</span></a>
 </nav>

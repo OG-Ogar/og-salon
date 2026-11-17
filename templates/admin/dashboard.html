@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Operations Dashboard - OG's Salon</title>
+    <title>Admin Operations Home - OG's Salon</title>
     <script src="/static/theme-switch.js"></script>
     <link rel="stylesheet" href="/static/app.css">
     <link rel="stylesheet" href="/static/ui.css">
@@ -175,9 +175,9 @@
     <div class="admin-ops-header">
         <div>
             <p class="crumbs">
-                <span>Admin Operations</span> / Dashboard
+                <span>Admin Operations</span> / Home
             </p>
-            <h1>Operations Dashboard</h1>
+            <h1>Operations Home</h1>
             <p class="lede">
                 High-density platform oversight, real-time activity metrics, and media asset management.
             </p>
@@ -353,12 +353,12 @@
 
     </section>
 
-    <!-- CUSTOMER DASHBOARD BACKGROUND SECTION (SIDE-BY-SIDE PREVIEW & GUIDELINES) -->
+    <!-- CUSTOMER HOME BACKGROUND SECTION (SIDE-BY-SIDE PREVIEW & GUIDELINES) -->
     <section class="panel ui-panel admin-media-section" aria-labelledby="heading-customer-asset">
 
-        <h2 id="heading-customer-asset" style="margin-top: 0;">Client Dashboard Atmosphere Artwork</h2>
+        <h2 id="heading-customer-asset" style="margin-top: 0;">Client Home Atmosphere Artwork</h2>
         <p class="lede">
-            Atmospheric backdrop rendered behind the client authenticated dashboard workspace.
+            Atmospheric backdrop rendered behind the client authenticated home workspace.
         </p>
 
         <div class="admin-media-grid">
@@ -371,7 +371,7 @@
                     {{if .CustomerLandingImage}}
                         <img class="photo"
                              src="{{.CustomerLandingImage}}"
-                             alt="Current client dashboard background"
+                             alt="Current client home background"
                              data-fullscreen-image
                              srcset="{{imageSrcset .CustomerLandingImage}}"
                              sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 480px"

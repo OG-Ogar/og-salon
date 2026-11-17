@@ -15,7 +15,7 @@
 <body class="public-profile-page"><div class="barber-page">
 <header class="barber-header">
 <a class="brand-box" href="/" aria-label="OG's Salon home"><span class="brand-mark" aria-hidden="true">OG's</span><span><span class="brand-title">OG's Salon</span><span class="brand-subtitle">OG's Salon</span></span></a>
-<nav class="customer-navigation" aria-label="Public navigation"><a class="nav-box" href="{{.ResultsLink}}">Find Barbers</a>{{if .CustomerSignedIn}}<a class="nav-box nav-primary" href="/customer/dashboard">Dashboard <span aria-hidden="true">→</span></a>{{else}}<a class="nav-box nav-primary" href="{{.LoginLink}}">Client Login <span aria-hidden="true">→</span></a>{{end}}</nav>
+<nav class="customer-navigation" aria-label="Public navigation"><a class="nav-box" href="{{.ResultsLink}}">Find Barbers</a>{{if .CustomerSignedIn}}<a class="nav-box nav-primary" href="/customer/dashboard">Home <span aria-hidden="true">→</span></a>{{else}}<a class="nav-box nav-primary" href="{{.LoginLink}}">Client Login <span aria-hidden="true">→</span></a>{{end}}</nav>
 </header>
 <main class="barber-main ui-page">
 <a class="back-link" href="{{.ResultsLink}}">← Back to barber results</a>
