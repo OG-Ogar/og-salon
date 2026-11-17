@@ -8,7 +8,7 @@
   </div>
   {{if .DashboardItems}}
   <nav class="provider-dashboard-shortcuts" aria-label="Provider dashboard shortcuts">
-    {{range .DashboardItems}}<a class="provider-dashboard-shortcut" href="{{.Path}}"><span>{{.Label}}</span><strong>{{.Count}}</strong></a>{{end}}
+    {{range .DashboardItems}}<a class="provider-dashboard-shortcut" data-shortcut="{{.Key}}" href="{{.Path}}"><span>{{.Label}}</span><strong>{{.Count}}</strong></a>{{end}}
   </nav>
   {{end}}
 

@@ -159,6 +159,10 @@ func renderChat(
 	if !ok {
 		return
 	}
+	if err := storage.MarkChatSeen(r.Context(), barber.ID, customer.ID); err != nil {
+		serverError(w, "mark conversation seen", err)
+		return
+	}
 
 	renderStatus(
 		w,

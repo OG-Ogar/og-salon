@@ -57,6 +57,10 @@ func BarberBookingsHandler(
 		serverError(w, "load barber booking page", err)
 		return
 	}
+	if err := storage.MarkProviderBookingsSeen(r.Context(), barber.ID); err != nil {
+		serverError(w, "mark barber bookings seen", err)
+		return
+	}
 	view.Pagination = bookingPagination(r, cursor, page)
 	if len(page.Items) == 0 && (cursor.After > 0 || cursor.Before > 0) {
 		http.Redirect(w, r, view.Pagination.FirstLink, 303)

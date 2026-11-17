@@ -145,6 +145,21 @@
         return sender || "Someone";
     }
 
+    function updateShortcutCounts(counts) {
+        if (!counts || typeof counts !== "object") {
+            return;
+        }
+        ["bookings", "orders", "products", "hairstyles", "messages"].forEach(function (key) {
+            if (typeof counts[key] !== "number") {
+                return;
+            }
+            var value = document.querySelector('[data-shortcut="' + key + '"] strong');
+            if (value && value.textContent !== String(counts[key])) {
+                value.textContent = String(counts[key]);
+            }
+        });
+    }
+
     /* ------------------------------------------------------------------
      * Chime (synthesised, no file)
      * ---------------------------------------------------------------- */
@@ -477,6 +492,7 @@
         }
 
         requestJSON(url).then(function (body) {
+            updateShortcutCounts(body.counts);
             if (firstCall) {
                 /* Baseline: remember where this device starts and do not
                    replay old bookings or messages. A zero is a real cursor:

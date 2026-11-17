@@ -30,8 +30,8 @@ type socialFeedView struct {
 }
 
 type dashboardItem struct {
-	Label, Path string
-	Count       int
+	Key, Label, Path string
+	Count            int
 }
 
 func loadSocialFeed(r *http.Request, role string, actorID int, actorName, actorPhoto, csrf string) (socialFeedView, error) {

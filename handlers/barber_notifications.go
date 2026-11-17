@@ -40,11 +40,12 @@ type messageAlert struct {
 // notificationsFeed is shared by both roles. The booking fields stay empty for
 // a customer; a barber receives both bookings and messages.
 type notificationsFeed struct {
-	Latest        int            `json:"latest"`
-	Bookings      []bookingAlert `json:"bookings"`
-	LatestMessage int            `json:"latestMessage"`
-	Messages      []messageAlert `json:"messages"`
-	PushPublicKey string         `json:"pushPublicKey,omitempty"`
+	Latest        int             `json:"latest"`
+	Bookings      []bookingAlert  `json:"bookings"`
+	LatestMessage int             `json:"latestMessage"`
+	Messages      []messageAlert  `json:"messages"`
+	Counts        *shortcutCounts `json:"counts,omitempty"`
+	PushPublicKey string          `json:"pushPublicKey,omitempty"`
 }
 
 // BarberNotificationsHandler is the poll target behind the live booking and
@@ -121,11 +122,19 @@ func BarberNotificationsHandler(w http.ResponseWriter, r *http.Request, barber m
 		}
 	}
 
+	counts, err := shortcutCountsForBarber(r.Context(), barber.ID)
+	if err != nil {
+		serverError(w, "load provider shortcut counts", err)
+
+		return
+	}
+
 	writeNotificationsFeed(w, notificationsFeed{
 		Latest:        latest,
 		Bookings:      alerts,
 		LatestMessage: latestMessage,
 		Messages:      messages,
+		Counts:        counts,
 	})
 }
 

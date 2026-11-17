@@ -41,6 +41,9 @@ var (
 	passkeys          = map[string]models.Passkey{}
 	rememberedDevices = map[string]models.RememberedDevice{}
 
+	providerBookingSeen = map[int]int{}
+	chatLastSeen        = map[chatSeenKey]int{}
+
 	pushMu            sync.RWMutex
 	pushSubscriptions = map[string]PushSubscription{}
 )
@@ -128,6 +131,8 @@ func Reset() {
 	mediaObjects = make(map[string]mediaObject)
 	passkeys = make(map[string]models.Passkey)
 	rememberedDevices = make(map[string]models.RememberedDevice)
+	providerBookingSeen = make(map[int]int)
+	chatLastSeen = make(map[chatSeenKey]int)
 	pushMu.Lock()
 	pushSubscriptions = make(map[string]PushSubscription)
 	pushMu.Unlock()
