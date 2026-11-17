@@ -72,3 +72,12 @@ func (b Barber) ProviderLabel() string {
 	}
 	return "Barber"
 }
+
+// ProviderNoun is the short role word used in calls to action, such as
+// "Message stylist" for a stylist and "Message barber" for a barber.
+func (b Barber) ProviderNoun() string {
+	if NormalizeProviderType(b.ProviderType) == ProviderHairstylist {
+		return "stylist"
+	}
+	return "barber"
+}
