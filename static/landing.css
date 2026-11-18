@@ -709,6 +709,24 @@
   border-top: 1px solid #193129;
 }
 
+.landing-page .public-footer .site-brand {
+  color: #f8f5e9;
+}
+
+.landing-page .public-footer .site-brand-mark {
+  background: #10221d;
+  color: #f4cb78;
+  border: 1px solid rgba(244, 203, 120, 0.45);
+}
+
+.landing-page .public-footer .site-brand-name {
+  color: #f8f5e9;
+}
+
+.landing-page .public-footer .site-brand-role {
+  color: #f4cb78;
+}
+
 .landing-page .public-footer a {
   color: #c2d4c7;
 }
@@ -718,8 +736,10 @@
   background: rgba(82, 116, 102, 0.2);
 }
 
-.landing-page .footer-copyright,
-.landing-page .footer-copytext {
+.landing-page .public-footer .footer-description,
+.landing-page .public-footer .footer-copyright,
+.landing-page .public-footer .footer-copytext,
+.landing-page .public-footer .footer-meta {
   color: #9db9a8;
 }
 
