@@ -149,3 +149,37 @@ body.message-actions-open{overflow:hidden}
     .chat-row{padding:10px 12px;gap:10px}
     .chat-row-avatar{flex-basis:44px;width:44px;height:44px}
 }
+
+/* Full-height conversation page: the partner photo, name and number stay at
+   the top, the thread takes every remaining pixel and the composer sits at
+   the bottom edge of the screen. */
+.chat-thread-page{height:100dvh;min-height:100dvh;overflow:hidden;display:flex;flex-direction:column}
+.chat-thread-page>.site-header{flex:0 0 auto}
+.chat-thread-page .customer-chat-page,
+.chat-thread-page .barber-chat-page{flex:1 1 auto;min-height:0;width:100%;display:flex;padding:0 16px!important;overflow:hidden;box-sizing:border-box;background:transparent!important}
+.chat-thread-page .customer-chat,
+.chat-thread-page .barber-chat{display:flex;flex-direction:column;width:min(100%,1120px);height:100%;min-height:0;margin:0 auto}
+.chat-thread-page .chat-split-container{flex:1 1 auto;min-height:0;margin-top:0;align-items:stretch;grid-template-rows:minmax(0,1fr)}
+.chat-thread-page .chat-partner-sidebar{position:static;display:flex;flex-direction:column;gap:10px;min-height:0;overflow-y:auto}
+.chat-thread-page .chat-partner-card{position:relative}
+.chat-thread-page .chat-stream-pane{display:flex;flex-direction:column;gap:10px;min-height:0;overflow:hidden}
+.chat-thread-page .thread{flex:1 1 auto;min-height:0;max-height:none;margin-bottom:0}
+.chat-thread-page .chat-quick-responses{flex:0 0 auto}
+.chat-thread-page .chat-composer{flex:0 0 auto}
+.chat-refresh-link{position:absolute;top:10px;right:10px;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;border:1px solid var(--border-hi);background:var(--surface-hi);color:var(--ink-muted);text-decoration:none;transition:color .15s ease,border-color .15s ease}
+.chat-refresh-link:hover,.chat-refresh-link:focus-visible{color:var(--signal);border-color:var(--signal)}
+.chat-refresh-link:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+@media(max-width:860px){
+    .chat-thread-page .customer-chat-page,
+    .chat-thread-page .barber-chat-page{padding:0 10px!important}
+    .chat-thread-page .chat-split-container{display:flex;flex-direction:column;gap:8px;flex:1 1 auto;min-height:0}
+    .chat-thread-page .chat-partner-sidebar{display:flex;flex-direction:column;gap:4px;flex:0 0 auto;overflow:visible}
+    .chat-thread-page .chat-back-link{padding:2px 0;font-size:.78rem}
+    .chat-thread-page .chat-partner-card{padding:10px 12px;gap:10px}
+    .chat-thread-page .chat-stream-pane{flex:1 1 auto;min-height:0;gap:8px}
+    .chat-thread-page .thread{min-height:0;padding:10px!important}
+    .chat-thread-page .chat-quick-responses{flex-wrap:nowrap;overflow-x:auto;padding:0;scrollbar-width:none}
+    .chat-thread-page .chat-quick-responses::-webkit-scrollbar{display:none}
+    .chat-thread-page .quick-reply-chip{flex:0 0 auto;padding:5px 10px;font-size:.72rem}
+    .chat-thread-page .chat-composer textarea{min-height:48px}
+}
