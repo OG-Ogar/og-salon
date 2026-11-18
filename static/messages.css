@@ -161,12 +161,13 @@ body.message-actions-open{overflow:hidden}
 .chat-thread-page .barber-chat{display:flex;flex-direction:column;width:min(100%,1120px);height:100%;min-height:0;margin:0 auto}
 .chat-thread-page .chat-split-container{flex:1 1 auto;min-height:0;margin-top:0;align-items:stretch;grid-template-rows:minmax(0,1fr)}
 .chat-thread-page .chat-partner-sidebar{position:static;display:flex;flex-direction:column;gap:10px;min-height:0;overflow-y:auto}
-.chat-thread-page .chat-partner-card{position:relative}
 .chat-thread-page .chat-stream-pane{display:flex;flex-direction:column;gap:10px;min-height:0;overflow:hidden}
-.chat-thread-page .thread{flex:1 1 auto;min-height:0;max-height:none;margin-bottom:0}
+.chat-thread-page .thread{flex:1 1 auto;min-height:0;max-height:none;margin-bottom:0;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;padding:8px 0!important}
 .chat-thread-page .chat-quick-responses{flex:0 0 auto}
 .chat-thread-page .chat-composer{flex:0 0 auto}
-.chat-refresh-link{position:absolute;top:10px;right:10px;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;border:1px solid var(--border-hi);background:var(--surface-hi);color:var(--ink-muted);text-decoration:none;transition:color .15s ease,border-color .15s ease}
+.chat-thread-page .chat-composer .composer-send{display:inline-flex!important;align-items:center;justify-content:center}
+.chat-nav-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.chat-refresh-link{display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border-radius:9999px;border:1px solid var(--border-hi);background:var(--surface-hi);color:var(--ink-muted);font-size:.74rem;font-weight:750;line-height:1;text-decoration:none;transition:color .15s ease,border-color .15s ease}
 .chat-refresh-link:hover,.chat-refresh-link:focus-visible{color:var(--signal);border-color:var(--signal)}
 .chat-refresh-link:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
 @media(max-width:860px){

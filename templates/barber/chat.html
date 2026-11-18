@@ -30,14 +30,17 @@
 
             <!-- Desktop Left Sidebar: Customer Context -->
             <aside class="chat-partner-sidebar">
-                <a class="chat-back-link" href="{{.BackLink}}">
-                    ← All Conversations
-                </a>
+                <div class="chat-nav-row">
+                    <a class="chat-back-link" href="{{.BackLink}}">
+                        ← All Conversations
+                    </a>
+                    <a class="chat-refresh-link" href="{{.Action}}" aria-label="Refresh conversation" title="Refresh conversation">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 3v6h-6"></path></svg>
+                        <span>Refresh</span>
+                    </a>
+                </div>
 
                 <section class="customer-card ui-panel chat-partner-card">
-                    <a class="chat-refresh-link" href="{{.Action}}" aria-label="Refresh conversation" title="Refresh conversation">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 3v6h-6"></path></svg>
-                    </a>
 
                     {{if .CustomerImage}}
                         <img
