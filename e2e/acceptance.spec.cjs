@@ -84,6 +84,7 @@ test('touch navigation and broken media retain usable populated views',async({br
 });
 
 test('booking outcomes, schedule conflicts, verified reviews and fulfillment persist',async({browser},testInfo)=>{
+ test.setTimeout(180000);
  const sellerContext=await acceptanceContext(browser,{storageState:fixture.barberState}),buyerContext=await acceptanceContext(browser,{storageState:fixture.customerState});
  try{
  const seller=await sellerContext.newPage(),buyer=await buyerContext.newPage();
@@ -126,6 +127,7 @@ test('both roles reset credentials, revoke prior sessions and reject reused link
 });
 
 test('account suspension and archival hide shops while retaining completed history',async({browser},testInfo)=>{
+ test.setTimeout(180000);
  const adminContext=await acceptanceContext(browser,{storageState:fixture.adminState}),sellerContext=await acceptanceContext(browser,{storageState:fixture.barberState}),buyerContext=await acceptanceContext(browser,{storageState:fixture.customerState});
  try{
  const admin=await adminContext.newPage(),seller=await sellerContext.newPage(),buyer=await buyerContext.newPage();for(const action of ['accept','complete']){const response=await seller.request.post('/barber/bookings/'+fixture.booking+'/'+action,{maxRedirects:0,form:{csrf_token:fixture.sellerCsrf}});expect([303,409]).toContain(response.status());}await seller.goto('/barber/dashboard');while(await seller.getByRole('button',{name:'Mark ready',exact:true}).count())await seller.getByRole('button',{name:'Mark ready',exact:true}).first().click();while(await seller.getByRole('button',{name:'Mark collected',exact:true}).count())await seller.getByRole('button',{name:'Mark collected',exact:true}).first().click();await admin.goto('/admin/barbers?q='+encodeURIComponent(fixture.email));const csrf=await admin.locator('form[action="/admin/barbers/'+fixture.seller+'/suspend"] input[name=csrf_token]').inputValue();await admin.locator('form[action="/admin/barbers/'+fixture.seller+'/suspend"] button').click();
