@@ -55,4 +55,5 @@ type HairstyleStatus struct {
 	Name        string
 	Image       string
 	Video       string
+	Price       float64
 }

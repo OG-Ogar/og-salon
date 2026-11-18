@@ -69,6 +69,9 @@ func CustomerRouter(w http.ResponseWriter, r *http.Request) {
 	case len(parts) == 2 && parts[1] == "dashboard":
 		CustomerDashboardHandler(w, r, customer, s)
 
+	case len(parts) == 2 && parts[1] == "hairstyles":
+		CustomerHairstylesHandler(w, r)
+
 	case len(parts) == 2 && parts[1] == "posts":
 		createSocialPost(w, r, models.SenderCustomer, customer.ID, customer.FullName, customer.ProfileImage, s)
 

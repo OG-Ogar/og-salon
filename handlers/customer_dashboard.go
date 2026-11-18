@@ -80,6 +80,20 @@ func CustomerDashboardHandler(
 	})
 }
 
+// CustomerHairstylesHandler shows the full active hairstyle catalogue.
+func CustomerHairstylesHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		methodNotAllowed(w, http.MethodGet)
+		return
+	}
+	styles, err := storage.AllHairstyleStatuses(r.Context())
+	if err != nil {
+		serverError(w, "load hairstyle catalogue", err)
+		return
+	}
+	render(w, "customer/hairstyles.html", struct{ Styles []models.HairstyleStatus }{Styles: styles})
+}
+
 // CustomerAccountHandler is the account summary page that the home menu
 // opens. It holds the welcome, search and tallies that used to sit below
 // the feed on the home page.

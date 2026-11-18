@@ -180,20 +180,29 @@ func HomeFeed(ctx context.Context, role string, actorID int) ([]models.SocialPos
 
 // HairstyleStatuses returns active barbers' currently bookable styles for the status row.
 func HairstyleStatuses(ctx context.Context) ([]models.HairstyleStatus, error) {
+	return hairstyleStatuses(ctx, socialStatusLimit)
+}
+
+// AllHairstyleStatuses returns all active, bookable hairstyles for the catalogue.
+func AllHairstyleStatuses(ctx context.Context) ([]models.HairstyleStatus, error) {
+	return hairstyleStatuses(ctx, 1000)
+}
+
+func hairstyleStatuses(ctx context.Context, limit int) ([]models.HairstyleStatus, error) {
 	ctx, cancel := databaseContext(ctx)
 	defer cancel()
 	if err := ctx.Err(); err != nil {
 		return nil, err
 	}
 	if databaseEnabled() {
-		return queryRecords(ctx, `select h.id,b.id,b.full_name,coalesce(nullif(b.personal_image,''),b.profile_image),b.shop_name,h.name,h.image,h.video
+		return queryRecords(ctx, `select h.id,b.id,b.full_name,coalesce(nullif(b.personal_image,''),b.profile_image),b.shop_name,h.name,h.image,h.video,h.price
 from public.hairstyles h join public.barbers b on b.id=h.barber_id
 where b.status='Active' and h.is_available and not h.is_archived
 order by h.id desc limit $1`, func(rows *sql.Rows) (models.HairstyleStatus, error) {
 			var v models.HairstyleStatus
-			err := rows.Scan(&v.HairstyleID, &v.BarberID, &v.BarberName, &v.BarberImage, &v.ShopName, &v.Name, &v.Image, &v.Video)
+			err := rows.Scan(&v.HairstyleID, &v.BarberID, &v.BarberName, &v.BarberImage, &v.ShopName, &v.Name, &v.Image, &v.Video, &v.Price)
 			return v, err
-		}, socialStatusLimit)
+		}, limit)
 	}
 	mu.RLock()
 	defer mu.RUnlock()
@@ -204,7 +213,7 @@ order by h.id desc limit $1`, func(rows *sql.Rows) (models.HairstyleStatus, erro
 		}
 	}
 	var statuses []models.HairstyleStatus
-	for i := len(hairstyles) - 1; i >= 0 && len(statuses) < socialStatusLimit; i-- {
+	for i := len(hairstyles) - 1; i >= 0 && len(statuses) < limit; i-- {
 		style := hairstyles[i]
 		barber, ok := barberByID[style.BarberID]
 		if !ok || !style.IsAvailable || style.Archived {
@@ -214,7 +223,7 @@ order by h.id desc limit $1`, func(rows *sql.Rows) (models.HairstyleStatus, erro
 		if photo == "" {
 			photo = barber.ProfileImage
 		}
-		statuses = append(statuses, models.HairstyleStatus{HairstyleID: style.ID, BarberID: barber.ID, BarberName: barber.FullName, BarberImage: photo, ShopName: barber.ShopName, Name: style.Name, Image: style.Image, Video: style.Video})
+		statuses = append(statuses, models.HairstyleStatus{HairstyleID: style.ID, BarberID: barber.ID, BarberName: barber.FullName, BarberImage: photo, ShopName: barber.ShopName, Name: style.Name, Image: style.Image, Video: style.Video, Price: style.Price})
 	}
 	return statuses, nil
 }
