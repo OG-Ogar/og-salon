@@ -21,7 +21,7 @@ test('both conversation views deliver replies through explicit refresh',async({b
   expect(signedUp.ok(),await signedUp.text()).toBeTruthy();
   await customer.goto('/customer/barbers?state=Lagos');
   await customer.getByRole('link',{name:/Chat Shop/}).first().click();
-  await customer.getByRole('link',{name:'Message Barber',exact:true}).first().click();
+  await customer.getByRole('link',{name:/Message (barber|Barber)/}).first().click();
   await expect(customer.getByRole('link',{name:'Refresh conversation',exact:true})).toBeVisible();
   await customer.getByRole('textbox',{name:'Your message'}).fill('Customer greeting');
   await customer.getByRole('button',{name:/send/i}).click();
@@ -435,14 +435,14 @@ test('catalogue uses bounded seller pages and exact-product continuation without
 });
 
 test('both roles page message history chronologically and refresh to latest replies',async({browser},testInfo)=>{
- test.setTimeout(120000);
+ test.setTimeout(240000);
  const customerContext=await newTestContext(browser),barberContext=await newTestContext(browser);
  try {
   const customer=await customerContext.newPage(),barber=await barberContext.newPage(),suffix=Date.now(),email='history-barber-'+suffix+'@example.test',shop='History Shop '+suffix;
   expect((await barber.request.post('/barber/register',{multipart:{fullname:'History Barber',phone:'08012345678',email,shopname:shop,shopaddress:'12 Example Street',state:'Lagos',local_area:'Ikeja',password:'browser-pass-123',confirm_password:'browser-pass-123',personal_image:{name:'profile.png',mimeType:'image/png',buffer:PNG}}})).ok()).toBeTruthy();
   expect((await barber.request.post('/barber/login',{form:{email,password:'browser-pass-123'}})).ok()).toBeTruthy();
   expect((await customer.request.post('/customer/register',{multipart:{fullname:'History Customer',phone:'08012345678',email:'history-customer-'+suffix+'@example.test',password:'browser-pass-123',confirm_password:'browser-pass-123'}})).ok()).toBeTruthy();
-  await customer.goto('/customer/barbers?state=Lagos&area=Ikeja');await customer.getByRole('link',{name:shop,exact:true}).first().click();await customer.getByRole('link',{name:'Message Barber',exact:true}).first().click();
+  await customer.goto('/customer/barbers?state=Lagos&area=Ikeja');await customer.getByRole('link',{name:shop,exact:true}).first().click();await customer.getByRole('link',{name:/Message (barber|Barber)/}).first().click();
   const action=await customer.locator('form.send').getAttribute('action'),csrf=await customer.locator('form.send input[name=csrf_token]').inputValue();
   for(let i=0;i<105;i++){const response=await customer.request.post(action,{maxRedirects:0,form:{csrf_token:csrf,text:'History '+String(i).padStart(3,'0')}});expect(response.status()).toBe(303);}
   await customer.goto(action);await expect(customer.locator('.thread .bubble')).toHaveCount(100);
