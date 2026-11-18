@@ -96,6 +96,7 @@
 }
 
 .social-tool[hidden]{display:none}
+.social-home-heading .social-home-chats{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 18px;border:1px solid var(--signal,#142034);border-radius:999px;background:var(--signal,#142034);color:var(--signal-ink,#fff);font-size:.82rem;font-weight:800;text-decoration:none;white-space:nowrap}.social-home-heading .social-home-chats:hover{filter:brightness(1.14)}.social-home-heading .social-home-chats:focus-visible{outline:3px solid rgba(var(--signal-rgb,20,32,52),.28);outline-offset:3px}
 .provider-dashboard-shortcuts {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));

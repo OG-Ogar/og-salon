@@ -5,6 +5,7 @@
       {{if .ActorPhoto}}<img src="{{.ActorPhoto}}" alt="" width="46" height="46" loading="lazy">{{else}}<span>{{printf "%.1s" .ActorName}}</span>{{end}}
     </a>
     <div><p class="social-kicker">OG's Salon community</p><h1>Home</h1></div>
+    {{if eq .Role "customer"}}<a class="social-home-chats" href="/customer/chats">Chats</a>{{end}}
   </div>
   {{if .DashboardItems}}
   <nav class="provider-dashboard-shortcuts" aria-label="Provider home shortcuts">
