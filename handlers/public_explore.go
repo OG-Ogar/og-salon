@@ -17,12 +17,13 @@ type exploreView struct {
 	CustomerSignedIn bool
 	LoginLink        string
 
-	Items                       []exploreCard
-	SelectedState, SelectedArea string
+	Items                            []exploreCard
+	SelectedState, SelectedArea      string
+	SelectedCategory, SelectedRating string
 }
 type publicBarberView struct {
-	ShowProducts bool
-	HandworkLink, ProductsLink string
+	ShowProducts                                           bool
+	HandworkLink, ProductsLink                             string
 	ServicePagination, ProductPagination, ReviewPagination listPagination
 	ResultsLink                                            string
 	LoginLink                                              string
@@ -70,7 +71,7 @@ func ExploreBarbersHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	destination := discoveryPath("/customer/barbers", discoveryQuery(r))
-	render(w, "explore.html", exploreView{Items: page.Items, Total: page.Total, Pagination: pagination, SelectedState: state, SelectedArea: area, CustomerSignedIn: signedIn, LoginLink: customerLoginPath(destination)})
+	render(w, "explore.html", exploreView{Items: page.Items, Total: page.Total, Pagination: pagination, SelectedState: state, SelectedArea: area, SelectedCategory: r.URL.Query().Get("category"), SelectedRating: r.URL.Query().Get("rating"), CustomerSignedIn: signedIn, LoginLink: customerLoginPath(destination)})
 }
 
 func ExploreBarberHandler(w http.ResponseWriter, r *http.Request, idSegment string) {
