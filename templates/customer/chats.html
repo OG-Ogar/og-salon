@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Messages - OG's Salon</title>
+    <title>Chats - OG's Salon</title>
 
     <script src="/static/theme-switch.js"></script>
     <link rel="stylesheet" href="/static/app.css">
@@ -22,7 +22,7 @@
 </head>
 
 
-<body class="modern-customer-page messaging-page">
+<body class="modern-customer-page messaging-page chats-index-page">
 
 <main class="customer-messages-page ui-page">
 
@@ -44,7 +44,7 @@
         <section class="messages-title-box">
 
             <h1>
-                Client Messages
+                Chats
             </h1>
 
             <p>
@@ -56,110 +56,79 @@
 
 
         <!-- =================================================
-             CONVERSATIONS
+             CHATS
              ================================================= -->
 
         {{if .Items}}
 
             <section
-                class="conversation-list"
-                aria-label="Barber and stylist conversations"
+                class="chat-list"
+                aria-label="Conversations"
             >
 
                 {{range .Items}}
 
                     <a
-                        class="conversation-card"
+                        class="chat-row"
                         href="/customer/chats/{{.BarberID}}"
                     >
 
 
-                        <!-- BARBER PHOTO -->
+                        <!-- PHOTO -->
 
-                        {{if .BarberImage}}
+                        <span class="chat-row-avatar">
 
-                            <img
-                                class="barber-photo customer-chat-avatar"
-                                src="{{.BarberImage}}" loading="lazy" decoding="async"
-                                alt="{{.Name}}"
-                                data-fullscreen-image
-                             srcset="{{imageSrcset .BarberImage}}" sizes="96px" width="640" height="480">
+                            {{if .BarberImage}}
 
-                        {{else}}
+                                <img
+                                    src="{{.BarberImage}}"
+                                    alt="{{.Name}}"
+                                    data-fullscreen-image
+                                    srcset="{{imageSrcset .BarberImage}}" sizes="56px" width="112" height="112" loading="lazy" decoding="async">
 
-                            <div
-                                class="barber-photo-placeholder"
-                                aria-hidden="true"
-                            >
-                                {{printf "%.1s" .Name}}
-                            </div>
+                            {{else}}
 
-                        {{end}}
+                                <span
+                                    class="chat-avatar-fallback"
+                                    aria-hidden="true"
+                                >
+                                    {{printf "%.1s" .Name}}
+                                </span>
 
+                            {{end}}
 
-
-                        <!-- BARBER NAME -->
-
-                        <h2 class="barber-name">
-                            {{.Name}}
-                        </h2>
+                        </span>
 
 
 
-                        <!-- SHOP NAME -->
+                        <!-- NAME + LAST MESSAGE -->
 
-                        {{if .Detail}}
+                        <span class="chat-row-body">
 
-                            <p class="barber-shop">
-                                {{.Detail}}
-                            </p>
+                            <span class="chat-row-head">
 
-                        {{end}}
+                                <span class="chat-row-name">
+                                    {{.Name}}
+                                </span>
 
+                                <span class="chat-row-time">
+                                    {{.LastAt}}
+                                </span>
 
-
-                        <!-- LAST MESSAGE -->
-
-                        <div class="last-message">
-
-                            <span class="last-message-label">
-                                Last message
                             </span>
 
-                            <p class="last-message-text">
+                            <span class="chat-row-message">
                                 {{.LastText}}
-                            </p>
-
-                        </div>
-
-
-
-                        <!-- DETAILS -->
-
-                        <div class="conversation-details">
-
-                            <span>
-                                {{.LastAt}}
                             </span>
 
-                            <span>
-                                {{.Count}} messages
-                            </span>
-
-                        </div>
-
-
-
-                        <!-- OPEN CHAT -->
-
-                        <span class="open-chat-button">
-                            Open Chat
                         </span>
 
 
                     </a>
 
                 {{end}}
+
+                {{template "list-pagination" .Pagination}}
 
             </section>
 
@@ -168,12 +137,12 @@
             <div class="empty-conversations">
 
                 <h2>
-                    No conversations yet
+                    No chats yet
                 </h2>
 
                 <p>
                     Find a barber or stylist and send them a message
-                    to start a conversation.
+                    to start a chat.
                 </p>
 
                 <a
@@ -192,8 +161,6 @@
 
 </main>
 
-{{template "list-pagination" .Pagination}}
-{{template "public-footer" .}}
 </body>
 
 </html>
