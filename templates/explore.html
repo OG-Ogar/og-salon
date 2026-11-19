@@ -27,6 +27,12 @@
 <p class="eyebrow"><span></span> Explore barbers and hair stylists</p>
 <h1>Find the right barber or hair stylist <em>around you.</em></h1>
 <p class="intro-text">Choose your location to discover active OG's Salon barbers and hair stylists, compare their handwork and prices, and find the right fit before you book.</p>
+<div class="discovery-trust-stats" aria-label="Network stats">
+<div class="trust-stat-item"><strong class="stat-number">36+</strong><span class="stat-label">States &amp; FCT</span></div>
+<div class="trust-stat-item"><strong class="stat-number">774</strong><span class="stat-label">Local Areas</span></div>
+<div class="trust-stat-item"><strong class="stat-number">100%</strong><span class="stat-label">Upfront Pricing</span></div>
+<div class="trust-stat-item"><strong class="stat-number">Real</strong><span class="stat-label">Client Reviews</span></div>
+</div>
 </section>
 
 <section class="search-section location-panel" aria-labelledby="location-title">
@@ -40,13 +46,13 @@
 </form>
 <div class="discovery-quick-filters" aria-label="Popular locations">
 <span class="quick-filter-label">Popular:</span>
-<a href="/explore?state=Lagos" class="quick-chip{{if eq $.SelectedState "Lagos"}} active{{end}}">Lagos</a>
-<a href="/explore?state=FCT" class="quick-chip{{if eq $.SelectedState "FCT"}} active{{end}}">Abuja (FCT)</a>
-<a href="/explore?state=Rivers" class="quick-chip{{if eq $.SelectedState "Rivers"}} active{{end}}">Port Harcourt</a>
-<a href="/explore?state=Oyo" class="quick-chip{{if eq $.SelectedState "Oyo"}} active{{end}}">Ibadan</a>
-<a href="/explore?state=Kano" class="quick-chip{{if eq $.SelectedState "Kano"}} active{{end}}">Kano</a>
-<a href="/explore?state=Enugu" class="quick-chip{{if eq $.SelectedState "Enugu"}} active{{end}}">Enugu</a>
-<a href="/explore?state=Delta" class="quick-chip{{if eq $.SelectedState "Delta"}} active{{end}}">Delta</a>
+<a href="/explore?state=Lagos" class="quick-chip{{if eq $.SelectedState "Lagos"}} active{{end}}">📍 Lagos</a>
+<a href="/explore?state=FCT" class="quick-chip{{if eq $.SelectedState "FCT"}} active{{end}}">📍 Abuja (FCT)</a>
+<a href="/explore?state=Rivers" class="quick-chip{{if eq $.SelectedState "Rivers"}} active{{end}}">📍 Port Harcourt</a>
+<a href="/explore?state=Oyo" class="quick-chip{{if eq $.SelectedState "Oyo"}} active{{end}}">📍 Ibadan</a>
+<a href="/explore?state=Kano" class="quick-chip{{if eq $.SelectedState "Kano"}} active{{end}}">📍 Kano</a>
+<a href="/explore?state=Enugu" class="quick-chip{{if eq $.SelectedState "Enugu"}} active{{end}}">📍 Enugu</a>
+<a href="/explore?state=Delta" class="quick-chip{{if eq $.SelectedState "Delta"}} active{{end}}">📍 Delta</a>
 </div>
 </section>
 
@@ -69,7 +75,7 @@
 <div class="barber-grid">
 {{range .Items}}
 <article class="barber-card">
-<a class="barber-image" href="{{discoveryCardPath "/explore" .ID $.SelectedState $.SelectedArea $.Pagination.After $.Pagination.Before "" $.SelectedCategory $.SelectedRating}}">{{if .ProfileImage}}<img src="{{.ProfileImage}}" alt="{{.ShopName}}" loading="lazy" srcset="{{imageSrcset .ProfileImage}}" sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px" width="640" height="480" decoding="async">{{else if .PersonalImage}}<img src="{{.PersonalImage}}" alt="{{.FullName}}" loading="lazy" srcset="{{imageSrcset .PersonalImage}}" sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px" width="640" height="480" decoding="async">{{else}}<span class="image-placeholder">OG's</span>{{end}}<span class="view-cue">View profile ↗</span>{{if .Hairstyles}}<span class="image-price">Services from {{naira .FromPrice}}</span>{{end}}</a>
+<a class="barber-image" href="{{discoveryCardPath "/explore" .ID $.SelectedState $.SelectedArea $.Pagination.After $.Pagination.Before "" $.SelectedCategory $.SelectedRating}}">{{if .ProfileImage}}<img src="{{.ProfileImage}}" alt="{{.ShopName}}" loading="lazy" srcset="{{imageSrcset .ProfileImage}}" sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px" width="640" height="480" decoding="async">{{else if .PersonalImage}}<img src="{{.PersonalImage}}" alt="{{.FullName}}" loading="lazy" srcset="{{imageSrcset .PersonalImage}}" sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px" width="640" height="480" decoding="async">{{else}}<span class="image-placeholder" aria-hidden="true"><svg class="brand-monogram" viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5" stroke-width="1.8" stroke="currentColor" stroke-opacity="0.85"/><path d="M15.5 8.5A5.2 5.2 0 1 0 16.8 14H12" stroke-width="2.2" stroke="currentColor"/></svg></span>{{end}}<span class="view-cue">View profile ↗</span>{{if .Hairstyles}}<span class="image-price">Services from {{naira .FromPrice}}</span>{{end}}</a>
 <div class="barber-information">
 <div class="card-topline"><p class="card-label">{{.ProviderLabel}}</p>{{if .ReviewCount}}<span class="rating-badge">★ {{printf "%.1f" .Rating}} · {{.ReviewCount}} reviews</span>{{else}}<span class="new-badge">New</span>{{end}}</div>
 <h3><a href="{{discoveryCardPath "/explore" .ID $.SelectedState $.SelectedArea $.Pagination.After $.Pagination.Before "" $.SelectedCategory $.SelectedRating}}">{{.ShopName}}</a></h3>
@@ -85,13 +91,13 @@
 {{end}}
 </div>
 {{else}}
-<div class="empty-state"><div class="empty-icon">OG's</div><p class="eyebrow">No match yet</p><h2>No shops matched these choices.</h2><p>Try the whole state, clear the filters, or browse a nearby popular location.</p><div class="empty-recommendations"><a class="back-button" href="/explore?state={{urlquery .SelectedState}}">Search whole state</a><a class="filter-chip" href="{{discoveryCardPath "/explore" 0 .SelectedState .SelectedArea 0 0}}">Clear filters</a><a class="filter-chip" href="/explore?state=Lagos">Browse Lagos</a><a class="filter-chip" href="/explore?state=FCT">Browse Abuja</a></div></div>
+<div class="empty-state"><div class="empty-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><p class="eyebrow">No match yet</p><h2>No shops matched these choices.</h2><p>Try the whole state, clear the filters, or browse a nearby popular location.</p><div class="empty-recommendations"><a class="back-button" href="/explore?state={{urlquery .SelectedState}}">Search whole state</a><a class="filter-chip" href="{{discoveryCardPath "/explore" 0 .SelectedState .SelectedArea 0 0}}">Clear filters</a><a class="filter-chip" href="/explore?state=Lagos">Browse Lagos</a><a class="filter-chip" href="/explore?state=FCT">Browse Abuja</a></div></div>
 {{end}}
 </section>
 {{else}}
 <section class="discovery-guide" aria-label="How barber and hair stylist discovery works">
-<div><span class="step-number">02</span><div><h2>Compare the work</h2><p>Open real barber and hair stylist profiles to see their services, handwork, starting prices and booking reviews where available.</p></div></div>
-<div><span class="step-number">03</span><div><h2>Choose and continue</h2><p>Enter the barber or hair stylist's profile, inspect what they offer, then sign in when you are ready to message or book.</p></div></div>
+<div><span class="step-number">02</span><div><h2>Compare real lookbooks</h2><p>Open verified barber and hair stylist portfolios to inspect authentic handwork photos, service durations, and upfront pricing before you step in the door.</p></div></div>
+<div><span class="step-number">03</span><div><h2>Select chair &amp; book instant</h2><p>Pick your preferred grooming service, select an open calendar slot, and reserve your chair directly without wasting hours in a waiting line.</p></div></div>
 </section>
 {{end}}
 </main>
