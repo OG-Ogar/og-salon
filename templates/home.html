@@ -6,39 +6,213 @@
     <title>OG's Salon — Find and book a barber or hair stylist</title>
     <script src="/static/theme-switch.js"></script>
     <link rel="stylesheet" href="/static/app.css">
-<link rel="stylesheet" href="/static/ui.css">
-<link rel="stylesheet" href="/static/theme.css">
+    <link rel="stylesheet" href="/static/ui.css">
+    <link rel="stylesheet" href="/static/theme.css">
+    <link rel="stylesheet" href="/static/landing.css">
     <script src="/static/app.js" defer></script>
-{{template "public-metadata" (publicMetadata "/" "OG's Salon — Find and book a barber or hair stylist" "Find nearby barbers and hair stylists, compare services and book an appointment." .LandingImage "OG's Salon barber and hair stylist booking" "website" "summary_large_image" (websiteSchema "/"))}}
+    {{template "public-metadata" (publicMetadata "/" "OG's Salon — Find and book a barber or hair stylist" "Find nearby barbers and hair stylists, compare services and book an appointment." .LandingImage "OG's Salon barber and hair stylist booking" "website" "summary_large_image" (websiteSchema "/"))}}
 </head>
 <body class="landing-page">
-<main class="landing">
-    <header class="landing-header">
-        <a class="landing-brand" href="/" aria-label="OG's Salon home">
+<header class="landing-pill-wrapper">
+    <nav class="landing-nav-pill" aria-label="Main navigation">
+        <a class="landing-pill-brand" href="/" aria-label="OG's Salon home">
             <span class="landing-brand-mark" aria-hidden="true">OG's</span>
-            <span class="landing-brand-copy">
-                <span class="landing-brand-name">OG's Salon</span>
-            </span>
+            <span class="landing-pill-brand-text">OG's</span>
         </a>
-        <nav class="landing-nav" aria-label="Main navigation">
-            {{if .BarberSignedIn}}<a class="landing-nav-cta" href="/barber/dashboard">Barber home</a>{{else}}<a class="landing-nav-cta" href="/barber/login">Barber login</a>{{end}}
-            <a class="landing-nav-link" href="/hairstylist/login">Hair Stylist login</a>
-        </nav>
-    </header>
-
+        <div class="landing-pill-links">
+            <a href="/explore" class="landing-pill-link">Find Barbers</a>
+            <a href="/barber/register" class="landing-pill-link">For Barbers &amp; Stylists</a>
+            <a href="/help" class="landing-pill-link">Help</a>
+        </div>
+        <div class="landing-pill-action">
+            {{if .CustomerSignedIn}}<a href="/customer/dashboard" class="landing-pill-btn">My home</a>{{else if .BarberSignedIn}}<a href="/barber/dashboard" class="landing-pill-btn">Barber Home</a>{{else}}<a href="/customer/login" class="landing-pill-btn">Log In</a>{{end}}
+        </div>
+    </nav>
+</header>
+<main class="landing">
+    <!-- Hero Section -->
     <section class="landing-hero" aria-labelledby="landing-title">
-        <div class="landing-hero-copy">
-            <p class="landing-eyebrow">Barbers and hair stylists, one place</p>
-            <h1 id="landing-title">Find your barber or hair stylist. <em>Book your next look.</em></h1>
-            <p class="landing-lead">Browse nearby barbers and hair stylists, compare services and book an appointment.</p>
-            <div class="landing-actions">
-                <a class="landing-button" href="/explore">Find a Barber</a>
-                <a class="landing-secondary-button" href="/explore">Find a Hair Stylist</a>
-                {{if .CustomerSignedIn}}<a class="landing-secondary-button" href="/customer/dashboard">My home</a>{{else}}<a class="landing-secondary-button" href="/customer/register">Create account</a>{{end}}
+        <div class="landing-hero-container">
+            <div class="landing-hero-copy">
+                <p class="landing-eyebrow">Nigeria's Premier Grooming Network</p>
+                <h1 id="landing-title" class="landing-hero-title">FIND YOUR BARBER <em>OR HAIR STYLIST.</em></h1>
+                <p class="landing-lead">Discover top-rated barbers and hairstylists across Nigeria, explore real handwork, and book your appointment in seconds.</p>
+
+                <!-- Embedded Hero Search Container -->
+                <div class="hero-search-container">
+                    <form class="hero-search-form" method="get" action="/explore" role="search" aria-label="Find barbers by location">
+                        <div class="hero-search-field">
+                            <label for="hero-state" class="hero-search-label">State / FCT</label>
+                            <select id="hero-state" name="state" data-geography-state required>
+                                <option value="">Select State / FCT</option>
+                                {{range geographyStates}}<option value="{{.Name}}">{{.Name}}</option>{{end}}
+                            </select>
+                        </div>
+                        <div class="hero-search-field">
+                            <label for="hero-area" class="hero-search-label">LGA / Area</label>
+                            <select id="hero-area" name="area" data-geography-area>
+                                <option value="">All LGAs / Areas</option>
+                                {{range geographyStates}}
+                                <optgroup label="{{.Name}}" data-state-id="{{.Name}}">
+                                    {{range .Areas}}<option value="{{.Name}}">{{.Name}}</option>{{end}}
+                                </optgroup>
+                                {{end}}
+                            </select>
+                        </div>
+                        <button type="submit" class="hero-search-submit">Find My Barber</button>
+                    </form>
+                </div>
+
+                <!-- Trust proof bar -->
+                <div class="landing-trust-bar">
+                    <p class="landing-trust-text">COVERING 36 STATES &amp; FCT &middot; 774 LOCAL AREAS &middot; NIGERIA'S PREMIER GROOMING NETWORK</p>
+                </div>
+            </div>
+
+            <!-- Hero Visual Media retaining .landing-media for test compatibility -->
+            <div class="landing-visual" aria-hidden="true">
+                {{if .LandingImage}}<img class="landing-media" src="{{.LandingImage}}" srcset="{{imageSrcset .LandingImage}}" sizes="(max-width: 850px) 100vw, 45vw" width="1600" height="1200" alt="" loading="eager" fetchpriority="high" decoding="async">{{else}}<div class="landing-visual-placeholder">OG's</div>{{end}}
             </div>
         </div>
-        <div class="landing-visual" aria-hidden="true">
-            {{if .LandingImage}}<img class="landing-media" src="{{.LandingImage}}" srcset="{{imageSrcset .LandingImage}}" sizes="(max-width: 850px) 100vw, 45vw" width="1600" height="1200" alt="" loading="eager" fetchpriority="high" decoding="async">{{else}}<div class="landing-visual-placeholder">OG's</div>{{end}}
+    </section>
+
+    <!-- Use-Case Storytelling Sections (Alternating 2-Column) -->
+    <!-- Section 01 (For Clients) -->
+    <section class="landing-usecase landing-usecase-client" aria-labelledby="client-usecase-title">
+        <div class="landing-usecase-container">
+            <div class="landing-usecase-content">
+                <span class="landing-usecase-eyebrow">USE CASE, 01 &middot; FOR CLIENTS</span>
+                <h2 id="client-usecase-title" class="landing-usecase-heading">BARBERS &amp; STYLISTS WHO GET YOU</h2>
+                <p class="landing-usecase-subtitle">The easiest way to discover verified barbers and hair stylists worth keeping.</p>
+                <ul class="landing-checklist" role="list">
+                    <li class="landing-checklist-item">
+                        <span class="landing-check-icon" aria-hidden="true">&#x2713;</span>
+                        <span>Browse real photos &amp; video clips of hairstyles near you</span>
+                    </li>
+                    <li class="landing-checklist-item">
+                        <span class="landing-check-icon" aria-hidden="true">&#x2713;</span>
+                        <span>Filter by State, LGA, verified ratings, and pricing</span>
+                    </li>
+                    <li class="landing-checklist-item">
+                        <span class="landing-check-icon" aria-hidden="true">&#x2713;</span>
+                        <span>Send voice notes and chat directly with your barber</span>
+                    </li>
+                    <li class="landing-checklist-item">
+                        <span class="landing-check-icon" aria-hidden="true">&#x2713;</span>
+                        <span>Exact prices &amp; durations upfront &mdash; zero surprise costs</span>
+                    </li>
+                </ul>
+                <div class="landing-usecase-action">
+                    <a href="/explore" class="landing-cta-pill">Find a Barber Near You</a>
+                </div>
+            </div>
+            <div class="landing-usecase-media" aria-hidden="true">
+                <div class="landing-card-preview client-card">
+                    <div class="landing-card-header">
+                        <span class="landing-card-badge">VERIFIED PRO</span>
+                        <span class="landing-card-rating">&#9733; 4.9 (128 reviews)</span>
+                    </div>
+                    <div class="landing-card-body">
+                        <div class="client-avatar-preview">
+                            <span class="avatar-initials">TC</span>
+                            <div class="avatar-details">
+                                <span class="provider-name">Tariq Cuts</span>
+                                <span class="provider-location">Victoria Island, Lagos</span>
+                            </div>
+                        </div>
+                        <div class="style-highlight-box">
+                            <div class="style-tag">Signature Cut &middot; Low Skin Fade</div>
+                            <div class="style-meta">
+                                <span class="style-price">&#8358;5,000</span>
+                                <span class="style-time">45 mins</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="landing-card-footer">
+                        <span class="client-status-indicator"></span>
+                        <span>Instant Confirmation &middot; Walk-in or Reserve</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 02 (For Barbers & Hair Stylists) -->
+    <section class="landing-usecase landing-usecase-provider" aria-labelledby="provider-usecase-title">
+        <div class="landing-usecase-container alternate">
+            <div class="landing-usecase-media" aria-hidden="true">
+                <div class="landing-card-preview provider-card">
+                    <div class="landing-card-header">
+                        <span class="landing-card-badge badge-provider">BARBER &amp; SALON PRO</span>
+                        <span class="landing-card-stat">94% Booked This Week</span>
+                    </div>
+                    <div class="landing-card-body">
+                        <div class="provider-metrics-grid">
+                            <div class="metric-box">
+                                <span class="metric-value">18</span>
+                                <span class="metric-label">Bookings Today</span>
+                            </div>
+                            <div class="metric-box">
+                                <span class="metric-value">&#8358;142k</span>
+                                <span class="metric-label">Weekly Volume</span>
+                            </div>
+                        </div>
+                        <div class="provider-schedule-preview">
+                            <div class="schedule-row">
+                                <span class="schedule-time">10:00 AM</span>
+                                <span class="schedule-client">Chidi O. &middot; Classic Beard Sculpt</span>
+                                <span class="schedule-status confirmed">Confirmed</span>
+                            </div>
+                            <div class="schedule-row">
+                                <span class="schedule-time">11:15 AM</span>
+                                <span class="schedule-client">Amina B. &middot; Silk Press &amp; Trim</span>
+                                <span class="schedule-status confirmed">Confirmed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="landing-card-footer">
+                        <span class="provider-perk">Web Push &amp; WhatsApp Alerts Active</span>
+                    </div>
+                </div>
+            </div>
+            <div class="landing-usecase-content">
+                <span class="landing-usecase-eyebrow">USE CASE, 02 &middot; FOR PROVIDERS</span>
+                <h2 id="provider-usecase-title" class="landing-usecase-heading">FILL YOUR CHAIRS &amp; GROW YOUR SHOP</h2>
+                <p class="landing-usecase-subtitle">Everything you need to manage bookings, showcase your portfolio, and sell products.</p>
+                <ul class="landing-checklist" role="list">
+                    <li class="landing-checklist-item">
+                        <span class="landing-check-icon" aria-hidden="true">&#x2713;</span>
+                        <span>Set your weekly schedule, break times, and time-off</span>
+                    </li>
+                    <li class="landing-checklist-item">
+                        <span class="landing-check-icon" aria-hidden="true">&#x2713;</span>
+                        <span>Showcase your hairstyle catalogue and accept client bookings</span>
+                    </li>
+                    <li class="landing-checklist-item">
+                        <span class="landing-check-icon" aria-hidden="true">&#x2713;</span>
+                        <span>Sell grooming products with in-store order fulfillment</span>
+                    </li>
+                    <li class="landing-checklist-item">
+                        <span class="landing-check-icon" aria-hidden="true">&#x2713;</span>
+                        <span>In-app notifications and Web Push alerts for new appointments</span>
+                    </li>
+                </ul>
+                <div class="landing-usecase-action">
+                    <a href="/barber/register" class="landing-cta-pill secondary">List Your Business</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Conversion Card -->
+    <section class="landing-conversion" aria-labelledby="conversion-title">
+        <div class="landing-conversion-card">
+            <h2 id="conversion-title" class="landing-conversion-heading">YOUR NEXT LOOK IS ONE TAP AWAY</h2>
+            <p class="landing-conversion-subtitle">Join thousands of clients and professional barbers across Nigeria.</p>
+            <div class="landing-conversion-actions">
+                <a href="/explore" class="landing-cta-pill">Find a Barber</a>
+                {{if .CustomerSignedIn}}<a href="/customer/dashboard" class="landing-cta-pill secondary">Go to Dashboard</a>{{else if .BarberSignedIn}}<a href="/barber/dashboard" class="landing-cta-pill secondary">Barber Home</a>{{else}}<a href="/customer/register" class="landing-cta-pill secondary">Create Free Account</a>{{end}}
+            </div>
         </div>
     </section>
 </main>
