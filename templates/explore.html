@@ -32,6 +32,8 @@
 <section class="search-section location-panel" aria-labelledby="location-title">
 <div class="location-copy"><span class="step-number">01</span><div><p class="eyebrow">Start with your location</p><h2 id="location-title">Where do you need a barber or hair stylist?</h2><p>Tell us your state and, if you want, narrow it down to your LGA or area council.</p></div></div>
 <form class="location-form ui-form" method="get" action="/explore">
+{{if .SelectedCategory}}<input type="hidden" name="category" value="{{.SelectedCategory}}">{{end}}
+{{if .SelectedRating}}<input type="hidden" name="rating" value="{{.SelectedRating}}">{{end}}
 <div class="location-field ui-field"><label for="state">State</label>{{template "geography-state" .SelectedState}}</div>
 <div class="location-field ui-field"><label for="area">LGA / area council <span>Optional</span></label>{{template "geography-discovery-area" .}}</div>
 <button class="book-button find-submit ui-control" type="submit">Find Barbers &amp; Stylists <span aria-hidden="true">→</span></button>
@@ -52,27 +54,38 @@
 <section class="barbers-section" aria-labelledby="results-title">
 <div class="section-heading"><div><p class="eyebrow"><span></span> 02 · Results</p><h2 id="results-title">{{if .SelectedArea}}Barbers &amp; hair stylists in {{.SelectedArea}}, {{.SelectedState}}{{else}}Barbers &amp; hair stylists in {{.SelectedState}}{{end}}</h2></div><span class="barber-count">{{.Total}} found</span></div>
 <p class="discovery-count">{{.Total}} active shops in this location. Up to 24 shops per page.</p>
+<nav class="discovery-filters" aria-label="Filter results">
+<div class="filter-group" aria-label="Category"><span class="filter-name">Category</span>
+<a class="filter-chip{{if eq .SelectedCategory ""}} active{{end}}" href="{{discoveryCardPath "/explore" 0 .SelectedState .SelectedArea 0 0 "" "" .SelectedRating}}"{{if eq .SelectedCategory ""}} aria-current="page"{{end}}>All</a>
+<a class="filter-chip{{if eq .SelectedCategory "barber"}} active{{end}}" href="{{discoveryCardPath "/explore" 0 .SelectedState .SelectedArea 0 0 "" "barber" .SelectedRating}}"{{if eq .SelectedCategory "barber"}} aria-current="page"{{end}}>Barbers</a>
+<a class="filter-chip{{if eq .SelectedCategory "hairstylist"}} active{{end}}" href="{{discoveryCardPath "/explore" 0 .SelectedState .SelectedArea 0 0 "" "hairstylist" .SelectedRating}}"{{if eq .SelectedCategory "hairstylist"}} aria-current="page"{{end}}>Hair stylists</a>
+</div>
+<div class="filter-group" aria-label="Rating"><span class="filter-name">Rating</span>
+<a class="filter-chip{{if eq .SelectedRating ""}} active{{end}}" href="{{discoveryCardPath "/explore" 0 .SelectedState .SelectedArea 0 0 "" .SelectedCategory ""}}"{{if eq .SelectedRating ""}} aria-current="page"{{end}}>Any</a>
+<a class="filter-chip{{if eq .SelectedRating "4"}} active{{end}}" href="{{discoveryCardPath "/explore" 0 .SelectedState .SelectedArea 0 0 "" .SelectedCategory "4"}}"{{if eq .SelectedRating "4"}} aria-current="page"{{end}}>★ 4+ reviewed</a>
+</div>
+</nav>
 {{if .Items}}
 <div class="barber-grid">
 {{range .Items}}
 <article class="barber-card">
-<a class="barber-image" href="{{discoveryCardPath "/explore" .ID $.SelectedState $.SelectedArea $.Pagination.After $.Pagination.Before}}">{{if .ProfileImage}}<img src="{{.ProfileImage}}" alt="{{.ShopName}}" loading="lazy" srcset="{{imageSrcset .ProfileImage}}" sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px" width="640" height="480" decoding="async">{{else if .PersonalImage}}<img src="{{.PersonalImage}}" alt="{{.FullName}}" loading="lazy" srcset="{{imageSrcset .PersonalImage}}" sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px" width="640" height="480" decoding="async">{{else}}<span class="image-placeholder">OG's</span>{{end}}<span class="view-cue">View profile ↗</span></a>
+<a class="barber-image" href="{{discoveryCardPath "/explore" .ID $.SelectedState $.SelectedArea $.Pagination.After $.Pagination.Before "" $.SelectedCategory $.SelectedRating}}">{{if .ProfileImage}}<img src="{{.ProfileImage}}" alt="{{.ShopName}}" loading="lazy" srcset="{{imageSrcset .ProfileImage}}" sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px" width="640" height="480" decoding="async">{{else if .PersonalImage}}<img src="{{.PersonalImage}}" alt="{{.FullName}}" loading="lazy" srcset="{{imageSrcset .PersonalImage}}" sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px" width="640" height="480" decoding="async">{{else}}<span class="image-placeholder">OG's</span>{{end}}<span class="view-cue">View profile ↗</span>{{if .Hairstyles}}<span class="image-price">Services from {{naira .FromPrice}}</span>{{end}}</a>
 <div class="barber-information">
-<div class="card-topline"><p class="card-label">BARBER / STYLIST</p>{{if .ReviewCount}}<span class="rating-badge">★ {{printf "%.1f" .Rating}}</span>{{else}}<span class="new-badge">New</span>{{end}}</div>
-<h3><a href="{{discoveryCardPath "/explore" .ID $.SelectedState $.SelectedArea $.Pagination.After $.Pagination.Before}}">{{.ShopName}}</a></h3>
+<div class="card-topline"><p class="card-label">{{.ProviderLabel}}</p>{{if .ReviewCount}}<span class="rating-badge">★ {{printf "%.1f" .Rating}} · {{.ReviewCount}} reviews</span>{{else}}<span class="new-badge">New</span>{{end}}</div>
+<h3><a href="{{discoveryCardPath "/explore" .ID $.SelectedState $.SelectedArea $.Pagination.After $.Pagination.Before "" $.SelectedCategory $.SelectedRating}}">{{.ShopName}}</a></h3>
 <p class="barber-name">with {{.FullName}}</p>
 <div class="barber-location"><span class="location-icon" aria-hidden="true">⌖</span><span>{{if .ShopAddress}}{{.ShopAddress}}<br>{{end}}<strong>{{.LocalArea}}, {{.State}}</strong></span></div>
 <div class="barber-details"><div class="detail-item"><strong>{{.Hairstyles}}</strong><span>Services</span></div><div class="detail-divider"></div><div class="detail-item">{{if .Hairstyles}}<strong>{{naira .FromPrice}}</strong><span>Starting price</span>{{else}}<strong>—</strong><span>Prices coming soon</span>{{end}}</div>{{if .ReviewCount}}<div class="detail-divider"></div><div class="detail-item"><strong>{{.ReviewCount}}</strong><span>Reviews</span></div>{{end}}</div>
 <div class="barber-actions ui-actions">
-<a class="book-button" href="{{discoveryCardPath "/explore" .ID $.SelectedState $.SelectedArea $.Pagination.After $.Pagination.Before}}">See handwork & prices <span aria-hidden="true">→</span></a>
-<button type="button" class="barber-share-btn ui-control" data-share data-share-title="{{.ShopName}} on OG's Salon" data-share-text="Discover {{.ShopName}} in {{.LocalArea}}, {{.State}} on OG's Salon" data-share-url="{{discoveryCardPath "/explore" .ID $.SelectedState $.SelectedArea $.Pagination.After $.Pagination.Before}}" aria-label="Share {{.ShopName}}"><span aria-hidden="true">↗</span> Share</button>
+<a class="book-button" href="{{discoveryCardPath "/explore" .ID $.SelectedState $.SelectedArea $.Pagination.After $.Pagination.Before "" $.SelectedCategory $.SelectedRating}}">See handwork & prices <span aria-hidden="true">→</span></a>
+<button type="button" class="barber-share-btn ui-control" data-share data-share-title="{{.ShopName}} on OG's Salon" data-share-text="Discover {{.ShopName}} in {{.LocalArea}}, {{.State}} on OG's Salon" data-share-url="{{discoveryCardPath "/explore" .ID $.SelectedState $.SelectedArea $.Pagination.After $.Pagination.Before "" $.SelectedCategory $.SelectedRating}}" aria-label="Share {{.ShopName}}"><span aria-hidden="true">↗</span> Share</button>
 </div>
 </div>
 </article>
 {{end}}
 </div>
 {{else}}
-<div class="empty-state"><div class="empty-icon">OG's</div><p class="eyebrow">No match yet</p><h2>No registered barber or hair stylist matched that location.</h2><p>Try searching the whole state, or choose another LGA/area council.</p><a class="back-button" href="/explore?state={{urlquery .SelectedState}}">Search whole state</a></div>
+<div class="empty-state"><div class="empty-icon">OG's</div><p class="eyebrow">No match yet</p><h2>No shops matched these choices.</h2><p>Try the whole state, clear the filters, or browse a nearby popular location.</p><div class="empty-recommendations"><a class="back-button" href="/explore?state={{urlquery .SelectedState}}">Search whole state</a><a class="filter-chip" href="{{discoveryCardPath "/explore" 0 .SelectedState .SelectedArea 0 0}}">Clear filters</a><a class="filter-chip" href="/explore?state=Lagos">Browse Lagos</a><a class="filter-chip" href="/explore?state=FCT">Browse Abuja</a></div></div>
 {{end}}
 </section>
 {{else}}

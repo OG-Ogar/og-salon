@@ -66,6 +66,14 @@ func checkDiscoveryPages(t *testing.T) {
 	if b := one.Items[0]; b.Hairstyles != 2 || b.FromPrice != 500 || b.ReviewCount != 2 || b.Rating != 4 || b.PasswordHash != "" || b.Email != "" || b.PhoneNumber != "" {
 		t.Fatalf("incorrect or private summary %+v", b)
 	}
+	rated, err := DiscoveryPageResult(ctx, DiscoveryFilter{StateID: "NG025", AreaID: "NG025011", MinRating: 4})
+	if err != nil || rated.Total != 1 || len(rated.Items) != 1 || rated.Items[0].ID != first.ID {
+		t.Fatalf("rating filter lost reviewed shop %+v %v", rated, err)
+	}
+	stylists, err := DiscoveryPageResult(ctx, DiscoveryFilter{StateID: "NG025", AreaID: "NG025011", Category: models.ProviderHairstylist})
+	if err != nil || stylists.Total != 0 {
+		t.Fatalf("category filter included barbers %+v %v", stylists, err)
+	}
 	filter.After = one.Items[23].ID
 	two, err := DiscoveryPageResult(ctx, filter)
 	if err != nil || len(two.Items) != 2 || !two.HasPrevious || two.HasNext {
@@ -101,7 +109,7 @@ func checkDiscoveryPages(t *testing.T) {
 	if err != nil || whole.Total != 28 {
 		t.Fatalf("whole state lost unknown legacy area %+v %v", whole, err)
 	}
-	for _, bad := range []DiscoveryFilter{{StateID: "bad"}, {StateID: "Lagos", AreaID: "Abuja Municipal"}, {StateID: "Lagos", After: 1, Before: 1}, {StateID: "Lagos", Limit: 49}, {StateID: "Lagos", After: -1}} {
+	for _, bad := range []DiscoveryFilter{{StateID: "bad"}, {StateID: "Lagos", AreaID: "Abuja Municipal"}, {StateID: "Lagos", After: 1, Before: 1}, {StateID: "Lagos", Limit: 49}, {StateID: "Lagos", After: -1}, {StateID: "Lagos", Category: "anything"}, {StateID: "Lagos", MinRating: 5}} {
 		if _, err := DiscoveryPageResult(ctx, bad); !errors.Is(err, ErrInvalidDiscoveryFilter) {
 			t.Fatalf("invalid filter accepted %+v %v", bad, err)
 		}

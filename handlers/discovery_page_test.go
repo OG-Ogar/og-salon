@@ -71,3 +71,29 @@ func TestDiscoveryPagingAndReturns(t *testing.T) {
 		t.Fatal("profile return lost current page")
 	}
 }
+
+func TestPublicDiscoveryFilterLinks(t *testing.T) {
+	storage.Reset()
+	t.Cleanup(storage.Reset)
+	_, err := storage.CreateBarber(models.Barber{Email: "filter-barber@example.com", ShopName: "Barber Shop", State: "Lagos", LocalArea: "Ikeja", ProviderType: models.ProviderBarber})
+	if err != nil {
+		t.Fatal(err)
+	}
+	_, err = storage.CreateBarber(models.Barber{Email: "filter-stylist@example.com", ShopName: "Stylist Shop", State: "Lagos", LocalArea: "Ikeja", ProviderType: models.ProviderHairstylist})
+	if err != nil {
+		t.Fatal(err)
+	}
+	rec := httptest.NewRecorder()
+	ExploreBarbersHandler(rec, httptest.NewRequest(http.MethodGet, "/explore?state=Lagos&area=Ikeja&category=hairstylist", nil))
+	body := rec.Body.String()
+	if rec.Code != http.StatusOK || !strings.Contains(body, "Stylist Shop") || strings.Contains(body, "Barber Shop") || !strings.Contains(body, "rating=4") || !strings.Contains(body, "Hair stylists") {
+		t.Fatalf("public category filter: status=%d body=%s", rec.Code, body)
+	}
+	for _, query := range []string{"category=unknown", "rating=5"} {
+		rec = httptest.NewRecorder()
+		ExploreBarbersHandler(rec, httptest.NewRequest(http.MethodGet, "/explore?state=Lagos&"+query, nil))
+		if rec.Code != http.StatusBadRequest {
+			t.Fatalf("accepted invalid filter %s", query)
+		}
+	}
+}

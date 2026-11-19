@@ -51,7 +51,7 @@ func (c *discoveryConn) QueryContext(_ context.Context, query string, args []dri
 	if len(args) != 3 || args[2].Value != int64(25) {
 		return nil, errors.New("card query was not bounded")
 	}
-	values := []driver.Value{int64(1), "Barber", "Shop", "Address", "Lagos", "Ikeja", "", "", "Active", int64(2), float64(500), float64(4), int64(2)}
+	values := []driver.Value{int64(1), "Barber", "Shop", "Address", "Lagos", "Ikeja", "", "", "barber", "Active", int64(2), float64(500), float64(4), int64(2)}
 	if c.state.badScan {
 		values[0] = "invalid id"
 	}

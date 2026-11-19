@@ -18,6 +18,8 @@ var ErrInvalidDiscoveryFilter = errors.New("invalid discovery filter")
 
 type DiscoveryFilter struct {
 	StateID, AreaID, Query string
+	Category               string
+	MinRating              int
 	After, Before, Limit   int
 }
 type DiscoveryBarber struct {
@@ -49,6 +51,14 @@ func discoveryStatements(filter DiscoveryFilter) (string, []any, string, []any) 
 		args = append(args, "%"+likeEscaper.Replace(filter.Query)+"%")
 		where += fmt.Sprintf(" and (b.full_name ilike $%d escape '\\' or b.shop_name ilike $%d escape '\\')", len(args), len(args))
 	}
+	if filter.Category != "" {
+		args = append(args, filter.Category)
+		where += fmt.Sprintf(" and b.provider_type=$%d", len(args))
+	}
+	if filter.MinRating > 0 {
+		args = append(args, filter.MinRating)
+		where += fmt.Sprintf(" and exists (select 1 from public.reviews rated where rated.barber_id=b.id group by rated.barber_id having avg(rated.rating)>=$%d)", len(args))
+	}
 	count := "select count(*) from public.barbers b where " + where
 	countArgs := append([]any(nil), args...)
 	direction := "asc"
@@ -63,7 +73,7 @@ func discoveryStatements(filter DiscoveryFilter) (string, []any, string, []any) 
 	}
 	args = append(args, filter.Limit+1)
 	query := fmt.Sprintf(`with page as materialized (
- select b.id,b.full_name,b.shop_name,b.shop_address,b.state,b.local_area,b.profile_image,b.personal_image,b.status
+ select b.id,b.full_name,b.shop_name,b.shop_address,b.state,b.local_area,b.profile_image,b.personal_image,b.provider_type,b.status
  from public.barbers b where %s order by b.id %s limit $%d
  ), services as (
  select h.barber_id,count(*) as total,min(h.price) as from_price from public.hairstyles h
@@ -72,7 +82,7 @@ func discoveryStatements(filter DiscoveryFilter) (string, []any, string, []any) 
  select r.barber_id,avg(r.rating) as rating,count(*) as total from public.reviews r
  join page p on p.id=r.barber_id group by r.barber_id
  )
- select p.id,p.full_name,p.shop_name,p.shop_address,p.state,p.local_area,p.profile_image,p.personal_image,p.status,
+ select p.id,p.full_name,p.shop_name,p.shop_address,p.state,p.local_area,p.profile_image,p.personal_image,p.provider_type,p.status,
  coalesce(s.total,0),coalesce(s.from_price,0),coalesce(r.rating,0),coalesce(r.total,0)
  from page p left join services s on s.barber_id=p.id left join ratings r on r.barber_id=p.id
  order by p.id %s`, where, direction, len(args), direction)
@@ -90,7 +100,7 @@ func DiscoveryPageResult(ctx context.Context, filter DiscoveryFilter) (Discovery
 	if filter.Limit == 0 {
 		filter.Limit = DiscoveryPageSize
 	}
-	if filter.Limit < 1 || filter.Limit > maxDiscoveryPageSize || filter.After < 0 || filter.Before < 0 || (filter.After > 0 && filter.Before > 0) {
+	if filter.Limit < 1 || filter.Limit > maxDiscoveryPageSize || filter.After < 0 || filter.Before < 0 || (filter.After > 0 && filter.Before > 0) || (filter.Category != "" && filter.Category != models.ProviderBarber && filter.Category != models.ProviderHairstylist) || (filter.MinRating != 0 && filter.MinRating != 4) {
 		return DiscoveryPage{}, ErrInvalidDiscoveryFilter
 	}
 	filter.Query = strings.TrimSpace(filter.Query)
@@ -126,7 +136,7 @@ func DiscoveryPageResult(ctx context.Context, filter DiscoveryFilter) (Discovery
 		}
 		items, err := queryRecords(ctx, query, func(rows *sql.Rows) (DiscoveryBarber, error) {
 			var b DiscoveryBarber
-			err := rows.Scan(&b.ID, &b.FullName, &b.ShopName, &b.ShopAddress, &b.State, &b.LocalArea, &b.ProfileImage, &b.PersonalImage, &b.Status, &b.Hairstyles, &b.FromPrice, &b.Rating, &b.ReviewCount)
+			err := rows.Scan(&b.ID, &b.FullName, &b.ShopName, &b.ShopAddress, &b.State, &b.LocalArea, &b.ProfileImage, &b.PersonalImage, &b.ProviderType, &b.Status, &b.Hairstyles, &b.FromPrice, &b.Rating, &b.ReviewCount)
 			return b, err
 		}, args...)
 		if err != nil {
@@ -136,10 +146,28 @@ func DiscoveryPageResult(ctx context.Context, filter DiscoveryFilter) (Discovery
 	} else {
 		mu.RLock()
 		defer mu.RUnlock()
+		ratings := map[int]struct{ total, count int }{}
+		if filter.MinRating > 0 {
+			for _, review := range reviews {
+				value := ratings[review.BarberID]
+				value.total += review.Rating
+				value.count++
+				ratings[review.BarberID] = value
+			}
+		}
 		for _, b := range barbers {
 			s, ok := geography.FindState(b.State)
 			if !b.IsActive() {
 				continue
+			}
+			if filter.Category != "" && models.NormalizeProviderType(b.ProviderType) != filter.Category {
+				continue
+			}
+			if filter.MinRating > 0 {
+				rating := ratings[b.ID]
+				if rating.count == 0 || rating.total < filter.MinRating*rating.count {
+					continue
+				}
 			}
 			if filter.StateID != "" && (!ok || s.ID != filter.StateID) {
 				continue
