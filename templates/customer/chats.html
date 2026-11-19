@@ -9,25 +9,21 @@
 
     <script src="/static/theme-switch.js"></script>
     <link rel="stylesheet" href="/static/app.css">
-
     <script src="/static/app.js" defer></script>
 
-    
-
-<link rel="stylesheet" href="/static/messages.css">
-<link rel="stylesheet" href="/static/ui.css">
-<link rel="stylesheet" href="/static/theme.css">
-<link rel="stylesheet" href="/static/image-viewer.css">
-<script src="/static/image-viewer.js" defer></script>
+    <link rel="stylesheet" href="/static/messages.css">
+    <link rel="stylesheet" href="/static/customer-messages.css">
+    <link rel="stylesheet" href="/static/ui.css">
+    <link rel="stylesheet" href="/static/theme.css">
+    <link rel="stylesheet" href="/static/image-viewer.css">
+    <script src="/static/image-viewer.js" defer></script>
 </head>
 
-
-<body class="modern-customer-page messaging-page chats-index-page">
+<body class="modern-customer-page messaging-page chats-index-page customer-chats-index-page">
 
 <main class="customer-messages-page ui-page">
 
     <div class="customer-messages">
-
 
         <!-- =================================================
              HEADER
@@ -35,21 +31,14 @@
 
         {{template "role-header" (navigation "customer" "chats" .)}}
 
-
-
         <!-- =================================================
              TITLE
              ================================================= -->
 
         <section class="messages-title-box">
-
-            <h1>
-                Chats
-            </h1>
-
+            <h1>Chats</h1>
+            <p class="messages-subheading">Direct messages with your barbers and stylists</p>
         </section>
-
-
 
         <!-- =================================================
              CHATS
@@ -68,7 +57,6 @@
                         class="chat-row"
                         href="/customer/chats/{{.BarberID}}"
                     >
-
 
                         <!-- PHOTO -->
 
@@ -95,8 +83,6 @@
 
                         </span>
 
-
-
                         <!-- NAME + LAST MESSAGE -->
 
                         <span class="chat-row-body">
@@ -113,12 +99,25 @@
 
                             </span>
 
-                            <span class="chat-row-message">
-                                {{.LastText}}
+                            {{if .Detail}}
+                                <span class="chat-row-shop">
+                                    {{.Detail}}
+                                </span>
+                            {{end}}
+
+                            <span class="chat-row-bottom">
+                                <span class="chat-row-message">
+                                    {{if .LastText}}{{.LastText}}{{else}}<span class="chat-row-empty-text">Photo, voice note or video attachment</span>{{end}}
+                                </span>
+
+                                {{if gt .Count 0}}
+                                    <span class="chat-row-unread" aria-label="{{.Count}} messages">
+                                        {{.Count}}
+                                    </span>
+                                {{end}}
                             </span>
 
                         </span>
-
 
                     </a>
 
@@ -151,7 +150,6 @@
             </div>
 
         {{end}}
-
 
     </div>
 
