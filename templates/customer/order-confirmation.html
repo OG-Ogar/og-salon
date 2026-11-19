@@ -67,8 +67,8 @@
             </strong>
         </p>
 
-        <div style="margin-top:1rem;display:flex;gap:10px;flex-wrap:wrap;">
-            <button type="button" class="action-btn share-trigger ui-control" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:1px solid var(--border,#355348);background:var(--surface,#193129);color:var(--ink,#f8f5e9);" data-share-title="Order #{{.Order.ID}} on OG's Salon" data-share-text="My order #{{.Order.ID}} on OG's Salon is confirmed!" data-share-url="/customer/order-confirmation/{{.Order.ID}}">
+        <div class="order-actions">
+            <button type="button" class="order-share-btn share-trigger" data-share data-share-title="Order #{{.Order.ID}} on OG's Salon" data-share-text="My order #{{.Order.ID}} on OG's Salon is confirmed!" data-share-url="/customer/order-confirmation/{{.Order.ID}}">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                 Share Order
             </button>

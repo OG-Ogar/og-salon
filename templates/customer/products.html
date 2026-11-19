@@ -41,10 +41,14 @@
             sold by barbers and stylists.
         </p>
 
+        {{if .SellerName}}
+            <p class="products-heading-action">
+                <a class="cart-continue-button" href="/customer/products">Browse all products</a>
+            </p>
+        {{end}}
+
     </div>
 
-
-    {{if .SellerName}}<p><a class="cart-continue-button" href="/customer/products">Browse all products</a></p>{{end}}
 
     {{if .Products}}
 
