@@ -36,12 +36,32 @@
         <h1>
             My Bookings
         </h1>
-{{template "booking-filter" .Group}}
 
         <p class="bookings-description">
             Keep track of your appointments, their status and
             your previous visits.
         </p>
+
+        <nav class="booking-tabs" aria-label="Appointment filters">
+
+            <a class="booking-tab{{if or (eq .Group "") (eq .Group "all")}} is-active{{end}}"
+               href="?group=all"{{if or (eq .Group "") (eq .Group "all")}} aria-current="page"{{end}}>All</a>
+
+            <a class="booking-tab{{if eq .Group "pending"}} is-active{{end}}"
+               href="?group=pending"{{if eq .Group "pending"}} aria-current="page"{{end}}>Pending</a>
+
+            <a class="booking-tab{{if eq .Group "upcoming"}} is-active{{end}}"
+               href="?group=upcoming"{{if eq .Group "upcoming"}} aria-current="page"{{end}}>Upcoming</a>
+
+            <a class="booking-tab{{if eq .Group "followup"}} is-active{{end}}"
+               href="?group=followup"{{if eq .Group "followup"}} aria-current="page"{{end}}>Needs follow-up</a>
+
+            <a class="booking-tab{{if eq .Group "finished"}} is-active{{end}}"
+               href="?group=finished"{{if eq .Group "finished"}} aria-current="page"{{end}}>Finished</a>
+
+        </nav>
+
+{{template "booking-filter" .Group}}
 
     </div>
 
@@ -81,7 +101,7 @@
 
             {{range .Upcoming}}
 
-                <article class="booking-card">
+                <article class="booking-card appointment-card">
 
                     <div class="booking-card-main">
 
@@ -110,7 +130,7 @@
                                     {{.HairstyleName}}
                                 </h3>
 
-                                <p>
+                                <p class="service-duration">
                                     {{.Duration}} min
                                 </p>
 
@@ -121,15 +141,20 @@
 
                         <div class="booking-details">
 
-                            <div class="booking-detail">
+                            <div class="booking-detail booking-detail-barber">
 
                                 <span>
                                     Barber / Stylist
                                 </span>
 
-                                <strong>
-                                    {{.BarberName}}
-                                </strong>
+                                <div class="barber-avatar-chip">
+                                    <span class="barber-avatar" aria-hidden="true">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    </span>
+                                    <strong>
+                                        {{.BarberName}}
+                                    </strong>
+                                </div>
 
                             </div>
 
@@ -163,7 +188,8 @@
                                     Time
                                 </span>
 
-                                <strong>
+                                <strong class="time-chip">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                                     {{.Time}}
                                 </strong>
 
@@ -176,7 +202,7 @@
 
                     <div class="booking-card-footer">
 
-                        <div class="booking-price">
+                        <div class="booking-price price-badge">
 
                             <span>
                                 Price
@@ -189,11 +215,13 @@
                         </div>
 
 
-                        {{template "domain-status" (domainStatus "booking" .Status)}}
+                        <span class="status-wrap status">
+                            {{template "domain-status" (domainStatus "booking" .Status)}}
+                        </span>
 
 
-                        <button type="button" class="action-btn share-trigger ui-control" style="padding:0.4rem 0.8rem;font-size:0.78rem;display:inline-flex;align-items:center;gap:5px;border-radius:8px;border:1px solid var(--border,#355348);background:var(--surface,#193129);color:var(--ink,#f8f5e9);cursor:pointer;" data-share-title="Haircut appointment at {{.ShopName}}" data-share-text="I booked {{.HairstyleName}} at {{.ShopName}} on {{.Date}} at {{.Time}} via OG's Salon!" data-share-url="/customer/bookings">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                        <button type="button" class="share-button share-trigger" data-share data-share-title="Haircut appointment at {{.ShopName}}" data-share-text="I booked {{.HairstyleName}} at {{.ShopName}} on {{.Date}} at {{.Time}} via OG's Salon!" data-share-url="/customer/bookings">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                             Share
                         </button>
 
@@ -211,7 +239,7 @@
                             >
 
                             <button
-                                class="cancel-button ui-control"
+                                class="cancel-button"
                                 type="submit"
                             >
                                 Cancel booking
@@ -279,7 +307,7 @@
 
             {{range .Past}}
 
-                <article class="booking-card finished-card">
+                <article class="booking-card finished-card appointment-card">
 
                     <div class="booking-card-main">
 
@@ -308,7 +336,7 @@
                                     {{.HairstyleName}}
                                 </h3>
 
-                                <p>
+                                <p class="service-duration">
                                     {{.Duration}} min
                                 </p>
 
@@ -319,14 +347,31 @@
 
                         <div class="booking-details">
 
-                            <div class="booking-detail">
+                            <div class="booking-detail booking-detail-barber">
 
                                 <span>
                                     Barber / Stylist
                                 </span>
 
+                                <div class="barber-avatar-chip">
+                                    <span class="barber-avatar" aria-hidden="true">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    </span>
+                                    <strong>
+                                        {{.BarberName}}
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                            <div class="booking-detail">
+
+                                <span>
+                                    Shop
+                                </span>
+
                                 <strong>
-                                    {{.BarberName}}
+                                    {{.ShopName}}
                                 </strong>
 
                             </div>
@@ -349,7 +394,8 @@
                                     Time
                                 </span>
 
-                                <strong>
+                                <strong class="time-chip">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                                     {{.Time}}
                                 </strong>
 
@@ -362,7 +408,7 @@
 
                     <div class="booking-card-footer">
 
-                        <div class="booking-price">
+                        <div class="booking-price price-badge">
 
                             <span>
                                 Price
@@ -375,7 +421,9 @@
                         </div>
 
 
-                        {{template "domain-status" (domainStatus "booking" .Status)}}
+                        <span class="status-wrap status">
+                            {{template "domain-status" (domainStatus "booking" .Status)}}
+                        </span>
 
                     </div>
 
@@ -393,13 +441,13 @@
     <h2 id="follow-up-heading">Needs follow-up</h2>
     <p>These open appointments have reached their start time or their recorded time needs checking. Contact your barber or stylist to confirm the outcome. They are not automatically marked as no-shows.</p>
     {{range .FollowUp}}
-    <article class="booking-card">
+    <article class="booking-card appointment-card">
         <h3>{{.HairstyleName}} with {{.BarberName}}</h3>
         <p>{{.Date}} at {{.Time}} {{.BookingTimezone}} · {{template "domain-status" (domainStatus "booking" .Status)}}</p>
         <a href="/customer/chats/{{.BarberID}}">Message barber / stylist</a>
         <form method="post" action="{{$.ActionURL}}{{.ID}}/cancel" class="ui-form">
             <input type="hidden" name="csrf_token" value="{{$.CSRF}}">
-            <button type="submit" class="ui-control">Cancel appointment</button>
+            <button type="submit" class="ui-control cancel-button">Cancel appointment</button>
         </form>
     </article>
     {{end}}
