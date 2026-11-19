@@ -6,13 +6,22 @@
 <link rel="stylesheet" href="/static/app.css">
 <link rel="stylesheet" href="/static/ui.css">
 <link rel="stylesheet" href="/static/theme.css">
+<link rel="stylesheet" href="/static/public-content.css">
 <script src="/static/app.js" defer></script></head>
-<body class="modern-role-page">
-<header class="site-header"><a class="site-brand" href="/" aria-label="OG's Salon home"><span class="site-brand-mark" aria-hidden="true">OG's</span><span class="site-brand-copy"><span class="site-brand-name">OG's Salon</span><span class="site-brand-tag">Barber and hair stylist booking made simple</span></span></a><nav class="site-navigation" aria-label="Public navigation"><a href="/explore">Find a Barber</a><a href="/explore">Find a Hair Stylist</a><a href="/customer/dashboard">Client home</a><a href="/barber/dashboard">Barber home</a><a href="/hairstylist/login">Hair Stylist login</a></nav></header>
-<main class="public-content-card ui-page"><h1>{{.Title}}</h1>
+<body class="modern-role-page public-content-page">
+<header class="site-header">
+<div class="site-header-inner">
+<a class="site-brand" href="/" aria-label="OG's Salon home"><span class="site-brand-mark" aria-hidden="true"><svg class="brand-monogram" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5" stroke-width="2" stroke="currentColor" stroke-opacity="0.85"/><path d="M15.5 8.5A5.2 5.2 0 1 0 16.8 14H12" stroke-width="2.4" stroke="currentColor"/></svg></span><span class="site-brand-copy"><span class="site-brand-name">OG's Salon</span><span class="site-brand-tag">Grooming and styling made simple</span></span></a>
+<nav class="site-navigation" aria-label="Public navigation"><a href="/explore">Find a Barber</a><a href="/explore">Find a Hair Stylist</a><a href="/customer/dashboard">Client home</a><a href="/barber/dashboard">Barber home</a><a href="/hairstylist/login">Hair Stylist login</a></nav>
+</div>
+</header>
+<main class="public-content-main">
+<article class="public-content-card ui-page">
+{{if eq .Kind "help"}}<p class="content-eyebrow">Knowledge Base &amp; FAQ</p>{{else if eq .Kind "support"}}<p class="content-eyebrow">Customer Care &amp; Assistance</p>{{else}}<p class="content-eyebrow">Legal &amp; Trust Policies</p>{{end}}
+<h1>{{.Title}}</h1>
 {{if .Placeholder}}<p class="content-placeholder"><strong>Placeholder — awaiting approved content.</strong></p>{{end}}
 {{if eq .Kind "help"}}
-<p>These quick steps describe the current app. The full help center is pending.</p>
+<p class="content-lead">These quick steps describe the current app. The full help center is pending.</p>
 <div class="faq-accordion" aria-label="Frequently asked questions">
 <details class="faq-item" open><summary class="faq-summary">Find and book a barber</summary><div class="faq-content"><p><a href="/explore">Choose your state/FCT and optional LGA or area council</a>, open a barber’s profile, and choose a service. Sign in as a client to select a date and an available time, then submit your appointment request. Check My Bookings for its status.</p></div></details>
 <details class="faq-item"><summary class="faq-summary">Messages</summary><div class="faq-content"><p>Open Messages from your home. Send a message or use Refresh conversation to see new replies.</p></div></details>
@@ -20,12 +29,19 @@
 <details class="faq-item"><summary class="faq-summary">Account recovery</summary><div class="faq-content"><p>Use Forgot password on your role’s sign-in page. If recovery is unavailable or your email does not arrive, <a href="/support">contact support</a>.</p></div></details>
 </div>
 {{else if eq .Kind "support"}}
-<p>Call OG's Salon support using either number below.</p><ul class="support-contacts"><li><a href="tel:+2348128162561">08128162561</a></li><li><a href="tel:+2349164226427">09164226427</a></li></ul><p>For a question about an appointment or shop, signed-in clients can use Messages to contact their barber. This is a shop conversation, not a support desk.</p><p><a href="/help">Read the app’s quick help</a></p>
+<p class="content-lead">Call OG's Salon support using either number below.</p>
+<ul class="support-contacts"><li><a href="tel:+2348128162561">08128162561</a></li><li><a href="tel:+2349164226427">09164226427</a></li></ul>
+<div class="support-context-box">
+<p>For a question about an appointment or shop, signed-in clients can use Messages to contact their barber. This is a shop conversation, not a support desk.</p>
+</div>
+<p><a class="support-help-link" href="/help">Read the app’s quick help</a></p>
 {{else if eq .Kind "privacy"}}
-<p>The approved privacy notice will appear here. This placeholder does not describe or establish the site’s privacy policy.</p>
+<p class="content-lead">The approved privacy notice will appear here. This placeholder does not describe or establish the site’s privacy policy.</p>
 {{else if eq .Kind "terms"}}
-<p>The approved terms of use will appear here. This placeholder does not establish terms or ask you to accept an agreement.</p>
+<p class="content-lead">The approved terms of use will appear here. This placeholder does not establish terms or ask you to accept an agreement.</p>
 {{end}}
-<p><a href="/">Return home</a></p></main>
+<p class="return-home-row"><a class="return-home-link" href="/">Return home</a></p>
+</article>
+</main>
 {{template "public-footer" .}}
 </body></html>

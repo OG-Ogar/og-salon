@@ -11,15 +11,21 @@
 <script src="/static/app.js" defer></script>
 </head>
 <body class="modern-customer-page">
-<main class="ui-page" style="width:min(100% - 32px,560px);margin:4rem auto;">
-  <section class="ui-panel" style="padding:clamp(1.5rem,5vw,2.5rem);text-align:center;border-radius:18px;">
-    <div style="display:grid;place-items:center;width:120px;height:120px;margin:0 auto 1.25rem;overflow:hidden;border:3px solid var(--signal,#f4cb78);border-radius:50%;background:var(--surface-hi,#254137);color:var(--signal,#f4cb78);font-size:2.5rem;font-weight:850;">
+<header class="site-header">
+<div class="site-header-inner">
+<a class="site-brand" href="/" aria-label="OG's Salon home"><span class="site-brand-mark" aria-hidden="true"><svg class="brand-monogram" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5" stroke-width="2" stroke="currentColor" stroke-opacity="0.85"/><path d="M15.5 8.5A5.2 5.2 0 1 0 16.8 14H12" stroke-width="2.4" stroke="currentColor"/></svg></span><span class="site-brand-copy"><span class="site-brand-name">OG's Salon</span><span class="site-brand-tag">Grooming and styling made simple</span></span></a>
+<nav class="site-navigation" aria-label="Public navigation"><a href="/explore">Find a Barber</a><a href="/explore">Find a Hair Stylist</a><a href="/customer/login">Client Login</a></nav>
+</div>
+</header>
+<main class="ui-page" style="width:min(100% - 32px,560px);margin:3.5rem auto 5rem;">
+  <section class="ui-panel" style="padding:clamp(1.75rem,5vw,2.75rem);text-align:center;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.15);border:1px solid rgba(var(--border-hi-rgb),.45);">
+    <div style="display:grid;place-items:center;width:120px;height:120px;margin:0 auto 1.25rem;overflow:hidden;border:3px solid var(--signal,#f4cb78);border-radius:50%;background:rgba(var(--signal-rgb),.1);color:var(--signal);font-size:2.5rem;font-weight:850;">
       {{if .Image}}<img src="{{.Image}}" alt="Profile photo of {{.Name}}" srcset="{{imageSrcset .Image}}" sizes="120px" width="120" height="120" style="width:100%;height:100%;object-fit:cover;">{{else}}{{printf "%.1s" .Name}}{{end}}
     </div>
 
     <p class="eyebrow" style="margin:0 0 .4rem;">OG's Salon community</p>
-    <h1 style="margin:0 0 1rem;">{{.Name}}</h1>
-    <p style="margin:0 auto 1.5rem;max-width:36ch;color:var(--ink-muted,#c2d4c7);line-height:1.6;">
+    <h1 style="margin:0 0 1rem;font-size:clamp(1.75rem,4vw,2.25rem);font-weight:850;letter-spacing:-.03em;">{{.Name}}</h1>
+    <p style="margin:0 auto 1.5rem;max-width:36ch;color:var(--ink-muted);line-height:1.6;">
       This is a client profile from the OG's Salon community feed. Contact details stay private.
     </p>
 

@@ -467,9 +467,12 @@ var journeyErrorTemplate = template.Must(template.New("journey-error").Parse(`<!
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{{.Title}} - OG's Salon</title><link rel="stylesheet" href="/static/app.css"></head>
 <body class="modern-role-page"><main class="journey-error-card">
-<a href="/">OG's Salon</a><p>{{.Status}}</p><h1>{{.Title}}</h1><p role="alert">{{.Message}}</p>
-<p>You can return to your workspace or sign in again to continue.</p>
-<nav aria-label="Recovery options"><a href="/customer/dashboard">Customer home</a><a href="/barber/dashboard">Barber home</a><a href="/explore">Find a Barber</a><a href="/">Home</a></nav>
+<div class="journey-error-brand"><a class="error-brand-link" href="/" aria-label="OG's Salon home"><span class="site-brand-mark" aria-hidden="true"><svg class="brand-monogram" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5" stroke-width="2" stroke="currentColor" stroke-opacity="0.85"/><path d="M15.5 8.5A5.2 5.2 0 1 0 16.8 14H12" stroke-width="2.4" stroke="currentColor"/></svg></span><span>OG's Salon</span></a></div>
+<span class="error-code-badge">{{.Status}}</span>
+<h1>{{.Title}}</h1>
+<p class="error-alert-msg" role="alert">{{.Message}}</p>
+<p class="error-guidance">You can return to your workspace or sign in again to continue.</p>
+<nav class="recovery-nav" aria-label="Recovery options"><a href="/customer/dashboard">Customer home</a><a href="/barber/dashboard">Barber home</a><a href="/explore">Find a Barber</a><a href="/" class="primary-home-link">Home</a></nav>
 </main></body></html>`))
 
 func journeyError(w http.ResponseWriter, message string, status int) {
