@@ -16,14 +16,30 @@
 {{template "role-header" (navigation "customer" "orders" .)}}
 
 <main class="products-page ui-page">
-    <p class="eyebrow">Your purchases</p>
-    <h1 id="orders">My Orders</h1>
-    <p>Review your product purchases and order status.</p>
-    {{template "list-pagination" .Pagination}}
+
+    <div class="products-heading">
+
+        <p class="eyebrow">
+            Your purchases
+        </p>
+
+        <h1 id="orders">
+            My Orders
+        </h1>
+
+        <p>
+            Review your product purchases and their collection status.
+        </p>
+
+    </div>
+
     {{if .ProductOrders}}
-        <div class="appointment-list">
+
+        <div class="appointment-list order-list">
+
             {{range .ProductOrders}}
-                <article class="appointment-card">
+
+                <article class="appointment-card order-card">
                     <div class="appointment-date">
                         <span>Order #{{.ID}}</span>
                         <strong>{{.CreatedAt.Format "02 Jan 2006"}}</strong>
@@ -37,15 +53,23 @@
                         <a class="section-link" href="/customer/order-confirmation/{{.ID}}">View order</a>
                     </div>
                 </article>
+
             {{end}}
+
         </div>
+
+        {{template "list-pagination" .Pagination}}
+
     {{else}}
+
         <section class="ui-panel">
             <h2>No product orders yet</h2>
             <p>Browse products from barbers and stylists to make your first purchase.</p>
             <a class="ui-control" href="/customer/products">Browse products</a>
         </section>
+
     {{end}}
+
 </main>
 
 {{template "public-footer" .}}
