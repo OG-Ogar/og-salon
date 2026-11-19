@@ -68,11 +68,57 @@ linear-gradient(180deg,var(--void) 0%,var(--base) 48%,var(--void) 100%)}
 .empty-state{margin-top:20px;padding:60px 28px;border:1px solid rgba(var(--border-hi-rgb),.42);border-radius:var(--panel-radius);background:rgba(var(--surface-rgb),.38);text-align:center}.empty-icon{display:grid;place-items:center;width:58px;height:58px;margin:0 auto 20px;border:1px solid rgba(var(--signal-rgb),.35);border-radius:14px;color:var(--signal);font-weight:900}.empty-state .eyebrow{justify-content:center}.empty-state h2{margin:0;color:var(--ink,#0c1524);font-size:1.65rem}.empty-state p:not(.eyebrow){max-width:480px;margin:12px auto 22px;color:var(--ink-faint);line-height:1.6}
 @media(max-width:960px){.barber-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.location-form{grid-template-columns:1fr 1fr}.find-submit{grid-column:1/-1}}
 @media(max-width:680px){
-.barber-header,.barber-main{width:calc(100% - 32px)}.barber-header{padding:15px 0}.brand-mark{width:38px;height:38px}.brand-subtitle{display:none}.barber-header{flex-wrap:wrap}.customer-navigation{flex-wrap:wrap;width:100%}.nav-box{min-height:44px;padding:0 11px;font-size:.74rem}
-.barber-main{padding:52px 0 60px}.page-intro h1{font-size:clamp(3rem,14vw,4.4rem)}.intro-text{font-size:.95rem;line-height:1.6}.discovery-trust-stats{gap:1rem 1.75rem;margin-top:1.25rem}.location-panel{margin-top:34px;padding:20px}.location-copy{gap:12px}.location-form{grid-template-columns:1fr}.find-submit{grid-column:auto;width:100%}
-.discovery-guide{grid-template-columns:1fr}.barbers-section{margin-top:48px}.section-heading{align-items:flex-start;flex-direction:column}.barber-grid{grid-template-columns:1fr}.barber-image{height:260px}
+.barber-header,.barber-main{width:calc(100% - 28px)}
+.barber-header{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 0}
+.brand-mark{width:36px;height:36px;border-radius:10px}
+.brand-title{font-size:1.05rem}
+.brand-subtitle{display:none}
+.customer-navigation{display:flex;align-items:center;gap:6px;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none;flex-wrap:nowrap;padding:2px 0;max-width:100%}
+.customer-navigation::-webkit-scrollbar{display:none}
+.nav-box{flex-shrink:0;min-height:40px;padding:0 12px;font-size:.76rem;border-radius:9999px}
+.barber-main{padding:28px 0 52px}
+.page-intro{text-align:left}
+.page-intro h1{font-size:clamp(1.75rem,6.5vw,2.3rem);line-height:1.15;letter-spacing:-.035em;margin:0 0 10px}
+.intro-text{font-size:.9rem;line-height:1.52;margin:8px 0 0}
+.discovery-trust-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 14px;margin-top:1.15rem;padding:12px 14px;border-radius:14px;background:rgba(var(--surface-rgb),.4);border:1px solid rgba(var(--border-hi-rgb),.35)}
+.trust-item{padding:0}
+.trust-number{font-size:1.35rem;font-weight:900}
+.trust-label{font-size:.7rem;letter-spacing:.05em}
+.location-panel{margin-top:22px;padding:16px 14px;border-radius:16px}
+.location-copy{gap:10px}
+.step-number{width:32px;height:32px;font-size:.82rem;border-radius:8px}
+.location-copy h2{font-size:1.18rem}
+.location-copy p{font-size:.8rem;line-height:1.45}
+.location-form{grid-template-columns:1fr;gap:12px;margin-top:14px}
+.form-field label{font-size:.72rem;margin-bottom:6px}
+.form-field select,.form-field input{min-height:48px;border-radius:10px;font-size:.9rem}
+.find-submit{grid-column:auto;width:100%;min-height:48px;font-size:.92rem;border-radius:10px}
+.discovery-quick-filters{gap:6px;padding:10px 0 2px;margin-top:12px}
+.quick-chip{min-height:44px;padding:.4rem .85rem;font-size:.76rem}
+.discovery-guide{grid-template-columns:1fr;margin-top:24px}
+.barbers-section{margin-top:34px}
+.section-heading{align-items:flex-start;flex-direction:column;gap:6px}
+.section-heading h2{font-size:1.3rem}
+.barber-grid{grid-template-columns:1fr;gap:18px}
+.barber-card{border-radius:16px;overflow:hidden}
+.barber-image{height:220px}
+.barber-information{padding:16px}
+.barber-name{font-size:1.15rem}
+.barber-shop{font-size:.84rem}
+.barber-details{display:flex;flex-wrap:wrap;gap:6px 10px;margin:10px 0;padding:8px 0;font-size:.74rem}
+.barber-actions{display:flex;gap:8px;margin-top:14px;width:100%}
+.book-button{flex:1;min-height:48px;font-size:.88rem;border-radius:10px}
+.barber-share-btn{width:48px;min-height:48px;flex-shrink:0;border-radius:10px}
 }
-@media(max-width:380px){.barber-header,.barber-main{width:calc(100% - 26px)}.brand-title{font-size:1rem}.page-intro h1{font-size:2.8rem}.discovery-trust-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.875rem}.location-panel{padding:16px}.barber-image{height:230px}.barber-information{padding:17px}}
+@media(max-width:380px){
+.barber-header,.barber-main{width:calc(100% - 20px)}
+.brand-title{font-size:.98rem}
+.page-intro h1{font-size:1.65rem}
+.discovery-trust-stats{gap:8px 10px;padding:10px 12px}
+.location-panel{padding:14px 12px}
+.barber-image{height:190px}
+.barber-information{padding:14px}
+}
 @media(prefers-reduced-motion:reduce){.nav-box,.book-button,.back-button,.barber-card,.barber-image img{transition:none!important}}
 @media(prefers-reduced-transparency:reduce){.location-panel,.barber-card,.discovery-guide>div,.view-cue{backdrop-filter:none;background:var(--surface)}}
 

@@ -266,33 +266,67 @@ body{font-family:var(--font,Inter,ui-sans-serif,system-ui,sans-serif)}
 }
 
 @media(max-width:680px){
-  .barber-header,.barber-main{width:calc(100% - 32px)}
-  .barber-header{padding:15px 0}
-  .brand-mark{width:38px;height:38px}
+  .barber-header,.barber-main{width:calc(100% - 28px)}
+  .barber-header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0}
+  .brand-mark{width:36px;height:36px;border-radius:10px}
+  .brand-title{font-size:1.05rem}
   .brand-subtitle{display:none}
-  .nav-box:first-child{display:none}
-  .nav-box{min-height:40px;padding:0 11px;font-size:.74rem}
-  .barber-main{padding:24px 0 60px}
-  .shop-jumpbar{justify-content:flex-start;overflow-x:auto;margin-top:16px}
-  .hairstyles-section{margin-top:44px}
+  .customer-navigation{display:flex;align-items:center;gap:6px;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .customer-navigation::-webkit-scrollbar{display:none}
+  .nav-box{flex-shrink:0;min-height:40px;padding:0 12px;font-size:.76rem;border-radius:9999px}
+  .barber-main{padding:20px 0 60px}
+  .back-link{font-size:.78rem;margin-bottom:14px}
+  .shop-hero-cover{height:clamp(180px,42vw,240px)}
+  .hero-cover-badges{top:12px;right:12px}
+  .schedule-badge{padding:4px 10px;font-size:.68rem}
+  .shop-hero-body{padding:0 14px 20px}
+  .hero-avatar-anchor{margin-top:-44px;margin-bottom:10px}
+  .barber-avatar-wrap{width:82px;height:82px}
+  .hero-avatar{width:82px;height:82px;border-width:3px}
+  .avatar-verified-mark{width:22px;height:22px;font-size:.72rem}
+  .shop-hero-body h1{font-size:clamp(1.65rem,6.5vw,2.25rem);line-height:1.1;letter-spacing:-.035em;word-break:break-word;overflow-wrap:break-word}
+  .barber-identity{flex-wrap:wrap;gap:4px 8px;margin-top:8px}
+  .barber-address{font-size:.82rem;margin-top:10px}
+  .directions-pill{min-height:44px;padding:.4rem .9rem;font-size:.74rem}
+  .shop-jumpbar{justify-content:flex-start;overflow-x:auto;margin-top:14px;gap:6px;padding:4px 0 8px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .shop-jumpbar::-webkit-scrollbar{display:none}
+  .jump-pill{min-height:44px;padding:.4rem .85rem;font-size:.76rem;flex-shrink:0}
+  .hairstyles-section,.products-section,.reviews-section{margin-top:32px}
+  .section-title h2{font-size:1.3rem}
+  .public-style-card{border-radius:14px;overflow:hidden}
+  .style-media-frame{height:180px}
+  .style-content-body{padding:12px 14px}
+  .service-title{font-size:1rem}
+  .service-price-chip{font-size:.95rem}
+  .service-select-btn{min-height:44px;font-size:.82rem}
 }
 
 @media(max-width:580px){
   .public-style-grid,
-  .public-product-grid{grid-template-columns:1fr}
-  .barber-actions{display:grid;grid-template-columns:1fr;width:100%}
-  .book-button,.message-button,.share-profile-button{width:100%}
-  .shop-final-cta{padding:28px 20px}
+  .public-product-grid{grid-template-columns:1fr;gap:14px}
+  .barber-actions{display:grid;grid-template-columns:1fr;width:100%;gap:8px}
+  .book-button,.message-button,.share-profile-button{width:100%;min-height:48px}
+  .shop-final-cta{padding:24px 16px;border-radius:16px}
   .shop-trust-row{width:100%}
 }
 
 @media(max-width:520px){
-  .hairstyle-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .hairstyle-card .style-info,.hairstyle-card .style-price{padding-inline:12px}
+  .hairstyle-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .hairstyle-card .style-info,.hairstyle-card .style-price{padding-inline:10px}
 }
 
 @media(max-width:420px){
   .hairstyle-grid{grid-template-columns:1fr}
+  .mobile-sticky-action-bar{padding:10px 14px;padding-bottom:max(10px,env(safe-area-inset-bottom))}
+  .sticky-shop-name{font-size:.88rem}
+  .sticky-book-btn{min-height:44px;padding:0 16px;font-size:.8rem}
+}
+
+@media(max-width:360px){
+  .barber-header,.barber-main{width:calc(100% - 20px)}
+  .brand-title{font-size:.98rem}
+  .shop-hero-body{padding:0 12px 18px}
+  .shop-hero-body h1{font-size:1.55rem}
 }
 
 /* Reduced Motion & Transparency */
