@@ -1,45 +1,236 @@
-*{box-sizing:border-box}html,body{margin:0;min-height:100%}body{font-family:var(--font,Inter,ui-sans-serif,system-ui,sans-serif)}
-.public-profile-page{min-width:320px;background:var(--void,#ffffff);color:var(--ink,#0c1524)}
-.barber-page{min-height:100vh;background:radial-gradient(circle at 85% 5%,rgba(var(--signal-rgb),.08),transparent 24%),linear-gradient(180deg,var(--void),var(--base) 52%,var(--void))}
-.barber-header{display:flex;align-items:center;justify-content:space-between;gap:24px;width:min(100% - 48px,1180px);margin:auto;padding:24px 0;border-bottom:1px solid rgba(var(--ink-muted-rgb),.15)}
-.brand-box{display:flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none}.brand-mark{display:grid;place-items:center;width:42px;height:42px;border:1px solid rgba(var(--signal-rgb),.5);border-radius:12px;background:var(--surface);color:var(--signal);font-size:.72rem;font-weight:900}.brand-box>span:last-child{display:flex;flex-direction:column;gap:4px}.brand-title{font-size:1.12rem;font-weight:850}.brand-subtitle{color:var(--ink-faint);font-size:.64rem;font-weight:750;letter-spacing:.11em;text-transform:uppercase}
-.customer-navigation{display:flex;gap:10px}.nav-box{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid rgba(var(--ink-muted-rgb),.23);border-radius:var(--control-radius);background:rgba(var(--surface-rgb),.48);color:var(--ink-muted);font-size:.82rem;font-weight:800;text-decoration:none}.nav-primary{border-color:var(--signal);background:var(--signal);color:var(--signal-ink)}
-.barber-main{width:min(100% - 48px,1180px);margin:auto;padding:34px 0 90px}.back-link{display:inline-flex;margin-bottom:18px;color:var(--ink-faint);font-size:.8rem;font-weight:750;text-decoration:none}.back-link:hover{color:var(--signal)}
-.shop-hero{display:grid;grid-template-columns:minmax(300px,.8fr) minmax(0,1.2fr);overflow:hidden;border:1px solid rgba(var(--border-hi-rgb),.5);border-radius:var(--panel-radius);background:linear-gradient(145deg,rgba(var(--surface-hi-rgb),.55),rgba(var(--surface-rgb),.45));box-shadow:0 24px 60px rgba(0,0,0,.2)}
-.barber-photo{min-height:390px;background:var(--surface)}.barber-photo img{display:block;width:100%;height:100%;object-fit:cover}.photo-placeholder{display:grid;place-items:center;width:100%;height:100%;min-height:390px;color:var(--signal);font-size:2.3rem;font-weight:900;background:linear-gradient(135deg,var(--surface),var(--surface-hi))}
-.barber-details{display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,5vw,54px)}.eyebrow{display:flex;align-items:center;gap:9px;margin:0 0 9px;color:var(--signal);font-size:.66rem;font-weight:850;letter-spacing:.14em;text-transform:uppercase}.eyebrow>span{display:block;width:22px;height:1px;background:var(--signal)}
-.barber-details h1{margin:0;font-size:clamp(2.7rem,5vw,4.7rem);line-height:.95;letter-spacing:-.055em}.barber-identity{display:flex;align-items:center;gap:11px;margin-top:20px}.avatar{width:46px;height:46px;border:1px solid var(--border-hi);border-radius:50%;object-fit:cover}.avatar-placeholder{display:grid;place-items:center;background:var(--surface);color:var(--signal);font-size:.6rem;font-weight:900}.barber-identity small{display:block;margin-bottom:3px;color:var(--ink-faint);font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.barber-name{margin:0;color:var(--ink);font-size:.92rem;font-weight:750}
-.barber-address{display:flex;align-items:center;gap:8px;margin:18px 0 0;color:var(--ink-muted);font-size:.82rem;line-height:1.45}.barber-address>span{display:grid;place-items:center;flex:0 0 22px;width:22px;height:22px;border:1px solid rgba(var(--signal-rgb),.28);border-radius:6px;color:var(--signal)}
-.shop-trust-row{display:flex;align-items:center;gap:10px;margin-top:16px}.shop-trust-row strong{color:var(--signal);font-size:.82rem}.shop-trust-row small,.signin-note,.section-cta-note{color:var(--ink-faint)}.signin-note{margin:11px 0 0;font-size:.72rem}
-.barber-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}.book-button,.message-button{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 18px;border-radius:var(--control-radius);font-size:.82rem;font-weight:850;text-decoration:none}.book-button{background:var(--signal);color:var(--signal-ink)}.message-button{border:1px solid var(--border-hi);background:rgba(var(--void-rgb),.25);color:var(--ink)}
-.shop-jumpbar{position:sticky;top:8px;z-index:5;display:flex;gap:6px;width:max-content;max-width:100%;margin:18px auto 0;padding:6px;border:1px solid rgba(var(--border-hi-rgb),.5);border-radius:10px;background:rgba(var(--void-rgb),.92);backdrop-filter:blur(10px)}.shop-jumpbar a{padding:9px 13px;border-radius:7px;color:var(--ink-muted);font-size:.73rem;font-weight:800;text-decoration:none}.shop-jumpbar a:hover{background:var(--surface);color:var(--signal)}
-.hairstyles-section{margin-top:62px;scroll-margin-top:80px}.section-title{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:18px}.section-title h2{margin:0;font-size:clamp(1.7rem,3vw,2.35rem);letter-spacing:-.04em}.count{padding:7px 10px;border:1px solid rgba(var(--signal-rgb),.25);border-radius:999px;background:rgba(var(--signal-rgb),.08);color:var(--signal);font-size:.68rem;font-weight:850}
-.public-style-grid{display:grid;grid-template-columns:repeat(auto-fill,200px);justify-content:center;gap:15px}.public-style-card,.public-product-card,.public-review-card{overflow:hidden;border:1px solid rgba(var(--border-hi-rgb),.42);border-radius:var(--panel-radius);background:linear-gradient(145deg,rgba(var(--surface-hi-rgb),.46),rgba(var(--surface-rgb),.38))}.public-style-image{height:auto;aspect-ratio:4/3;background:var(--surface)}.public-style-image img{display:block;width:100%;height:100%;object-fit:cover}.public-style-copy{padding:19px}.public-style-copy h3,.public-product-card h3{margin:0;color:var(--ink);font-size:1.05rem}.public-style-copy>p:not(.eyebrow){color:var(--ink-faint);font-size:.8rem;line-height:1.55}.style-meta{display:flex;justify-content:space-between;gap:12px;margin-top:18px;padding-top:14px;border-top:1px solid rgba(var(--ink-muted-rgb),.12)}.style-meta strong,.product-price strong{color:var(--signal)}.style-meta span,.product-price span{color:var(--ink-faint);font-size:.72rem}
-.public-product-grid{display:grid;grid-template-columns:repeat(auto-fill,200px);justify-content:center;gap:13px}.public-review-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.public-product-card{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px}.product-price{text-align:right}.product-price strong,.product-price span{display:block}.product-price span{margin-top:5px}
-.public-review-card{padding:20px}.review-heading{display:flex;justify-content:space-between;gap:12px}.review-heading span{color:var(--signal);font-size:.78rem;font-weight:800}.public-review-card p{color:var(--ink-muted);font-size:.84rem;line-height:1.6}.public-review-card small{color:var(--ink-faint);font-size:.68rem;font-weight:750}
-.empty-state{grid-column:1/-1;padding:54px 24px;border:1px solid rgba(var(--border-hi-rgb),.4);border-radius:var(--panel-radius);background:rgba(var(--surface-rgb),.34);text-align:center}.empty-icon{display:grid;place-items:center;width:54px;height:54px;margin:0 auto 18px;border:1px solid rgba(var(--signal-rgb),.3);border-radius:13px;color:var(--signal);font-weight:900}.empty-state h2{margin:0}.empty-state p{margin:10px auto 0;color:var(--ink-faint)}
-.section-cta-note{font-size:.76rem}
-.shop-final-cta{position:relative;overflow:hidden;margin-top:62px;padding:clamp(28px,5vw,48px);border:1px solid rgba(var(--signal-rgb),.3);border-radius:var(--panel-radius);background:linear-gradient(135deg,var(--surface-hi),var(--surface));box-shadow:0 20px 55px rgba(0,0,0,.2)}.shop-final-cta::after{content:"";position:absolute;width:220px;height:220px;right:-100px;top:-100px;border:1px solid rgba(var(--signal-rgb),.12);border-radius:50%}.shop-final-cta h2{margin:0;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.045em}.shop-final-cta>p:not(.eyebrow){max-width:570px;color:var(--ink-muted);line-height:1.6}.shop-final-cta .barber-actions{position:relative;z-index:1}
-@media(max-width:820px){.shop-hero{grid-template-columns:1fr}.barber-photo{min-height:300px;max-height:430px}}
-@media(max-width:680px){.barber-header,.barber-main{width:calc(100% - 32px)}.barber-header{padding:15px 0}.brand-mark{width:38px;height:38px}.brand-subtitle{display:none}.nav-box:first-child{display:none}.nav-box{min-height:40px;padding:0 11px;font-size:.74rem}.barber-main{padding:24px 0 60px}.barber-photo{min-height:260px}.barber-details{padding:25px 20px}.barber-details h1{font-size:2.75rem}.barber-actions{display:grid;grid-template-columns:1fr 1fr}.shop-jumpbar{justify-content:flex-start;overflow-x:auto;margin-top:14px}.hairstyles-section{margin-top:48px}.section-title{align-items:flex-start;flex-direction:column}.public-review-list{grid-template-columns:1fr}}
-@media(max-width:520px){.barber-actions{grid-template-columns:1fr}.shop-final-cta{padding:25px 20px}.shop-trust-row{align-items:flex-start;flex-direction:column;gap:5px}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}@media(prefers-reduced-transparency:reduce){.shop-hero,.public-style-card,.public-product-card,.public-review-card,.shop-jumpbar{backdrop-filter:none;background:var(--surface)}}
-/* Keep section headings legible and image actions inside reserved media. */
-.public-profile-page :is(h2,h3){color:var(--ink)}
-.public-profile-page .barber-main{overflow-wrap:anywhere}
-.public-profile-page .public-style-card,.public-profile-page .public-product-card,.public-profile-page .public-review-card,.public-profile-page .empty-state,.public-profile-page .shop-final-cta{background:var(--surface)}
-.public-profile-page .public-style-image,.public-profile-page .barber-photo{position:relative}
-.public-profile-page .public-product-card{display:grid;grid-template-columns:1fr;gap:10px}
-.public-profile-page .public-product-card .public-style-image,.public-profile-page .public-product-card .catalogue-video,.public-profile-page .public-product-card .book-button{grid-column:1/-1}
-.public-profile-page .product-price{white-space:nowrap;text-align:left}
-.share-profile-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:50px;padding:0 18px;border:1px solid var(--border);border-radius:var(--control-radius);background:var(--surface);color:var(--ink-muted);font-size:.85rem;font-weight:700;cursor:pointer;transition:transform .15s ease,border-color .15s ease,color .15s ease}
-.share-profile-button:hover{border-color:var(--signal);color:var(--signal);transform:translateY(-2px)}
-.sticky-action-info{display:flex;flex-direction:column;gap:2px;min-width:0;text-align:left}
-.sticky-shop-name{color:var(--ink);font-size:.92rem;font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sticky-shop-loc{color:var(--ink-faint);font-size:.74rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* =========================================================
+   OG's Salon — Customer Barber Profile & Public Lookbook
+   Modern atmospheric shop hero, 1:1 Instagram portfolio,
+   product showcase, verified reviews, and sticky mobile CTA.
+   ========================================================= */
 
-/* Haircut gallery: the services a barber uploaded are shown as a grid of
-   medium cards, each with its photo, its clip and its price. */
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{font-family:var(--font,Inter,ui-sans-serif,system-ui,sans-serif)}
+
+.public-profile-page{min-width:320px;background:var(--void,#ffffff);color:var(--ink,#0c1524);--ink-faint:#475569}
+.barber-page{min-height:100vh;background:radial-gradient(circle at 85% 5%,rgba(var(--signal-rgb),.08),transparent 24%),linear-gradient(180deg,var(--void),var(--base) 52%,var(--void))}
+
+/* Site Header (Public Profile) */
+.barber-header{display:flex;align-items:center;justify-content:space-between;gap:24px;width:min(100% - 48px,1180px);margin:auto;padding:24px 0;border-bottom:1px solid rgba(var(--ink-muted-rgb),.15)}
+.brand-box{display:flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none}
+.brand-mark{display:grid;place-items:center;width:42px;height:42px;border:1px solid rgba(var(--signal-rgb),.5);border-radius:12px;background:var(--surface);color:var(--signal);font-size:.72rem;font-weight:900}
+.brand-box>span:last-child{display:flex;flex-direction:column;gap:4px}
+.brand-title{font-size:1.12rem;font-weight:850}
+.brand-subtitle{color:var(--ink-faint);font-size:.64rem;font-weight:750;letter-spacing:.11em;text-transform:uppercase}
+
+.customer-navigation{display:flex;gap:10px}
+.nav-box{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid rgba(var(--ink-muted-rgb),.23);border-radius:var(--control-radius);background:rgba(var(--surface-rgb),.48);color:var(--ink-muted);font-size:.82rem;font-weight:800;text-decoration:none;transition:border-color .15s ease,background-color .15s ease,color .15s ease}
+.nav-box:hover{border-color:var(--signal);color:var(--signal)}
+.nav-primary{border-color:var(--signal);background:var(--signal);color:var(--signal-ink)}
+.nav-primary:hover{background:var(--signal);color:var(--signal-ink);filter:brightness(1.08)}
+
+/* Main Layout */
+.barber-main{width:min(100% - 48px,1180px);margin:auto;padding:32px 0 96px;overflow-wrap:anywhere}
+.back-link{display:inline-flex;align-items:center;gap:6px;margin-bottom:20px;color:var(--ink-faint);font-size:.82rem;font-weight:750;text-decoration:none;transition:color .15s ease}
+.back-link:hover{color:var(--signal)}
+
+/* =========================================================
+   1. Atmospheric Shop Hero (theCut / Squire Benchmark)
+   ========================================================= */
+.shop-hero{position:relative;display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(var(--border-hi-rgb),.5);border-radius:var(--panel-radius,20px);background:var(--surface);box-shadow:0 24px 60px rgba(0,0,0,.18);transition:border-color .2s ease,box-shadow .2s ease}
+
+/* Shop Cover Banner */
+.shop-hero-cover{position:relative;width:100%;height:clamp(200px,30vw,340px);background:linear-gradient(135deg,var(--surface-hi),var(--surface));overflow:hidden}
+.shop-hero-cover img{display:block;width:100%;height:100%;object-fit:cover}
+.photo-placeholder{display:grid;place-items:center;width:100%;height:100%;color:var(--signal);font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,var(--surface),var(--surface-hi))}
+.hero-cover-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.62) 100%);pointer-events:none}
+.hero-cover-badges{position:absolute;top:16px;right:16px;z-index:3;display:flex;gap:8px}
+
+.schedule-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:999px;font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.schedule-badge.open{background:rgba(16,185,129,.18);border:1px solid rgba(16,185,129,.55);color:#10b981}
+.pulse-dot{width:8px;height:8px;border-radius:50%;background:#10b981;box-shadow:0 0 0 0 rgba(16,185,129,.7);animation:pulse-green 2s infinite}
+@keyframes pulse-green{0%{transform:scale(.95);box-shadow:0 0 0 0 rgba(16,185,129,.7)}70%{transform:scale(1);box-shadow:0 0 0 7px rgba(16,185,129,0)}100%{transform:scale(.95);box-shadow:0 0 0 0 rgba(16,185,129,0)}}
+
+/* Hero Details Body */
+.shop-hero-body{position:relative;display:flex;flex-direction:column;padding:0 clamp(20px,4.5vw,48px) clamp(24px,4.5vw,44px)}
+.hero-avatar-anchor{position:relative;margin-top:-52px;margin-bottom:14px;z-index:4;width:fit-content}
+.barber-avatar-wrap{position:relative;width:96px;height:96px}
+.hero-avatar{display:block;width:96px;height:96px;border-radius:50%;border:4px solid var(--surface);box-shadow:0 8px 24px rgba(0,0,0,.3);object-fit:cover;background:var(--surface-hi)}
+.hero-avatar.avatar-placeholder{display:grid;place-items:center;color:var(--signal);font-size:1.3rem;font-weight:900}
+.avatar-verified-mark{position:absolute;bottom:2px;right:2px;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--signal);color:var(--signal-ink);font-size:.8rem;font-weight:900;border:2.5px solid var(--surface);box-shadow:0 2px 8px rgba(0,0,0,.3)}
+
+.hero-content{display:flex;flex-direction:column}
+.hero-meta-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.provider-type-badge{padding:4px 11px;border-radius:999px;border:1px solid var(--border-hi);background:rgba(var(--surface-hi-rgb),.6);color:var(--ink-muted);font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.verified-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:999px;border:1px solid rgba(var(--signal-rgb),.4);background:rgba(var(--signal-rgb),.12);color:var(--signal);font-size:.7rem;font-weight:850;letter-spacing:.06em;text-transform:uppercase}
+.verified-badge .badge-icon{flex-shrink:0}
+
+.shop-hero-body h1{margin:0;font-size:clamp(2.1rem,4.5vw,3.6rem);font-weight:900;line-height:1.05;letter-spacing:-.045em;color:var(--ink)}
+
+.barber-identity{display:flex;align-items:baseline;gap:8px;margin-top:10px}
+.barber-identity small{color:var(--ink-faint);font-size:.74rem;font-weight:750;text-transform:uppercase;letter-spacing:.08em}
+.barber-name{margin:0;color:var(--ink);font-size:1rem;font-weight:800}
+
+.barber-address{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:12px 0 0;color:var(--ink-muted);font-size:.85rem;line-height:1.45}
+.loc-icon{display:grid;place-items:center;flex:0 0 24px;width:24px;height:24px;border-radius:6px;border:1px solid rgba(var(--signal-rgb),.3);background:rgba(var(--signal-rgb),.08);color:var(--signal);font-size:.85rem}
+.directions-pill{display:inline-flex;align-items:center;gap:4px;padding:3px 11px;border-radius:999px;border:1px solid var(--border-hi);background:rgba(var(--surface-hi-rgb),.6);color:var(--signal);font-size:.73rem;font-weight:800;text-decoration:none;transition:all .18s ease}
+.directions-pill:hover{background:var(--signal);color:var(--signal-ink);border-color:var(--signal)}
+
+/* Trust Row */
+.shop-trust-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:16px;padding:10px 16px;border-radius:var(--control-radius);background:rgba(var(--surface-hi-rgb),.45);border:1px solid rgba(var(--border-hi-rgb),.35);width:fit-content}
+.trust-item{display:inline-flex;align-items:center;gap:6px;font-size:.82rem}
+.trust-stars{color:var(--ink);font-weight:900;font-size:.95rem;display:inline-flex;align-items:center;gap:3px}
+.star-glyph{color:#d97706}
+.trust-count{color:var(--ink-muted);font-weight:700}
+.trust-divider{color:var(--border-hi);font-weight:900}
+.trust-item.guarantee{color:var(--ink-muted);font-size:.78rem;font-weight:750}
+.trust-item.guarantee svg{color:var(--signal);flex-shrink:0}
+
+/* Actions */
+.barber-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:24px}
+.book-button,.message-button,.share-profile-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;font-size:.84rem;font-weight:850;text-decoration:none;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease,border-color .18s ease}
+.book-button{background:var(--signal);color:var(--signal-ink);border:1px solid var(--signal);box-shadow:0 4px 16px rgba(var(--signal-rgb),.32)}
+.book-button:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(var(--signal-rgb),.45)}
+.message-button{background:rgba(var(--surface-hi-rgb),.5);color:var(--ink);border:1px solid var(--border-hi)}
+.message-button:hover{background:var(--surface-hi);border-color:var(--signal);color:var(--signal);transform:translateY(-2px)}
+.share-profile-button{background:rgba(var(--surface-hi-rgb),.5);color:var(--ink-muted);border:1px solid var(--border-hi)}
+.share-profile-button:hover{background:var(--surface-hi);border-color:var(--signal);color:var(--signal);transform:translateY(-2px)}
+.signin-note{margin:14px 0 0;color:var(--ink-faint);font-size:.75rem;line-height:1.5}
+
+/* =========================================================
+   2. Shop Jumpbar & Category Tabs
+   ========================================================= */
+.shop-jumpbar{position:sticky;top:12px;z-index:25;display:flex;align-items:center;gap:6px;width:max-content;max-width:100%;margin:24px auto 0;padding:6px;border:1px solid rgba(var(--border-hi-rgb),.55);border-radius:999px;background:rgba(var(--void-rgb),.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 8px 28px rgba(0,0,0,.16)}
+.jump-pill{padding:9px 18px;border-radius:999px;color:var(--ink-muted);font-size:.78rem;font-weight:800;text-decoration:none;transition:all .18s ease;white-space:nowrap}
+.jump-pill:hover{color:var(--ink);background:rgba(var(--surface-hi-rgb),.7)}
+.jump-pill.active,.jump-pill[aria-current="page"]{background:var(--signal);color:var(--signal-ink);box-shadow:0 2px 10px rgba(var(--signal-rgb),.35)}
+
+/* =========================================================
+   3. Instagram-Style Media Portfolio (Handwork & Services)
+   ========================================================= */
+.hairstyles-section{margin-top:58px;scroll-margin-top:80px}
+.section-title{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px}
+.section-title h2{margin:4px 0 0;font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:850;letter-spacing:-.04em;color:var(--ink)}
+.section-title-actions{display:flex;align-items:center;gap:12px}
+.count{padding:6px 14px;border:1px solid rgba(var(--signal-rgb),.35);border-radius:999px;background:rgba(var(--signal-rgb),.08);color:var(--signal);font-size:.72rem;font-weight:850;white-space:nowrap}
+
+/* Lookbook Grid (3 columns on desktop, responsive 1:1 media) */
+.public-style-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.public-style-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--border);border-radius:var(--panel-radius,16px);background:var(--surface);box-shadow:0 8px 24px rgba(0,0,0,.08);transition:transform .22s cubic-bezier(0.16,1,0.3,1),box-shadow .22s ease,border-color .22s ease}
+.public-style-card:hover{transform:translateY(-4px);border-color:rgba(var(--signal-rgb),.45);box-shadow:0 16px 36px rgba(0,0,0,.16)}
+
+/* 1:1 Instagram style media container */
+.public-style-media{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:var(--surface-hi)}
+.public-style-media img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.public-style-card:hover .public-style-media img{transform:scale(1.04)}
+
+.media-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;height:100%;background:linear-gradient(135deg,var(--surface-hi),var(--surface));color:var(--signal)}
+.placeholder-icon{font-size:2.4rem}
+.placeholder-text{font-size:.78rem;font-weight:800;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.08em}
+
+.media-category-tag{position:absolute;top:12px;left:12px;z-index:2;padding:4px 11px;border-radius:999px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);color:#ffffff;font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+
+.video-overlay-badge{position:absolute;top:12px;right:12px;z-index:2;display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);color:#ffffff;font-size:.68rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.video-overlay-badge svg{fill:#ffffff;flex-shrink:0}
+.portfolio-video{display:block;width:100%;max-height:200px;background:#000;border-radius:0}
+
+.public-style-copy{display:flex;flex-direction:column;flex:1;padding:18px 20px 20px}
+.style-header-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.duration-pill{display:inline-flex;align-items:center;gap:5px;color:var(--ink-faint);font-size:.75rem;font-weight:750}
+.style-title{margin:0 0 6px;font-size:1.15rem;font-weight:800;line-height:1.25;color:var(--ink);letter-spacing:-.02em}
+.style-description{margin:0 0 16px;color:var(--ink-muted);font-size:.82rem;line-height:1.55;flex:1}
+
+.style-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:14px;border-top:1px solid rgba(var(--border-hi-rgb),.35)}
+.style-price-block{display:flex;flex-direction:column}
+.price-caption{font-size:.68rem;font-weight:750;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em}
+.service-price{font-size:1.25rem;font-weight:900;color:var(--signal)}
+.choose-service-btn{min-height:40px;padding:0 16px;border-radius:999px;font-size:.78rem;font-weight:800;white-space:nowrap}
+
+/* =========================================================
+   4. Product Showcase Grid
+   ========================================================= */
+.public-product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.public-product-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--border);border-radius:var(--panel-radius,16px);background:var(--surface);box-shadow:0 8px 24px rgba(0,0,0,.08);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.public-product-card:hover{transform:translateY(-4px);border-color:rgba(var(--signal-rgb),.45);box-shadow:0 16px 36px rgba(0,0,0,.16)}
+
+.product-media-wrap{position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--surface-hi)}
+.product-media-wrap img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.public-product-card:hover .product-media-wrap img{transform:scale(1.04)}
+.product-placeholder{font-size:2rem}
+
+.product-category-tag{position:absolute;top:12px;left:12px;z-index:2;padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.catalogue-video{width:100%;max-height:190px;background:#000}
+
+.product-card-body{display:flex;flex-direction:column;flex:1;padding:18px 20px 20px}
+.product-status-row{margin-bottom:8px}
+.stock-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:6px;font-size:.72rem;font-weight:800}
+.stock-badge.in-stock{background:rgba(16,185,129,.14);color:#10b981}
+.stock-badge.in-stock .stock-dot{width:6px;height:6px;border-radius:50%;background:#10b981}
+.stock-badge.out-of-stock{background:rgba(239,68,68,.14);color:#ef4444}
+
+.product-title{margin:0 0 6px;font-size:1.12rem;font-weight:800;line-height:1.25;color:var(--ink);letter-spacing:-.02em}
+.product-desc{margin:0 0 16px;color:var(--ink-muted);font-size:.82rem;line-height:1.5;flex:1}
+
+.product-footer-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:14px;border-top:1px solid rgba(var(--border-hi-rgb),.35)}
+.product-price{display:flex;flex-direction:column}
+.product-amount{font-size:1.2rem;font-weight:900;color:var(--signal)}
+.section-cta-note{font-size:.78rem;color:var(--ink-faint);margin-top:14px}
+
+/* =========================================================
+   5. Verified Client Reviews Section
+   ========================================================= */
+.public-review-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.public-review-card{display:flex;flex-direction:column;padding:22px;border:1px solid var(--border);border-radius:var(--panel-radius,16px);background:var(--surface);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+
+.review-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.reviewer-info{display:flex;align-items:center;gap:10px}
+.reviewer-avatar{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:rgba(var(--signal-rgb),.15);color:var(--signal);font-size:.95rem;font-weight:900;border:1px solid rgba(var(--signal-rgb),.3)}
+.reviewer-name{display:block;font-size:.95rem;font-weight:800;color:var(--ink)}
+.verified-badge-row{display:flex;align-items:center;gap:4px;color:#10b981;font-size:.72rem;font-weight:750;margin-top:2px}
+.verified-badge-row .verify-check{flex-shrink:0}
+
+.review-rating-pill{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:999px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.4);color:#f59e0b;font-size:.78rem;font-weight:850}
+.review-comment{margin:0;color:var(--ink-muted);font-size:.86rem;line-height:1.6;flex:1}
+.review-date-row{margin-top:14px;padding-top:10px;border-top:1px solid rgba(var(--border-hi-rgb),.25)}
+.review-date{color:var(--ink-faint);font-size:.72rem;font-weight:700}
+
+/* Empty State */
+.empty-state{grid-column:1/-1;padding:54px 24px;border:1px solid rgba(var(--border-hi-rgb),.4);border-radius:var(--panel-radius);background:rgba(var(--surface-rgb),.34);text-align:center}
+.empty-icon{display:grid;place-items:center;width:54px;height:54px;margin:0 auto 18px;border:1px solid rgba(var(--signal-rgb),.3);border-radius:14px;color:var(--signal);font-size:1.4rem;font-weight:900}
+.empty-state h2{margin:0;color:var(--ink)}
+.empty-state p{margin:10px auto 0;color:var(--ink-faint);max-width:440px}
+
+/* Final CTA */
+.shop-final-cta{position:relative;overflow:hidden;margin-top:64px;padding:clamp(28px,5vw,52px);border:1px solid rgba(var(--signal-rgb),.3);border-radius:var(--panel-radius);background:linear-gradient(135deg,var(--surface-hi),var(--surface));box-shadow:0 20px 55px rgba(0,0,0,.2)}
+.shop-final-cta::after{content:"";position:absolute;width:240px;height:240px;right:-100px;top:-100px;border:1px solid rgba(var(--signal-rgb),.12);border-radius:50%}
+.shop-final-cta h2{margin:0;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.045em;color:var(--ink)}
+.shop-final-cta>p:not(.eyebrow){max-width:570px;color:var(--ink-muted);line-height:1.6}
+.shop-final-cta .barber-actions{position:relative;z-index:1}
+
+/* Eyebrow helper */
+.eyebrow{display:flex;align-items:center;gap:9px;margin:0 0 9px;color:var(--signal);font-size:.66rem;font-weight:850;letter-spacing:.14em;text-transform:uppercase}
+.eyebrow>span{display:block;width:22px;height:1px;background:var(--signal)}
+
+/* =========================================================
+   6. Mobile Sticky Action Bar (Facebook/theCut standard)
+   ========================================================= */
+.mobile-sticky-action-bar{position:fixed;bottom:0;left:0;right:0;z-index:45;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 18px;padding-bottom:max(12px,env(safe-area-inset-bottom));background:rgba(var(--void-rgb),.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border-hi);box-shadow:0 -8px 30px rgba(0,0,0,.28);transform:translateY(115%);visibility:hidden;pointer-events:none;transition:transform .26s cubic-bezier(0.16,1,0.3,1),visibility .26s ease}
+.mobile-sticky-action-bar.visible{transform:translateY(0);visibility:visible;pointer-events:auto}
+.sticky-action-info{display:flex;flex-direction:column;gap:2px;min-width:0;text-align:left}
+.sticky-shop-name{color:var(--ink);font-size:.94rem;font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sticky-shop-sub{display:flex;align-items:center;gap:4px;font-size:.74rem;color:var(--ink-faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sticky-shop-loc{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sticky-rating{color:var(--ink);font-weight:800}
+.sticky-book-btn{flex-shrink:0;min-height:42px;padding:0 20px;border-radius:999px;font-size:.82rem;font-weight:850}
+
+@media(min-width:761px){
+  .mobile-sticky-action-bar{display:none!important}
+}
+
+/* =========================================================
+   Customer / Booking Form Backward Compatibility
+   (Used by templates/customer/barber-detail.html)
+   ========================================================= */
+.hero-section{display:grid;grid-template-columns:minmax(300px,.8fr) minmax(0,1.2fr);overflow:hidden}
+.hero-section .barber-photo{min-height:390px}
+.hero-section .barber-photo img{display:block;width:100%;height:100%;object-fit:cover}
+.hero-section .barber-details{padding:clamp(28px,5vw,54px)}
 .hairstyle-list{margin:20px 0 0;padding:0;border:0}
 .hairstyle-list legend{padding:0;margin:0 0 10px;color:var(--ink);font-size:.95rem;font-weight:850}
 .hairstyle-grid{display:grid;grid-template-columns:repeat(auto-fill,180px);justify-content:center;gap:14px}
@@ -59,5 +250,60 @@
 .hairstyle-card .style-price span{padding:6px 12px;border:1px solid rgba(var(--signal-rgb),.3);border-radius:999px;color:var(--signal);font-size:.7rem;font-weight:850}
 .hairstyle-card input[type=radio]:focus-visible+label{outline:3px solid var(--signal);outline-offset:-3px}
 .hairstyle-card input[type=radio]:checked+label{box-shadow:inset 0 0 0 2px rgba(var(--signal-rgb),.55)}
-@media(max-width:520px){.hairstyle-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hairstyle-card .style-info,.hairstyle-card .style-price{padding-inline:12px}}
-@media(max-width:420px){.hairstyle-grid{grid-template-columns:1fr}}
+.hairstyle-option{border:1px solid var(--border);border-radius:var(--panel-radius);background:var(--surface)}
+.booking-form{margin-top:24px}
+
+/* Responsive Breakpoints */
+@media(max-width:960px){
+  .public-style-grid,
+  .public-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero-section{grid-template-columns:1fr}
+}
+
+@media(max-width:760px){
+  .public-review-list{grid-template-columns:1fr}
+  .section-title{align-items:flex-start;flex-direction:column}
+}
+
+@media(max-width:680px){
+  .barber-header,.barber-main{width:calc(100% - 32px)}
+  .barber-header{padding:15px 0}
+  .brand-mark{width:38px;height:38px}
+  .brand-subtitle{display:none}
+  .nav-box:first-child{display:none}
+  .nav-box{min-height:40px;padding:0 11px;font-size:.74rem}
+  .barber-main{padding:24px 0 60px}
+  .shop-jumpbar{justify-content:flex-start;overflow-x:auto;margin-top:16px}
+  .hairstyles-section{margin-top:44px}
+}
+
+@media(max-width:580px){
+  .public-style-grid,
+  .public-product-grid{grid-template-columns:1fr}
+  .barber-actions{display:grid;grid-template-columns:1fr;width:100%}
+  .book-button,.message-button,.share-profile-button{width:100%}
+  .shop-final-cta{padding:28px 20px}
+  .shop-trust-row{width:100%}
+}
+
+@media(max-width:520px){
+  .hairstyle-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hairstyle-card .style-info,.hairstyle-card .style-price{padding-inline:12px}
+}
+
+@media(max-width:420px){
+  .hairstyle-grid{grid-template-columns:1fr}
+}
+
+/* Reduced Motion & Transparency */
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important;transition:none!important}
+  .pulse-dot{animation:none!important}
+}
+@media(prefers-reduced-transparency:reduce){
+  .shop-hero,.public-style-card,.public-product-card,.public-review-card,.shop-jumpbar,.mobile-sticky-action-bar{
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    background:var(--surface);
+  }
+}
