@@ -25,6 +25,49 @@
 
     {{template "role-header" (navigation "customer" "dashboard" .)}}
 
+    <header class="customer-dashboard-hub" aria-label="Customer quick navigation">
+        <div class="hub-hero-container">
+            <div class="hub-welcome">
+                <span class="hub-eyebrow">Client Hub</span>
+                <p class="hub-greeting">Welcome back, <strong>{{if .FullName}}{{.FullName}}{{else}}Client{{end}}</strong></p>
+            </div>
+            <nav class="hub-quick-grid" aria-label="Quick actions">
+                <a class="hub-quick-card primary" href="/customer/barbers">
+                    <span class="hub-card-icon" aria-hidden="true">&#9986;</span>
+                    <span class="hub-card-info">
+                        <strong class="hub-card-title">Find a Barber / Stylist</strong>
+                        <span class="hub-card-sub">Book verified pros</span>
+                    </span>
+                    <span class="hub-card-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+                <a class="hub-quick-card" href="/customer/bookings?group=upcoming">
+                    <span class="hub-card-icon" aria-hidden="true">&#128197;</span>
+                    <span class="hub-card-info">
+                        <strong class="hub-card-title">My Bookings</strong>
+                        <span class="hub-card-sub">Appointments &amp; schedule</span>
+                    </span>
+                    <span class="hub-card-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+                <a class="hub-quick-card" href="/customer/orders">
+                    <span class="hub-card-icon" aria-hidden="true">&#128717;</span>
+                    <span class="hub-card-info">
+                        <strong class="hub-card-title">My Orders</strong>
+                        <span class="hub-card-sub">Hair care &amp; accessories</span>
+                    </span>
+                    <span class="hub-card-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+                <a class="hub-quick-card" href="/customer/chats">
+                    <span class="hub-card-icon" aria-hidden="true">&#128172;</span>
+                    <span class="hub-card-info">
+                        <strong class="hub-card-title">Chats</strong>
+                        <span class="hub-card-sub">Direct messaging</span>
+                    </span>
+                    <span class="hub-card-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
     {{template "social-feed" .Feed}}
 </div>
 
