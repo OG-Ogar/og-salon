@@ -52,7 +52,7 @@ body{font-family:var(--font,Inter,ui-sans-serif,system-ui,sans-serif)}
 .hero-avatar-anchor{position:relative;margin-top:-52px;margin-bottom:14px;z-index:4;width:fit-content}
 .barber-avatar-wrap{position:relative;width:96px;height:96px}
 .hero-avatar{display:block;width:96px;height:96px;border-radius:50%;border:4px solid var(--surface);box-shadow:0 8px 24px rgba(0,0,0,.3);object-fit:cover;background:var(--surface-hi)}
-.hero-avatar.avatar-placeholder{display:grid;place-items:center;color:var(--signal);font-size:1.3rem;font-weight:900}
+.hero-avatar.avatar-placeholder{display:grid;place-items:center;color:var(--signal);font-size:1.3rem;font-weight:900;background:radial-gradient(circle at center,rgba(var(--signal-rgb),.2),var(--surface-hi))}
 .avatar-verified-mark{position:absolute;bottom:2px;right:2px;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--signal);color:var(--signal-ink);font-size:.8rem;font-weight:900;border:2.5px solid var(--surface);box-shadow:0 2px 8px rgba(0,0,0,.3)}
 
 .hero-content{display:flex;flex-direction:column}
@@ -69,7 +69,7 @@ body{font-family:var(--font,Inter,ui-sans-serif,system-ui,sans-serif)}
 
 .barber-address{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:12px 0 0;color:var(--ink-muted);font-size:.85rem;line-height:1.45}
 .loc-icon{display:grid;place-items:center;flex:0 0 24px;width:24px;height:24px;border-radius:6px;border:1px solid rgba(var(--signal-rgb),.3);background:rgba(var(--signal-rgb),.08);color:var(--signal);font-size:.85rem}
-.directions-pill{display:inline-flex;align-items:center;gap:4px;padding:3px 11px;border-radius:999px;border:1px solid var(--border-hi);background:rgba(var(--surface-hi-rgb),.6);color:var(--signal);font-size:.73rem;font-weight:800;text-decoration:none;transition:all .18s ease}
+.directions-pill{display:inline-flex;align-items:center;gap:4px;min-height:44px;padding:0.45rem 1rem;border-radius:999px;border:1px solid var(--border-hi);background:rgba(var(--surface-hi-rgb),.6);color:var(--signal);font-size:.73rem;font-weight:800;text-decoration:none;transition:all .18s ease}
 .directions-pill:hover{background:var(--signal);color:var(--signal-ink);border-color:var(--signal)}
 
 /* Trust Row */
@@ -97,7 +97,7 @@ body{font-family:var(--font,Inter,ui-sans-serif,system-ui,sans-serif)}
    2. Shop Jumpbar & Category Tabs
    ========================================================= */
 .shop-jumpbar{position:sticky;top:12px;z-index:25;display:flex;align-items:center;gap:6px;width:max-content;max-width:100%;margin:24px auto 0;padding:6px;border:1px solid rgba(var(--border-hi-rgb),.55);border-radius:999px;background:rgba(var(--void-rgb),.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 8px 28px rgba(0,0,0,.16)}
-.jump-pill{padding:9px 18px;border-radius:999px;color:var(--ink-muted);font-size:.78rem;font-weight:800;text-decoration:none;transition:all .18s ease;white-space:nowrap}
+.jump-pill{display:inline-flex;align-items:center;min-height:44px;padding:0.45rem 1.15rem;border-radius:999px;color:var(--ink-muted);font-size:.78rem;font-weight:800;text-decoration:none;transition:all .18s ease;white-space:nowrap}
 .jump-pill:hover{color:var(--ink);background:rgba(var(--surface-hi-rgb),.7)}
 .jump-pill.active,.jump-pill[aria-current="page"]{background:var(--signal);color:var(--signal-ink);box-shadow:0 2px 10px rgba(var(--signal-rgb),.35)}
 
@@ -140,7 +140,7 @@ body{font-family:var(--font,Inter,ui-sans-serif,system-ui,sans-serif)}
 .style-price-block{display:flex;flex-direction:column}
 .price-caption{font-size:.68rem;font-weight:750;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em}
 .service-price{font-size:1.25rem;font-weight:900;color:var(--signal)}
-.choose-service-btn{min-height:40px;padding:0 16px;border-radius:999px;font-size:.78rem;font-weight:800;white-space:nowrap}
+.choose-service-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:999px;font-size:.78rem;font-weight:800;white-space:nowrap}
 
 /* =========================================================
    4. Product Showcase Grid
