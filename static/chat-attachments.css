@@ -83,10 +83,10 @@
     justify-content: center;
     box-sizing: border-box;
     padding: 0 !important;
-    border: 1px solid var(--border, #d8e0ea);
+    border: 1px solid var(--border);
     border-radius: 50%;
-    background: var(--surface, #ffffff);
-    color: var(--ink, #0c1524);
+    background: var(--surface-hi);
+    color: var(--ink);
     font-size: 1.6rem;
     line-height: 1;
     cursor: pointer;
@@ -110,20 +110,20 @@
 }
 
 .composer-mic.recording {
-    background: #c0392b;
-    border-color: #c0392b;
-    color: #fff;
+    background: var(--danger, #ef4444);
+    border-color: var(--danger, #ef4444);
+    color: var(--signal-ink, #ffffff);
     animation: rec-pulse 1s infinite;
 }
 
 @keyframes rec-pulse {
     0%,
     100% {
-        box-shadow: 0 0 0 0 rgba(192, 57, 43, 0.5);
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5);
     }
 
     50% {
-        box-shadow: 0 0 0 10px rgba(192, 57, 43, 0);
+        box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
     }
 }
 
@@ -161,8 +161,8 @@
     max-height: 52px;
     border-radius: 8px;
     overflow: hidden;
-    border: 1px solid var(--border, #d8e0ea);
-    background: #0b1f1a;
+    border: 1px solid var(--border);
+    background: var(--surface-hi);
 }
 
 .chat-composer .composer-preview[hidden] {
@@ -198,7 +198,7 @@
     padding: 1px 5px;
     border-radius: 5px;
     background: rgba(0, 0, 0, 0.72);
-    color: #fff;
+    color: var(--signal-ink, #ffffff);
     font-size: 0.55rem;
     font-weight: 800;
     letter-spacing: 0.02em;
@@ -215,14 +215,14 @@
     top: 1px;
     right: 1px;
     z-index: 3;
-    width: 20px;
-    height: 20px;
-    min-height: 20px;
+    width: 24px;
+    height: 24px;
+    min-height: 24px;
     padding: 0;
     border: 0;
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.78);
-    color: #fff;
+    color: var(--signal-ink, #ffffff);
     font-size: 0.85rem;
     line-height: 1;
     cursor: pointer;
@@ -233,7 +233,7 @@
     margin: 0;
     font-size: 0.78rem;
     line-height: 1.3;
-    color: var(--ink-muted, #b8c7c0);
+    color: var(--ink-muted);
 }
 
 .composer-status[hidden] {
@@ -241,7 +241,7 @@
 }
 
 .composer-status.error {
-    color: #ffb4a9;
+    color: var(--danger-ink, #ef4444);
 }
 
 /* Voice recording status */
@@ -251,8 +251,8 @@
     gap: 0.6rem;
     padding: 0.5rem 0.75rem;
     border-radius: 10px;
-    background: rgba(192, 57, 43, 0.15);
-    color: var(--ink, #0c1524);
+    background: var(--danger-soft, rgba(239, 68, 68, 0.15));
+    color: var(--ink);
     font-size: 0.9rem;
 }
 
@@ -265,7 +265,7 @@
     height: 10px;
     flex: 0 0 10px;
     border-radius: 50%;
-    background: #e74c3c;
+    background: var(--danger, #ef4444);
     animation: rec-pulse 1s infinite;
 }
 
@@ -310,33 +310,36 @@
 .chat-audio-download {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
 
-    min-height: 32px;
+    min-height: 44px;
 
     margin-top: 6px;
-    padding: 0 10px;
+    padding: 8px 16px;
 
-    border: 1px solid var(--border-hi, #9fb0c4);
+    border: 1px solid var(--border-hi);
     border-radius: 999px;
 
     background: rgba(var(--surface-rgb), 0.6);
-    color: var(--ink, #0c1524);
+    color: var(--ink);
 
-    font-size: 0.7rem;
+    font-size: 0.74rem;
     font-weight: 800;
 
     text-decoration: none;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 .chat-audio-download:hover {
-    border-color: var(--signal, #142034);
-    color: var(--signal, #142034);
+    border-color: var(--signal);
+    color: var(--signal);
+    background: var(--surface);
 }
 
 .chat-audio-warning {
     margin: 6px 0 0;
 
-    color: var(--ink-faint, #68778d);
+    color: var(--ink-faint);
     font-size: 0.72rem;
     line-height: 1.45;
 }
