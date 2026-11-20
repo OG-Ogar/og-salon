@@ -16,6 +16,59 @@
 <body class="barber-page modern-role-page modern-barber-page">
 {{template "role-header" (navigation "barber" "dashboard" .)}}
 
+<header class="barber-dashboard-hub" aria-label="Provider operations quick navigation">
+    <div class="barber-hub-container">
+        <div class="barber-hub-welcome">
+            <div class="barber-hub-avatar-wrap">
+                {{if .PersonalImage}}
+                    <img class="barber-hub-avatar" src="{{.PersonalImage}}" alt="Profile photo of {{.FullName}}" width="48" height="48" loading="lazy" decoding="async">
+                {{else}}
+                    <span class="barber-hub-avatar-placeholder" aria-hidden="true">&#9986;</span>
+                {{end}}
+            </div>
+            <div>
+                <span class="barber-hub-eyebrow">Provider Workspace</span>
+                <p class="barber-hub-greeting">Welcome back, <strong>{{if .FullName}}{{.FullName}}{{else}}Barber{{end}}</strong></p>
+                {{if .ShopName}}<span class="barber-hub-shop">{{.ShopName}}</span>{{end}}
+            </div>
+        </div>
+        <nav class="barber-hub-quick-grid" aria-label="Provider quick actions">
+            <a class="barber-hub-quick-card highlighted" href="/barber/bookings">
+                <span class="barber-hub-card-icon" aria-hidden="true">&#128197;</span>
+                <span class="barber-hub-card-info">
+                    <strong class="barber-hub-card-title">Bookings &amp; Requests</strong>
+                    <span class="barber-hub-card-sub">Appointments &amp; client schedule</span>
+                </span>
+                <span class="barber-hub-card-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+            <a class="barber-hub-quick-card" href="/barber/schedule">
+                <span class="barber-hub-card-icon" aria-hidden="true">&#9200;</span>
+                <span class="barber-hub-card-info">
+                    <strong class="barber-hub-card-title">Operating Schedule</strong>
+                    <span class="barber-hub-card-sub">Weekly hours &amp; availability</span>
+                </span>
+                <span class="barber-hub-card-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+            <a class="barber-hub-quick-card" href="/barber/hairstyles">
+                <span class="barber-hub-card-icon" aria-hidden="true">&#9986;</span>
+                <span class="barber-hub-card-info">
+                    <strong class="barber-hub-card-title">Hairstyle Catalog</strong>
+                    <span class="barber-hub-card-sub">Service menu &amp; pricing</span>
+                </span>
+                <span class="barber-hub-card-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+            <a class="barber-hub-quick-card" href="/barber/orders">
+                <span class="barber-hub-card-icon" aria-hidden="true">&#128717;</span>
+                <span class="barber-hub-card-info">
+                    <strong class="barber-hub-card-title">Product Orders</strong>
+                    <span class="barber-hub-card-sub">Retail stock &amp; order fulfillment</span>
+                </span>
+                <span class="barber-hub-card-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+        </nav>
+    </div>
+</header>
+
 {{template "social-feed" .Feed}}
 
 {{template "public-footer" .}}
