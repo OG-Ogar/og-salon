@@ -8,10 +8,10 @@
 
     <script src="/static/theme-switch.js"></script>
     <link rel="stylesheet" href="/static/app.css">
-    <link rel="stylesheet" href="/static/customer-profile.css">
-    <link rel="stylesheet" href="/static/image-viewer.css">
     <link rel="stylesheet" href="/static/ui.css">
     <link rel="stylesheet" href="/static/theme.css">
+    <link rel="stylesheet" href="/static/customer-profile.css">
+    <link rel="stylesheet" href="/static/image-viewer.css">
 
     <script src="/static/app.js" defer></script>
     <script src="/static/image-viewer.js" defer></script>
@@ -21,74 +21,122 @@
 
 {{template "role-header" (navigation "customer" "profile" .)}}
 
-<main class="customer-profile-page ui-page">
-
-    <div class="customer-profile-card ui-panel" style="overflow:hidden;border-radius:18px;">
-
-        <div class="customer-profile-banner" style="height:120px;background:linear-gradient(135deg,rgba(244,203,120,.22),rgba(16,34,29,.95));position:relative;"></div>
-
-        <div class="customer-profile-photo" style="margin-top:-55px;position:relative;z-index:2;margin-left:24px;">
-
-            {{if .Customer.ProfileImage}}
-               <img
-            class="fullscreen-image"
-            src="{{.Customer.ProfileImage}}"
-            alt="{{.Customer.FullName}}"
-            data-fullscreen-image
-            style="border:4px solid var(--surface,#193129);border-radius:50%;width:110px;height:110px;object-fit:cover;"
-         srcset="{{imageSrcset .Customer.ProfileImage}}" sizes="110px" width="110" height="110" loading="lazy" decoding="async">
-            {{else}}
-                <div class="customer-profile-placeholder" style="border:4px solid var(--surface,#193129);border-radius:50%;width:110px;height:110px;display:grid;place-items:center;background:var(--surface-hi,#254137);color:var(--signal,#f4cb78);font-size:2.2rem;font-weight:800;">
-                    {{printf "%.1s" .Customer.FullName}}
-                </div>
-            {{end}}
-
-        </div>
-
-        <div class="customer-profile-info" style="padding:1.5rem;">
-
-            <p class="customer-profile-label eyebrow">
-                Client Profile
-            </p>
-
-            <h1>{{.Customer.FullName}}</h1>
-
-            <div class="customer-details">
-
-                <div>
-                    <span>Phone</span>
-                    <strong>{{.Customer.PhoneNumber}}</strong>
-                </div>
-
-                <div>
-                    <span>Email</span>
-                    <strong>{{.Customer.Email}}</strong>
-                </div>
-
+<main class="customer-profile-page" id="main-content">
+    <div class="customer-profile-container">
+        <!-- Profile Hero Card with Banner & Avatar -->
+        <article class="customer-profile-card">
+            <div class="customer-profile-banner" aria-hidden="true">
+                <div class="profile-banner-pattern"></div>
             </div>
 
-            <div class="customer-profile-actions ui-actions">
+            <div class="customer-profile-header">
+                <div class="customer-profile-photo">
+                    {{if .Customer.ProfileImage}}
+                        <img
+                            class="fullscreen-image profile-avatar-img"
+                            src="{{.Customer.ProfileImage}}"
+                            alt="{{.Customer.FullName}}"
+                            data-fullscreen-image
+                            srcset="{{imageSrcset .Customer.ProfileImage}}"
+                            sizes="110px"
+                            width="110"
+                            height="110"
+                            loading="eager"
+                            decoding="async">
+                    {{else}}
+                        <div class="customer-profile-placeholder" aria-label="{{.Customer.FullName}}">
+                            {{printf "%.1s" .Customer.FullName}}
+                        </div>
+                    {{end}}
+                </div>
 
-                <a
-                    class="customer-primary-button ui-control"
-                    href="/customer/profile/edit"
-                >
-                    Edit Profile
-                </a>
-
-                <a
-                    class="customer-secondary-button"
-                    href="/customer/dashboard"
-                >
-                    Back to Home
-                </a>
-
+                <div class="customer-profile-badge">
+                    <span class="customer-profile-label">Client Profile</span>
+                </div>
             </div>
 
-        </div>
+            <div class="customer-profile-info">
+                <h1 class="customer-profile-name">{{.Customer.FullName}}</h1>
 
+                <div class="customer-details">
+                    <div class="customer-detail-item">
+                        <span class="detail-label">Phone</span>
+                        <strong class="detail-value">{{.Customer.PhoneNumber}}</strong>
+                    </div>
+
+                    <div class="customer-detail-item">
+                        <span class="detail-label">Email</span>
+                        <strong class="detail-value">{{.Customer.Email}}</strong>
+                    </div>
+
+                    <div class="customer-detail-item">
+                        <span class="detail-label">Account Status</span>
+                        <strong class="detail-value status-active">
+                            <span class="status-dot" aria-hidden="true"></span> Active Member
+                        </strong>
+                    </div>
+                </div>
+
+                <div class="customer-profile-actions">
+                    <a
+                        class="customer-primary-button"
+                        href="/customer/profile/edit"
+                    >
+                        Edit Profile
+                    </a>
+
+                    <a
+                        class="customer-secondary-button"
+                        href="/customer/dashboard"
+                    >
+                        Back to Home
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Quick Client Hub Links -->
+        <section class="profile-quick-links" aria-label="Client navigation shortcuts">
+            <h2 class="profile-section-title">Quick Actions</h2>
+            <div class="profile-links-grid">
+                <a class="profile-link-card" href="/customer/barbers">
+                    <span class="link-card-icon" aria-hidden="true">&#9986;</span>
+                    <div class="link-card-body">
+                        <strong>Find a Barber</strong>
+                        <span>Browse verified barbers &amp; stylists</span>
+                    </div>
+                    <span class="link-card-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+
+                <a class="profile-link-card" href="/customer/bookings?group=upcoming">
+                    <span class="link-card-icon" aria-hidden="true">&#128197;</span>
+                    <div class="link-card-body">
+                        <strong>My Bookings</strong>
+                        <span>Manage upcoming appointments</span>
+                    </div>
+                    <span class="link-card-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+
+                <a class="profile-link-card" href="/customer/hairstyles">
+                    <span class="link-card-icon" aria-hidden="true">&#10024;</span>
+                    <div class="link-card-body">
+                        <strong>Hairstyles Lookbook</strong>
+                        <span>Browse haircut gallery &amp; styles</span>
+                    </div>
+                    <span class="link-card-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+
+                <a class="profile-link-card" href="/customer/orders">
+                    <span class="link-card-icon" aria-hidden="true">&#128717;</span>
+                    <div class="link-card-body">
+                        <strong>My Orders</strong>
+                        <span>Track hair care &amp; products</span>
+                    </div>
+                    <span class="link-card-arrow" aria-hidden="true">&rarr;</span>
+                </a>
+            </div>
+        </section>
     </div>
-
 </main>
 
 {{template "public-footer" .}}

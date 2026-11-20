@@ -8,12 +8,12 @@
 
     <script src="/static/theme-switch.js"></script>
     <link rel="stylesheet" href="/static/app.css">
-    <link rel="stylesheet" href="/static/customer-profile.css">
     <link rel="stylesheet" href="/static/ui.css">
     <link rel="stylesheet" href="/static/theme.css">
+    <link rel="stylesheet" href="/static/customer-profile.css">
+    <link rel="stylesheet" href="/static/image-viewer.css">
 
     <script src="/static/app.js" defer></script>
-    <link rel="stylesheet" href="/static/image-viewer.css">
     <script src="/static/image-viewer.js" defer></script>
 </head>
 
@@ -21,154 +21,142 @@
 
 {{template "role-header" (navigation "customer" "profile" .)}}
 
-<main class="customer-profile-page ui-page">
+<main class="customer-profile-page" id="main-content">
+    <div class="customer-profile-container">
+        <div class="customer-edit-card">
+            <header class="customer-edit-heading">
+                <p class="customer-profile-label">My Profile</p>
+                <h1>Edit Profile</h1>
+                <p class="customer-edit-subtitle">
+                    Update your personal information and profile photo.
+                </p>
+            </header>
 
-    <div class="customer-edit-card ui-panel" style="border-radius:18px;">
+            {{template "form-error" .Error}}
 
-        <div class="customer-edit-heading">
+            <form
+                class="customer-edit-form"
+                method="post"
+                action="/customer/profile/edit"
+                enctype="multipart/form-data"
+                {{if .Error}}aria-describedby="form-error"{{end}}>
 
-            <p class="customer-profile-label eyebrow">
-                My Profile
-            </p>
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    value="{{.CSRF}}"
+                >
 
-            <h1>Edit Profile</h1>
-
-            <p>
-                Update your personal information and profile photo.
-            </p>
-
-        </div>
-
-        {{template "form-error" .Error}}
-
-        <form
-            class="customer-edit-form ui-form"
-            method="post"
-            action="/customer/profile/edit"
-            enctype="multipart/form-data"
-         {{if .Error}}aria-describedby="form-error"{{end}}>
-
-            <input
-                type="hidden"
-                name="csrf_token"
-                value="{{.CSRF}}"
-            >
-
-            <div class="customer-photo-upload">
-
-                {{if .ProfileImage}}
-
-                    <img
-                        class="customer-edit-photo"
-                        src="{{.ProfileImage}}"
-                        alt="Current profile photo"
-                        data-fullscreen-image
-                     srcset="{{imageSrcset .ProfileImage}}" sizes="(max-width: 520px) calc(100vw - 48px), (max-width: 900px) 50vw, 360px" width="640" height="480" loading="lazy" decoding="async">
-
-                {{else}}
-
-                    <div class="customer-edit-photo customer-profile-placeholder">
-                        {{printf "%.1s" (index .Values "fullname")}}
+                <div class="customer-photo-upload">
+                    <div class="customer-photo-preview-wrap">
+                        {{if .ProfileImage}}
+                            <img
+                                class="customer-edit-photo fullscreen-image"
+                                src="{{.ProfileImage}}"
+                                alt="Current profile photo"
+                                data-fullscreen-image
+                                srcset="{{imageSrcset .ProfileImage}}"
+                                sizes="92px"
+                                width="92"
+                                height="92"
+                                loading="lazy"
+                                decoding="async">
+                        {{else}}
+                            <div class="customer-edit-photo customer-profile-placeholder" aria-label="Avatar placeholder">
+                                {{printf "%.1s" (index .Values "fullname")}}
+                            </div>
+                        {{end}}
                     </div>
 
-                {{end}}
+                    <div class="customer-photo-controls">
+                        <label for="profile_image" class="profile-upload-label">
+                            Profile Photo
+                        </label>
 
-                <div>
+                        <input
+                            class="professional-file-input"
+                            id="profile_image"
+                            type="file"
+                            name="profile_image"
+                            accept="image/jpeg,image/png,image/gif,image/webp"
+                            aria-describedby="profile-photo-help"
+                        >
 
-                    <label for="profile_image">
-                        Profile Photo
+                        <p id="profile-photo-help" class="profile-upload-help">
+                            Optional. Upload a new square or portrait photo. Maximum size: 32 MB.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="customer-form-field customer-floating-field">
+                    <label for="fullname">
+                        Full Name
                     </label>
 
                     <input
-                        class="professional-file-input"
-                        id="profile_image"
-                        type="file"
-                        name="profile_image"
-                        accept="image/jpeg,image/png,image/gif,image/webp" aria-describedby="profile-photo-help"
+                        id="fullname"
+                        type="text"
+                        name="fullname"
+                        maxlength="120"
+                        value="{{index .Values "fullname"}}"
+                        autocomplete="name"
+                        placeholder=" "
+                        required
                     >
-
-                    <p id="profile-photo-help">
-                        Optional. Upload a new photo to replace the
-                        current one. Maximum size: 32 MB.
-                    </p>
-
                 </div>
 
-            </div>
+                <div class="customer-form-field customer-floating-field">
+                    <label for="phone">
+                        Phone Number
+                    </label>
 
-            <div class="customer-form-field ui-field">
+                    <input
+                        id="phone"
+                        type="tel"
+                        name="phone"
+                        maxlength="32"
+                        value="{{index .Values "phone"}}"
+                        autocomplete="tel"
+                        placeholder=" "
+                        required
+                    >
+                </div>
 
-                <label for="fullname">
-                    Full Name
-                </label>
+                <div class="customer-form-field customer-floating-field">
+                    <label for="email">
+                        Email Address
+                    </label>
 
-                <input
-                    id="fullname"
-                    type="text"
-                    name="fullname" maxlength="120"
-                    value="{{index .Values "fullname"}}"
-                    autocomplete="name"
-                    required
-                >
+                    <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        maxlength="254"
+                        value="{{index .Values "email"}}"
+                        autocomplete="email"
+                        placeholder=" "
+                        required
+                    >
+                </div>
 
-            </div>
+                <div class="customer-edit-actions">
+                    <button
+                        class="customer-primary-button"
+                        type="submit"
+                    >
+                        Save Changes
+                    </button>
 
-            <div class="customer-form-field ui-field">
-
-                <label for="phone">
-                    Phone Number
-                </label>
-
-                <input
-                    id="phone"
-                    type="tel"
-                    name="phone" maxlength="32"
-                    value="{{index .Values "phone"}}"
-                    autocomplete="tel"
-                    required
-                >
-
-            </div>
-
-            <div class="customer-form-field ui-field">
-
-                <label for="email">
-                    Email Address
-                </label>
-
-                <input
-                    id="email"
-                    type="email"
-                    name="email" maxlength="254"
-                    value="{{index .Values "email"}}"
-                    autocomplete="email"
-                    required
-                >
-
-            </div>
-
-            <div class="customer-edit-actions ui-actions">
-
-                <button
-                    class="customer-primary-button ui-control"
-                    type="submit"
-                >
-                    Save Changes
-                </button>
-
-                <a
-                    class="customer-secondary-button"
-                    href="/customer/profile"
-                >
-                    Cancel
-                </a>
-
-            </div>
-
-        </form>
-
+                    <a
+                        class="customer-secondary-button"
+                        href="/customer/profile"
+                    >
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
-
 </main>
 
 {{template "public-footer" .}}
