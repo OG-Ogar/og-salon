@@ -17,7 +17,11 @@
 {{template "role-header" (navigation "barber" "account" .)}}
 
 <main class="barber-main ui-page">
-    <section class="barber-dashboard-intro barber-dashboard-hero">
+    <nav class="barber-breadcrumb" aria-label="Breadcrumb">
+        <a href="/barber/dashboard">Dashboard</a> / <span>Account Overview</span>
+    </nav>
+
+    <section class="barber-dashboard-intro barber-dashboard-hero" aria-label="Provider profile overview">
         <div class="barber-dashboard-photo">
             {{if .PersonalImage}}
                 <a href="/barber/profile" aria-label="View your profile">
@@ -48,11 +52,11 @@
         </div>
     </section>
 
-    <section class="barber-stat-grid">
+    <section class="barber-stat-grid" aria-label="Account performance metrics">
         <article class="barber-stat-card">
             <div class="stat-card-header">
                 <span class="barber-stat-number">{{.PendingBookings}}</span>
-                {{if gt .PendingBookings 0}}<span class="barber-badge Suspended">Pending</span>{{end}}
+                {{if gt .PendingBookings 0}}<span class="barber-badge Pending">Pending</span>{{end}}
             </div>
             <span class="barber-stat-label">Booking requests</span>
             <div class="barber-actions ui-actions">
@@ -92,6 +96,32 @@
         </article>
     </section>
 
+    <section class="barber-section" aria-label="Provider operations quick actions">
+        <h2 class="barber-section-title">Operations &amp; Catalog</h2>
+        <div class="barber-shortcuts-grid">
+            <a class="barber-shortcut-card" href="/barber/hairstyles/new">
+                <span class="barber-shortcut-icon" aria-hidden="true">&#9986;</span>
+                <div class="barber-shortcut-body">
+                    <h3>Add Hairstyle</h3>
+                    <p>Publish a new cut with category, duration, and pricing.</p>
+                </div>
+            </a>
+            <a class="barber-shortcut-card" href="/barber/products/new">
+                <span class="barber-shortcut-icon" aria-hidden="true">&#128717;</span>
+                <div class="barber-shortcut-body">
+                    <h3>List Product</h3>
+                    <p>Sell grooming products, pomades, and hair care items.</p>
+                </div>
+            </a>
+            <a class="barber-shortcut-card" href="/barber/profile/edit">
+                <span class="barber-shortcut-icon" aria-hidden="true">&#9881;</span>
+                <div class="barber-shortcut-body">
+                    <h3>Edit Shop Profile</h3>
+                    <p>Update banner photo, shop bio, address, and contact details.</p>
+                </div>
+            </a>
+        </div>
+    </section>
 </main>
 
 {{template "public-footer" .}}
