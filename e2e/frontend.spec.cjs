@@ -94,7 +94,6 @@ test('customer and barber dashboard brand mark and name match landing page stand
  expect(landingMarkRadius).toBe('50%');
  const landingSvg=await page.locator('.landing-brand-mark svg.brand-monogram').count();
  expect(landingSvg).toBe(1);
- await page.locator('.landing-pill-brand').screenshot({path:'/home/recoding/.gemini/antigravity/brain/e8cd389d-3c00-4ec1-8bc2-c5063d9a5cae/landing_brand_logo.png'});
 
  const email='brand-customer-'+Date.now()+'@example.test';
  const response=await page.request.post('/customer/register',{multipart:{fullname:'Brand Test Customer',phone:'08012345678',email,password:'browser-pass-123',confirm_password:'browser-pass-123'}});
@@ -109,7 +108,6 @@ test('customer and barber dashboard brand mark and name match landing page stand
  expect(customerSvg).toBe(1);
  const customerRole=await page.locator('.site-header .site-brand-role').count();
  expect(customerRole).toBe(0);
- await page.locator('.site-header .site-brand').screenshot({path:'/home/recoding/.gemini/antigravity/brain/e8cd389d-3c00-4ec1-8bc2-c5063d9a5cae/customer_brand_logo.png'});
 
  const barberEmail='brand-barber-'+Date.now()+'@example.test';
  const barberReg=await page.request.post('/barber/register',{multipart:{fullname:'Brand Test Barber',phone:'08012345678',email:barberEmail,shopname:'Brand Shop',shopaddress:'12 Example Street',state:'Lagos',local_area:'Ikeja',password:'browser-pass-123',confirm_password:'browser-pass-123',personal_image:{name:'profile.png',mimeType:'image/png',buffer:PNG}}});
@@ -125,7 +123,6 @@ test('customer and barber dashboard brand mark and name match landing page stand
  expect(barberSvg).toBe(1);
  const barberRole=await page.locator('.site-header .site-brand-role').count();
  expect(barberRole).toBe(0);
- await page.locator('.site-header .site-brand').screenshot({path:'/home/recoding/.gemini/antigravity/brain/e8cd389d-3c00-4ec1-8bc2-c5063d9a5cae/barber_brand_logo.png'});
 });
 test('customer journeys, public sessions and narrow navigation',async({page},testInfo)=>{
  const email='browser-customer-'+Date.now()+'@example.test';
