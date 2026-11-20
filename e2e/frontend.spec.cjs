@@ -72,6 +72,20 @@ test('classic white is the default and the existing navy theme remains available
  }));
  expect(navyPalette).toEqual({theme:'navy',surface:'#070d1a'});
 });
+test('landing page floating pill does not obscure hero write-up across phone viewports',async({page})=>{
+ for(const width of [320,360,375,390,412,480]){
+  await page.setViewportSize({width,height:900});
+  await page.goto('/');
+  const pill=await page.locator('.landing-nav-pill').boundingBox();
+  const eyebrow=await page.locator('.landing-eyebrow').boundingBox();
+  const title=await page.locator('.landing-hero-title').boundingBox();
+  expect(pill).not.toBeNull();
+  expect(eyebrow).not.toBeNull();
+  expect(title).not.toBeNull();
+  expect(eyebrow.y).toBeGreaterThanOrEqual(pill.y+pill.height+14);
+  expect(title.y).toBeGreaterThanOrEqual(eyebrow.y+eyebrow.height);
+ }
+});
 test('customer journeys, public sessions and narrow navigation',async({page},testInfo)=>{
  const email='browser-customer-'+Date.now()+'@example.test';
  const response=await page.request.post('/customer/register',{multipart:{fullname:'A customer with a deliberately long display name',phone:'08012345678',email,password:'browser-pass-123',confirm_password:'browser-pass-123'}});

@@ -6,7 +6,7 @@
 /* Floating Frosted-Glass Nav Pill */
 .landing-pill-wrapper {
   position: fixed;
-  top: 1.25rem;
+  top: calc(1.25rem + env(safe-area-inset-top, 0px));
   left: 0;
   right: 0;
   display: flex;
@@ -161,7 +161,7 @@ html[data-theme="stone"] .landing-nav-pill {
   position: relative;
   background: var(--void);
   color: var(--ink);
-  padding: 7.5rem 1.5rem 4.5rem;
+  padding: calc(7.5rem + env(safe-area-inset-top, 0px)) 1.5rem 4.5rem;
   min-height: 85vh;
   display: flex;
   align-items: center;
@@ -1456,12 +1456,21 @@ html[data-theme="stone"] .landing-conversion-card {
 }
 
 @media (max-width: 720px) {
+  .landing-pill-wrapper {
+    top: calc(1rem + env(safe-area-inset-top, 0px));
+    padding: 0 0.85rem;
+  }
+
   .landing-pill-links {
     display: none;
   }
 
   .landing-nav-pill {
     padding: 0.5rem 0.85rem 0.5rem 1rem;
+  }
+
+  .landing-hero {
+    padding: calc(7rem + env(safe-area-inset-top, 0px)) 1rem 3rem;
   }
 
   .hero-search-form {
@@ -1503,8 +1512,13 @@ html[data-theme="stone"] .landing-conversion-card {
 }
 
 @media (max-width: 480px) {
+  .landing-pill-wrapper {
+    top: calc(0.75rem + env(safe-area-inset-top, 0px));
+    padding: 0 0.75rem;
+  }
+
   .landing-hero {
-    padding: 4.25rem 0.85rem 2rem;
+    padding: calc(6.75rem + env(safe-area-inset-top, 0px)) 0.85rem 2rem;
     min-height: auto;
   }
 
@@ -1672,6 +1686,7 @@ html[data-theme="stone"] .landing-conversion-card {
 
 @media (max-width: 360px) {
   .landing-pill-wrapper {
+    top: calc(0.5rem + env(safe-area-inset-top, 0px));
     padding: 0 0.5rem;
   }
 
@@ -1691,7 +1706,7 @@ html[data-theme="stone"] .landing-conversion-card {
   }
 
   .landing-hero {
-    padding: 3.75rem 0.75rem 1.5rem;
+    padding: calc(6.25rem + env(safe-area-inset-top, 0px)) 0.75rem 1.5rem;
   }
 
   .landing-hero .landing-hero-title,
