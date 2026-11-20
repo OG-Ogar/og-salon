@@ -477,8 +477,15 @@
 .barber-actions {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 10px;
     margin-top: 18px;
+}
+
+.barber-actions form,
+.barber-actions .ui-form {
+    display: inline-flex;
+    margin: 0;
 }
 
 .barber-button {
