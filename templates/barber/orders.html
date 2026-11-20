@@ -7,13 +7,14 @@
     <script src="/static/theme-switch.js"></script>
     <link rel="stylesheet" href="/static/app.css">
     <link rel="stylesheet" href="/static/barber.css">
+    <link rel="stylesheet" href="/static/products.css">
     <link rel="stylesheet" href="/static/image-viewer.css">
     <link rel="stylesheet" href="/static/ui.css">
     <link rel="stylesheet" href="/static/theme.css">
     <script src="/static/app.js" defer></script>
     <script src="/static/image-viewer.js" defer></script>
 </head>
-<body class="barber-page modern-role-page modern-barber-page">
+<body class="barber-page modern-role-page modern-barber-page barber-orders-page">
 {{template "role-header" (navigation "barber" "orders" .)}}
 
 <main class="barber-main ui-page">
@@ -40,7 +41,7 @@
 
         {{if .ProductOrders}}
             <div class="barber-card ui-panel">
-                <table class="barber-profile-table">
+                <table class="barber-profile-table barber-orders-table">
                     <thead>
                         <tr>
                             <th>Order</th>
@@ -54,13 +55,13 @@
                     <tbody>
                         {{range .ProductOrders}}
                             <tr>
-                                <td>#{{.OrderID}}</td>
-                                <td>
+                                <td data-label="Order">#{{.OrderID}}</td>
+                                <td data-label="Client">
                                     <strong>{{.CustomerName}}</strong><br>
                                     <span class="muted">{{.CustomerPhone}}</span><br>
                                     <span class="muted">{{.CustomerEmail}}</span>
                                 </td>
-                                <td>
+                                <td data-label="Product">
                                     <div class="order-product">
                                         <div class="order-product-image">
                                             {{if .ProductImage}}
@@ -77,9 +78,9 @@
                                         <span>{{.ProductName}}</span>
                                     </div>
                                 </td>
-                                <td>{{.Quantity}}</td>
-                                <td>{{naira .Subtotal}}</td>
-                                <td>
+                                <td data-label="Quantity">{{.Quantity}}</td>
+                                <td data-label="Subtotal">{{naira .Subtotal}}</td>
+                                <td data-label="Status">
                                     {{template "domain-status" (domainStatus "fulfillment" .FulfillmentStatus)}}
 
                                     {{if eq .FulfillmentStatus "Pending"}}

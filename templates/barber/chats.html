@@ -45,6 +45,7 @@
             <h1>
                 Chats
             </h1>
+            <p>Conversations with your clients</p>
 
         </section>
 
@@ -112,8 +113,13 @@
 
                             </span>
 
-                            <span class="chat-row-message">
-                                {{.LastText}}
+                            <span class="chat-row-bottom">
+                                <span class="chat-row-message">
+                                    {{if .LastText}}{{.LastText}}{{else}}Photo, voice note or video attachment{{end}}
+                                </span>
+                                {{if gt .Count 0}}
+                                    <span class="chat-row-unread" aria-label="{{.Count}} messages">{{.Count}}</span>
+                                {{end}}
                             </span>
 
                         </span>
@@ -131,7 +137,7 @@
 
             <div class="empty-messages">
 
-                No chats yet.
+                No conversations yet. When a client sends a message, you will see it here.
 
             </div>
 
