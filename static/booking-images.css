@@ -1,46 +1,50 @@
-.booking-hairstyle {
+/* ==========================================================================
+   OG'S SALON - BOOKING HAIRSTYLE IMAGES & MEDIA PREVIEWS
+   Unified semantic tokens: var(--surface-hi), var(--border), var(--ink-muted)
+   ========================================================================== */
+
+.booking-hairstyle,
+.customer-booking-hairstyle {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     min-width: 170px;
 }
 
-.booking-hairstyle-image {
+.booking-hairstyle-image,
+.customer-booking-image {
     width: 58px;
     height: 58px;
     flex: 0 0 58px;
-
     overflow: hidden;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background: #eee9df;
-    border: 1px solid #d8d1c5;
+    background: var(--surface-hi, #f4f7fb);
+    border: 1px solid var(--border, #d8e0ea);
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
-.booking-hairstyle-image img {
+.booking-hairstyle-image img,
+.customer-booking-image img {
     width: 100%;
     height: 100%;
-
     display: block;
-
     object-fit: cover;
     object-position: center;
+    border-radius: 11px;
+    cursor: zoom-in;
 }
 
-.booking-hairstyle-image span {
-    color: #77736a;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1px;
+.booking-hairstyle-image span,
+.customer-booking-image span {
+    color: var(--ink-muted, #40516a);
+    font-family: var(--font, system-ui, -apple-system, sans-serif);
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 .booking-hairstyle-info {
@@ -49,51 +53,11 @@
 
 .booking-hairstyle-info strong {
     display: block;
-}
-
-.customer-booking-hairstyle {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 170px;
-}
-
-.customer-booking-image {
-    width: 58px;
-    height: 58px;
-    flex: 0 0 58px;
-
-    overflow: hidden;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #eee9df;
-    border: 1px solid #d8d1c5;
-}
-
-.customer-booking-image img {
-    width: 100%;
-    height: 100%;
-
-    display: block;
-
-    object-fit: cover;
-    object-position: center;
-}
-
-.customer-booking-image span {
-    color: #77736a;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1px;
+    color: var(--ink, #0c1524);
+    font-size: 0.95rem;
+    font-weight: 750;
+    letter-spacing: -0.015em;
+    margin-bottom: 2px;
 }
 
 @media (max-width: 700px) {
@@ -107,5 +71,11 @@
         width: 48px;
         height: 48px;
         flex-basis: 48px;
+        border-radius: 10px;
+    }
+
+    .booking-hairstyle-image img,
+    .customer-booking-image img {
+        border-radius: 9px;
     }
 }
