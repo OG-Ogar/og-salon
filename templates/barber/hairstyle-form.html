@@ -3,39 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Add a Hairstyle - OG's Salon</title>
-
     <script src="/static/theme-switch.js"></script>
     <link rel="stylesheet" href="/static/app.css">
     <link rel="stylesheet" href="/static/barber.css">
     <link rel="stylesheet" href="/static/ui.css">
     <link rel="stylesheet" href="/static/theme.css">
-
     <script src="/static/app.js" defer></script>
 </head>
-
 <body class="barber-page modern-role-page modern-barber-page">
-
 {{template "role-header" (navigation "barber" "hairstyles" .)}}
 
 <main class="barber-main ui-page">
+    <nav class="barber-breadcrumb" aria-label="Breadcrumb">
+        <a href="/barber/dashboard">Dashboard</a> / <a href="/barber/hairstyles">Hairstyles</a> / <span>Add</span>
+    </nav>
 
-    <p class="barber-breadcrumb">
-        <a href="/barber/dashboard">Home</a>
-        /
-        <a href="/barber/hairstyles">Hairstyles</a>
-        /
-        Add
-    </p>
-
-    <h1 class="barber-title">
-        Add a Hairstyle
-    </h1>
-
-    <p class="barber-lede">
-        Add a hairstyle or service clients can book at your shop.
-    </p>
+    <h1 class="barber-title">Add a Hairstyle</h1>
+    <p class="barber-lede">Publish a hairstyle or grooming service clients can book at your shop.</p>
 
     {{template "form-error" .Error}}
 
@@ -44,15 +29,10 @@
           action="/barber/hairstyles/new"
           enctype="multipart/form-data" {{if .Error}}aria-describedby="form-error"{{end}}>
 
-        <input type="hidden"
-               name="csrf_token"
-               value="{{.CSRF}}">
+        <input type="hidden" name="csrf_token" value="{{.CSRF}}">
 
         <div class="barber-field ui-field">
-            <label for="name">
-                Style Name
-            </label>
-
+            <label for="name">Style Name</label>
             <input id="name"
                    type="text"
                    name="name"
@@ -62,10 +42,7 @@
         </div>
 
         <div class="barber-field ui-field">
-            <label for="category">
-                Category
-            </label>
-
+            <label for="category">Category</label>
             <input id="category"
                    type="text"
                    name="category"
@@ -73,17 +50,11 @@
                    placeholder="Fade, Braids, Buzz Cut, Beard Trim..."
                    required
                    aria-describedby="category-hint">
-
-            <p class="barber-hint" id="category-hint">
-                For example: Fade, Braids or Beard trim.
-            </p>
+            <p class="barber-hint" id="category-hint">For example: Fade, Braids or Beard trim.</p>
         </div>
 
         <div class="barber-field ui-field">
-            <label for="description">
-                Description
-            </label>
-
+            <label for="description">Description</label>
             <textarea id="description"
                       name="description"
                       placeholder="Describe what is included in this service..."
@@ -91,13 +62,11 @@
         </div>
 
         <div class="barber-field ui-field">
-            <label for="price">
-                Price (&#8358;)
-            </label>
-
+            <label for="price">Price (&#8358;)</label>
             <input id="price"
                    type="number"
-                   name="price" max="9999999999.99"
+                   name="price"
+                   max="9999999999.99"
                    step="0.01"
                    min="0"
                    placeholder="3500.00"
@@ -106,10 +75,7 @@
         </div>
 
         <div class="barber-field ui-field">
-            <label for="duration">
-                Duration (minutes)
-            </label>
-
+            <label for="duration">Duration (minutes)</label>
             <input id="duration"
                    type="number"
                    name="duration"
@@ -122,63 +88,43 @@
         </div>
 
         <div class="barber-field ui-field">
-            <label for="image">
-                Photo (optional)
-            </label>
-
-            <input class="professional-file-input" id="image"
+            <label for="image">Photo (optional)</label>
+            <input class="professional-file-input"
+                   id="image"
                    type="file"
                    name="image"
                    accept=".jpg,.jpeg,.png,.gif,.webp"
                    data-preview="photo"
                    aria-describedby="image-hint">
-
-            <p class="barber-hint" id="image-hint">
-                JPG, PNG, GIF or WEBP, up to 32 MB.
-                Large pictures are resized automatically.
-            </p>
+            <p class="barber-hint" id="image-hint">JPG, PNG, GIF or WEBP, up to 32 MB. Large photos are resized automatically.</p>
         </div>
 
         <div class="barber-field ui-field">
-            <label for="video">
-                Video (optional)
-            </label>
-
-            <input class="professional-file-input" id="video"
+            <label for="video">Video (optional)</label>
+            <input class="professional-file-input"
+                   id="video"
                    type="file"
                    name="video"
                    accept=".mp4,.m4v,.mov,.webm,.3gp"
                    aria-describedby="video-hint">
-
-            <p class="barber-hint" id="video-hint">
-                MP4, M4V, MOV, WEBM or 3GP, up to 50 MB.
-                Clients can watch the clip on your hairstyle page.
-            </p>
+            <p class="barber-hint" id="video-hint">MP4, M4V, MOV, WEBM or 3GP, up to 50 MB. Clients can watch the clip on your lookbook.</p>
         </div>
 
-        <div class="barber-field ui-field">
-            <label>
-                <input type="checkbox"
+        <div class="barber-check ui-field">
+            <label for="available">
+                <input id="available"
+                       type="checkbox"
                        name="available"
                        checked>
-                Available for booking
+                <span>Available for client booking</span>
             </label>
         </div>
 
         <div class="barber-actions ui-actions">
-            <button class="barber-button primary ui-control"
-                    type="submit">
-                Save Hairstyle
-            </button>
-
-            <a class="barber-button"
-               href="/barber/hairstyles">
-                Cancel
-            </a>
+            <button class="barber-button primary ui-control" type="submit">Save Hairstyle</button>
+            <a class="barber-button" href="/barber/hairstyles">Cancel</a>
         </div>
-
     </form>
-
 </main>
 
 {{template "public-footer" .}}
