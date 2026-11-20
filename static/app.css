@@ -5,7 +5,7 @@
   color-scheme:light;
   --void:#ffffff;--base:#ffffff;--surface:#ffffff;--surface-hi:#f4f7fb;
   --border:#d8e0ea;--border-hi:#9fb0c4;--ink:#0c1524;--ink-muted:#40516a;
-  --ink-faint:#68778d;--signal:#142034;--signal-ink:#ffffff;--signal-rgb:20,32,52;
+  --ink-faint:#59687e;--signal:#142034;--signal-ink:#ffffff;--signal-rgb:20,32,52;
   /* The same colours as the triplets above, so a surface can be laid over
      a photograph with its own alpha and still follow the active theme. */
   --void-rgb:255,255,255;--base-rgb:255,255,255;--surface-rgb:255,255,255;
@@ -138,7 +138,7 @@ body:not(.landing-page):not(.auth-page) a{transition:opacity .16s ease,transform
 /* =========================================================
    BARBER + ADMIN MODERN ROLE SURFACES
    ========================================================= */
-.modern-role-page{--role-ink:var(--ink,#0c1524);--role-muted:var(--ink-muted,#40516a);--role-faint:var(--ink-faint,#68778d);--role-accent:var(--signal,#142034);min-height:100vh;background:radial-gradient(circle at 90% 5%,rgba(var(--signal-rgb),.07),transparent 22%),linear-gradient(180deg,var(--void,#ffffff),var(--base,#ffffff) 55%,var(--void,#ffffff))!important;color:var(--role-ink)!important}
+.modern-role-page{--role-ink:var(--ink,#0c1524);--role-muted:var(--ink-muted,#40516a);--role-faint:var(--ink-faint,#59687e);--role-accent:var(--signal,#142034);min-height:100vh;background:radial-gradient(circle at 90% 5%,rgba(var(--signal-rgb),.07),transparent 22%),linear-gradient(180deg,var(--void,#ffffff),var(--base,#ffffff) 55%,var(--void,#ffffff))!important;color:var(--role-ink)!important}
 .modern-role-page h1,.modern-role-page h2,.modern-role-page h3,.modern-role-page h4,.modern-role-page strong,.modern-role-page th{color:var(--role-ink)!important}
 .modern-role-page p,.modern-role-page td,.modern-role-page label,.modern-role-page small{color:var(--role-muted)}
 .modern-role-page .barber-header,.modern-role-page .barber-simple-header,.modern-role-page .topbar,.modern-role-page .messages-header,.modern-role-page .barber-chat-header{border-color:rgba(var(--ink-muted-rgb),.15)!important;background:rgba(var(--void-rgb),.94)!important;color:var(--role-ink)!important}

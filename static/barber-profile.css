@@ -5,8 +5,8 @@
 .barber-page {
     margin: 0;
     min-height: 100vh;
-    background: #f5f3ef;
-    color: #222222;
+    background: var(--base);
+    color: var(--ink);
 }
 
 /* =========================================================
@@ -22,12 +22,12 @@
 
     padding: 0 32px;
 
-    background: #ffffff;
-    border-bottom: 1px solid #e3e0db;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
 }
 
 .barber-brand {
-    color: #222222;
+    color: var(--ink);
 
     text-decoration: none;
 
@@ -43,7 +43,7 @@
 
 .barber-header-actions a,
 .barber-header-actions button {
-    color: #333333;
+    color: var(--ink);
 
     background: none;
     border: 0;
@@ -59,7 +59,7 @@
 
 .barber-header-actions a:hover,
 .barber-header-actions button:hover {
-    color: #7a4a1e;
+    color: var(--signal);
 }
 
 /* =========================================================
@@ -81,9 +81,9 @@
 
     padding: 50px;
 
-    background: #ffffff;
+    background: var(--surface);
 
-    border: 1px solid #e3e0db;
+    border: 1px solid var(--border);
     border-radius: 14px;
 
     box-shadow:
@@ -125,7 +125,7 @@
 .barber-profile-label {
     margin: 0 0 8px;
 
-    color: #7a4a1e;
+    color: var(--signal);
 
     font-size: 0.8rem;
     font-weight: 800;
@@ -154,7 +154,7 @@
 }
 
 .barber-details span {
-    color: #777777;
+    color: var(--ink-muted);
 
     font-size: 0.8rem;
     font-weight: 700;
@@ -164,7 +164,7 @@
 }
 
 .barber-details strong {
-    color: #222222;
+    color: var(--ink);
 
     font-size: 1rem;
     font-weight: 600;
@@ -201,26 +201,26 @@
 }
 
 .barber-primary-button {
-    color: #ffffff;
-    background: #7a4a1e;
+    color: var(--signal-ink);
+    background: var(--signal);
 
-    border: 1px solid #7a4a1e;
+    border: 1px solid var(--signal);
 }
 
 .barber-primary-button:hover {
-    background: #5f3915;
-    border-color: #5f3915;
+    background: var(--signal);
+    border-color: var(--signal);
 }
 
 .barber-secondary-button {
-    color: #333333;
-    background: #ffffff;
+    color: var(--ink);
+    background: var(--surface);
 
-    border: 1px solid #d5d0c8;
+    border: 1px solid var(--border-hi);
 }
 
 .barber-secondary-button:hover {
-    background: #f5f3ef;
+    background: var(--base);
 }
 
 /* =========================================================
@@ -249,7 +249,7 @@
 .barber-edit-heading > p:last-child {
     margin: 0;
 
-    color: #777777;
+    color: var(--ink-muted);
 
     font-size: 0.95rem;
 }
@@ -263,10 +263,10 @@
 
     padding: 13px 15px;
 
-    color: #8b1e1e;
-    background: #fff0f0;
+    color: var(--danger-ink);
+    background: var(--danger-soft);
 
-    border: 1px solid #e4b5b5;
+    border: 1px solid var(--danger-border);
     border-radius: 7px;
 }
 
@@ -280,9 +280,9 @@
 
     padding: 0;
 
-    background: #ffffff;
+    background: var(--surface);
 
-    border: 1px solid #e3e0db;
+    border: 1px solid var(--border);
     border-radius: 14px;
 
     box-shadow:
@@ -298,7 +298,7 @@
 .barber-edit-section {
     padding: 30px 38px;
 
-    border-bottom: 1px solid #e3e0db;
+    border-bottom: 1px solid var(--border);
 }
 
 .barber-section-heading {
@@ -314,7 +314,7 @@
 .barber-section-heading p {
     margin: 0;
 
-    color: #777777;
+    color: var(--ink-muted);
 
     font-size: 0.85rem;
 }
@@ -347,13 +347,14 @@
 }
 
 .barber-form-field label {
-    color: #333333;
+    color: var(--ink);
 
     font-size: 0.85rem;
     font-weight: 800;
 }
 
-.barber-form-field input {
+.barber-form-field input,
+.barber-form-field select {
     width: 100%;
 
     box-sizing: border-box;
@@ -362,19 +363,20 @@
 
     padding: 10px 12px;
 
-    color: #222222;
-    background: #ffffff;
+    color: var(--ink);
+    background: var(--surface);
 
-    border: 1px solid #d5d0c8;
+    border: 1px solid var(--border-hi);
     border-radius: 7px;
 
     font: inherit;
 }
 
-.barber-form-field input:focus {
-    outline: 2px solid rgba(122, 74, 30, 0.2);
+.barber-form-field input:focus-visible,
+.barber-form-field select:focus-visible {
+    outline: 2px solid rgba(var(--signal-rgb), 0.2);
 
-    border-color: #7a4a1e;
+    border-color: var(--signal);
 }
 
 /* =========================================================
@@ -389,9 +391,9 @@
 
     padding: 20px;
 
-    background: #faf9f7;
+    background: var(--surface-hi);
 
-    border: 1px solid #e3e0db;
+    border: 1px solid var(--border);
     border-radius: 10px;
 }
 
@@ -405,7 +407,7 @@
 
     border-radius: 8px;
 
-    background: #eeeeee;
+    background: var(--surface-hi);
 }
 
 .barber-current-photo img {
@@ -435,7 +437,7 @@
 
     margin-bottom: 9px;
 
-    color: #333333;
+    color: var(--ink);
 
     font-size: 0.9rem;
     font-weight: 800;
@@ -450,7 +452,7 @@
 .barber-upload-hint {
     margin: 8px 0 0;
 
-    color: #777777;
+    color: var(--ink-muted);
 
     font-size: 0.8rem;
     line-height: 1.5;
@@ -467,7 +469,7 @@
 
     padding: 25px 38px;
 
-    background: #faf9f7;
+    background: var(--surface-hi);
 }
 
 .barber-edit-actions .barber-primary-button,
@@ -601,20 +603,47 @@
         padding: 20px 18px;
     }
 }
-/* OG's Salon barber profile refinement */
-.barber-simple-header{background:#171311}.barber-brand,.barber-header-actions a,.barber-header-actions button{color:#fff}.barber-edit-section,.barber-profile-card{border-radius:16px;box-shadow:0 10px 30px rgba(31,24,20,.06)}@media(max-width:480px){.barber-simple-header{min-height:64px}}
-
-
-/* OG's Salon — modern barber profile editor */
-.modern-role-page.barber-page{background:var(--void);color:var(--ink)}
-.modern-role-page .barber-simple-header{position:sticky;top:0;z-index:20;min-height:72px;padding:0 max(20px,calc((100% - 1160px)/2));border-bottom:1px solid rgba(var(--ink-muted-rgb),.14);background:rgba(var(--void-rgb),.92);backdrop-filter:blur(16px)}
-.modern-role-page .barber-simple-header .barber-brand{color:var(--ink)}.modern-role-page .barber-header-actions a,.modern-role-page .barber-header-actions button{color:var(--ink-muted)}.modern-role-page .barber-header-actions a:hover,.modern-role-page .barber-header-actions button:hover{color:var(--signal)}
-.modern-role-page .barber-edit-page{width:min(calc(100% - 40px),980px);padding:48px 0 72px}.modern-role-page .barber-edit-heading{max-width:680px;margin-bottom:26px}.modern-role-page .barber-profile-label{color:var(--signal)}.modern-role-page .barber-edit-heading h1{margin:0 0 10px;color:var(--ink);font-size:clamp(2.2rem,5vw,3.5rem);letter-spacing:-.055em}.modern-role-page .barber-edit-heading>p:last-child{color:var(--ink-faint)}
-.modern-role-page .barber-form-error{border:1px solid rgba(239,68,68,.45);background:rgba(239,68,68,.1);color:var(--danger-ink)}
-.modern-role-page .barber-edit-card{border:1px solid rgba(var(--border-hi-rgb),.42);border-radius:18px;background:linear-gradient(145deg,rgba(var(--surface-hi-rgb),.46),rgba(var(--surface-rgb),.34));box-shadow:0 18px 48px rgba(0,0,0,.16)}
-.modern-role-page .barber-edit-section{padding:30px 34px;border:0;border-bottom:1px solid rgba(var(--ink-muted-rgb),.11);border-radius:0;box-shadow:none}.modern-role-page .barber-section-heading h2{color:var(--ink);font-size:1.15rem}.modern-role-page .barber-section-heading p{color:var(--ink-faint)}
-.modern-role-page .barber-form-field label,.modern-role-page .barber-upload-content label{color:var(--ink-muted)}.modern-role-page .barber-form-field input{min-height:50px;border:1px solid var(--border);border-radius:10px;background:var(--base);color:var(--ink)}.modern-role-page .barber-form-field input:focus{outline:0;border-color:var(--signal);box-shadow:0 0 0 3px rgba(var(--signal-rgb),.12)}
-.modern-role-page .barber-photo-upload-box{gap:22px;padding:18px!important;border:1px solid rgba(var(--border-hi-rgb),.45)!important;border-radius:15px!important;background:rgba(var(--void-rgb),.3)!important}.modern-role-page .barber-current-photo{border:1px solid var(--border-hi);background:var(--surface)}.modern-role-page .barber-current-photo img{border-radius:0}.modern-role-page .barber-personal-current-photo,.modern-role-page .barber-personal-current-photo img{border-radius:50%}.modern-role-page .barber-upload-hint{color:var(--ink-faint)}
-.modern-role-page .barber-edit-actions{padding:22px 34px;background:rgba(var(--void-rgb),.38)}.modern-role-page .barber-primary-button{border-color:var(--signal);background:var(--signal);color:#ffffff}.modern-role-page .barber-primary-button:hover{border-color:#1d2c46;background:#1d2c46}.modern-role-page .barber-secondary-button{border-color:var(--border-hi);background:var(--surface);color:var(--ink)}.modern-role-page .barber-secondary-button:hover{background:var(--surface-hi)}
-@media(max-width:700px){.modern-role-page .barber-simple-header{padding:12px 16px;align-items:flex-start;gap:12px}.modern-role-page .barber-header-actions{gap:8px;flex-wrap:wrap;justify-content:flex-end}.modern-role-page .barber-edit-page{width:calc(100% - 24px);padding:32px 0 48px}.modern-role-page .barber-edit-section{padding:24px 18px}.modern-role-page .barber-edit-actions{padding:18px}.modern-role-page .barber-photo-upload-box{align-items:stretch}.modern-role-page .barber-current-photo{width:100%;height:auto;aspect-ratio:4/3;flex-basis:auto}.modern-role-page .barber-personal-current-photo{width:112px;height:112px;aspect-ratio:1/1;flex-basis:112px}}
-@media(max-width:480px){.modern-role-page .barber-header-actions a{display:inline-flex}.modern-role-page .barber-header-actions{font-size:.78rem}.modern-role-page .barber-edit-heading h1{font-size:2rem}}
+/* Provider profile editor refinements. */
+.modern-role-page.barber-page { background: var(--void); color: var(--ink); }
+.modern-role-page .barber-profile-card { display: block; max-width: 800px; padding: clamp(18px, 3vw, 30px); background: var(--surface); border-color: var(--border); }
+.modern-role-page .barber-profile-card .barber-shop-photo { width: 100%; }
+.modern-role-page .barber-edit-page { width: min(calc(100% - 32px), 980px); padding: 44px 0 72px; }
+.modern-role-page .barber-edit-heading { max-width: 700px; }
+.modern-role-page .barber-edit-heading h1 { color: var(--ink); font-size: clamp(2rem, 5vw, 3.25rem); letter-spacing: -.045em; }
+.modern-role-page .barber-edit-heading > p:last-child { color: var(--ink-muted); }
+.modern-role-page .barber-edit-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; box-shadow: 0 16px 42px rgba(var(--ink-muted-rgb), .12); }
+.modern-role-page .barber-edit-section { border-color: var(--border); }
+.modern-role-page .barber-section-heading h2 { color: var(--ink); }
+.modern-role-page .barber-form-field input,
+.modern-role-page .barber-form-field select { background: var(--base); color: var(--ink); border: 1px solid var(--border-hi); border-radius: 10px; min-height: 48px; }
+.modern-role-page .barber-form-field input:focus-visible,
+.modern-role-page .barber-form-field select:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
+.modern-role-page .barber-photo-upload-box { background: var(--surface-hi); border-color: var(--border); }
+.modern-role-page .barber-photo-upload-box input[type=file] { min-height: 48px; color: var(--ink); }
+.modern-role-page .barber-edit-actions { background: var(--surface-hi); }
+.modern-role-page .barber-primary-button { color: var(--signal-ink); background: var(--signal); border-color: var(--signal); }
+.modern-role-page .barber-primary-button:hover { filter: brightness(.93); }
+.modern-role-page .barber-secondary-button { color: var(--ink); background: var(--surface); border-color: var(--border-hi); }
+.modern-role-page .barber-secondary-button:hover { background: var(--surface-hi); }
+.modern-role-page .barber-primary-button:focus-visible,
+.modern-role-page .barber-secondary-button:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; }
+.barber-profile-card .barber-shop-photo-placeholder {
+  min-height: 220px;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  background: var(--surface-hi);
+  color: var(--ink-muted);
+  text-align: center;
+}
+.barber-shop-photo-placeholder a { display: inline-flex; align-items: center; min-height: 44px; color: var(--signal); font-weight: 700; }
+.barber-profile-card .barber-personal-area { padding: 18px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface-hi); }
+.barber-profile-card .barber-profile-table td { overflow-wrap: anywhere; }
+@media (max-width: 600px) {
+  .modern-role-page .barber-edit-page { width: calc(100% - 24px); padding: 28px 0 48px; }
+  .modern-role-page .barber-edit-section { padding: 24px 18px; }
+  .modern-role-page .barber-edit-actions { padding: 20px 18px; }
+  .modern-role-page .barber-primary-button,
+  .modern-role-page .barber-secondary-button { width: 100%; }
+}

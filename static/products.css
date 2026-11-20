@@ -1020,3 +1020,42 @@ textarea {
     font-size: 1.15rem;
   }
 }
+
+/* Provider catalogue and order management. */
+.barber-product-grid {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr));
+  justify-content: stretch;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+.barber-product-grid .product-card { background: var(--surface); border-color: var(--border); }
+.barber-product-grid .card-menu-toggle { min-width: 44px; min-height: 44px; }
+.barber-product-grid .card-menu-item { min-height: 44px; }
+.barber-product-grid .product-price { color: var(--signal); }
+.barber-product-grid .product-description { overflow-wrap: anywhere; }
+.barber-product-form-card { max-width: 760px; }
+.barber-product-form-card .barber-field { margin-bottom: 20px; }
+.barber-product-form-card input:not([type="checkbox"]),
+.barber-product-form-card textarea { min-height: 48px; }
+.barber-product-form-card input[type="file"] { max-width: 100%; }
+.barber-product-form-card textarea { min-height: 120px; }
+.barber-product-form-card .barber-actions { margin-top: 22px; }
+.barber-orders-page .barber-orders-table { width: 100%; }
+.barber-orders-page .barber-orders-table td { vertical-align: top; overflow-wrap: anywhere; }
+.barber-orders-page .barber-orders-table form { margin-top: 8px; }
+.barber-orders-page .barber-orders-table .ui-control { min-height: 44px; }
+@media (max-width: 760px) {
+  .barber-orders-page .barber-orders-table thead { display: none; }
+  .barber-orders-page .barber-orders-table,
+  .barber-orders-page .barber-orders-table tbody,
+  .barber-orders-page .barber-orders-table tr,
+  .barber-orders-page .barber-orders-table td { display: block; width: 100%; }
+  .barber-orders-page .barber-orders-table tr { padding: 12px; margin-bottom: 14px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); }
+  .barber-orders-page .barber-orders-table td { display: grid; grid-template-columns: minmax(90px, .4fr) minmax(0, 1fr); gap: 10px; padding: 8px 0; }
+  .barber-orders-page .barber-orders-table td::before { content: attr(data-label); color: var(--ink-muted); font-size: .82rem; font-weight: 700; }
+  .barber-orders-page .order-product { min-width: 0; }
+}
+@media (max-width: 420px) {
+  .barber-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .barber-orders-page .barber-orders-table td { grid-template-columns: 1fr; gap: 4px; }
+}

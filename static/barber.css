@@ -598,9 +598,10 @@
     outline: 2px solid var(--signal);
 }
 
+.modern-role-page .barber-hint,
 .barber-hint {
     margin: 7px 0 0;
-    color: var(--ink-muted);
+    color: var(--ink-muted) !important;
     font-size: 0.82rem;
     line-height: 1.5;
 }
