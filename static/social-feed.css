@@ -844,11 +844,10 @@ html[data-theme="stone"] .social-feed-aside {
     place-items: center;
     width: 32px;
     height: 32px;
-    border-radius: 9px;
+    border-radius: 50%;
     background: var(--signal);
     color: var(--signal-ink);
-    font-size: 0.7rem;
-    font-weight: 900;
+    box-shadow: 0 2px 8px rgba(var(--signal-rgb), 0.3);
 }
 
 /* Legacy Dashboard Toggle if used */

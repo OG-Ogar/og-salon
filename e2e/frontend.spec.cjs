@@ -86,6 +86,44 @@ test('landing page floating pill does not obscure hero write-up across phone vie
   expect(title.y).toBeGreaterThanOrEqual(eyebrow.y+eyebrow.height);
  }
 });
+test('customer and barber dashboard brand mark and name match landing page standards',async({page})=>{
+ await page.goto('/');
+ const landingBrandText=await page.locator('.landing-pill-brand-text').textContent();
+ expect(landingBrandText?.trim()).toBe("OG's Salon");
+ const landingMarkRadius=await page.locator('.landing-brand-mark').evaluate(el=>getComputedStyle(el).borderRadius);
+ expect(landingMarkRadius).toBe('50%');
+ const landingSvg=await page.locator('.landing-brand-mark svg.brand-monogram').count();
+ expect(landingSvg).toBe(1);
+
+ const email='brand-customer-'+Date.now()+'@example.test';
+ const response=await page.request.post('/customer/register',{multipart:{fullname:'Brand Test Customer',phone:'08012345678',email,password:'browser-pass-123',confirm_password:'browser-pass-123'}});
+ expect(response.ok(),await response.text()).toBeTruthy();
+
+ await page.goto('/customer/dashboard');
+ const customerBrandName=await page.locator('.site-header .site-brand-name').textContent();
+ expect(customerBrandName?.trim()).toBe("OG's Salon");
+ const customerMarkRadius=await page.locator('.site-header .site-brand-mark').evaluate(el=>getComputedStyle(el).borderRadius);
+ expect(customerMarkRadius).toBe('50%');
+ const customerSvg=await page.locator('.site-header .site-brand-mark svg.brand-monogram').count();
+ expect(customerSvg).toBe(1);
+ const customerRole=await page.locator('.site-header .site-brand-role').count();
+ expect(customerRole).toBe(0);
+
+ const barberEmail='brand-barber-'+Date.now()+'@example.test';
+ const barberReg=await page.request.post('/barber/register',{multipart:{fullname:'Brand Test Barber',phone:'08012345678',email:barberEmail,shopname:'Brand Shop',shopaddress:'12 Example Street',state:'Lagos',local_area:'Ikeja',password:'browser-pass-123',confirm_password:'browser-pass-123',personal_image:{name:'profile.png',mimeType:'image/png',buffer:PNG}}});
+ expect(barberReg.ok(),await barberReg.text()).toBeTruthy();
+ expect((await page.request.post('/barber/login',{form:{email:barberEmail,password:'browser-pass-123'}})).ok()).toBeTruthy();
+
+ await page.goto('/barber/dashboard');
+ const barberBrandName=await page.locator('.site-header .site-brand-name').textContent();
+ expect(barberBrandName?.trim()).toBe("OG's Salon");
+ const barberMarkRadius=await page.locator('.site-header .site-brand-mark').evaluate(el=>getComputedStyle(el).borderRadius);
+ expect(barberMarkRadius).toBe('50%');
+ const barberSvg=await page.locator('.site-header .site-brand-mark svg.brand-monogram').count();
+ expect(barberSvg).toBe(1);
+ const barberRole=await page.locator('.site-header .site-brand-role').count();
+ expect(barberRole).toBe(0);
+});
 test('customer journeys, public sessions and narrow navigation',async({page},testInfo)=>{
  const email='browser-customer-'+Date.now()+'@example.test';
  const response=await page.request.post('/customer/register',{multipart:{fullname:'A customer with a deliberately long display name',phone:'08012345678',email,password:'browser-pass-123',confirm_password:'browser-pass-123'}});
