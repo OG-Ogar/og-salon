@@ -17,22 +17,19 @@
 
 <main class="barber-main wrap ui-page ui-confirmation">
 
-    <p class="barber-breadcrumb">
-        <a href="/barber/dashboard">Home</a>
+    <nav class="barber-breadcrumb" aria-label="Breadcrumb">
+        <a href="/barber/dashboard">Dashboard</a>
         /
         <a href="/barber/hairstyles">Hairstyles</a>
         /
-        Delete
-    </p>
+        <span>Delete</span>
+    </nav>
 
     <h1 class="barber-title">{{.Title}}</h1>
 
     <div class="panel ui-panel barber-card">
-
         <p>{{.Message}}</p>
-
         {{template "confirmation-actions" (confirmation .Action .CSRF "Yes, delete it" .Cancel "No, keep it")}}
-
     </div>
 
 </main>

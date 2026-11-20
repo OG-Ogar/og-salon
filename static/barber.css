@@ -1136,6 +1136,8 @@
 .barber-profile-table td {
     color: var(--ink);
     font-size: 0.95rem;
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 .barber-logout {
@@ -1385,5 +1387,11 @@
         width: 72px;
         height: 72px;
         flex-basis: 72px;
+    }
+}
+
+@media (max-width: 440px) {
+    .barber-hairstyle-grid {
+        grid-template-columns: 1fr;
     }
 }
