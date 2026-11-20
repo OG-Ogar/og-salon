@@ -3,35 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hairstyles - OG's Salon</title>
+  <title>All Hairstyles - OG's Salon</title>
   <script src="/static/theme-switch.js"></script>
   <link rel="stylesheet" href="/static/app.css">
   <link rel="stylesheet" href="/static/ui.css">
   <link rel="stylesheet" href="/static/theme.css">
-  <link rel="stylesheet" href="/static/customer-dashboard.css">
-  <link rel="stylesheet" href="/static/social-feed.css?v=9">
+  <link rel="stylesheet" href="/static/customer-profile.css">
+  <script src="/static/app.js" defer></script>
 </head>
-<body class="modern-customer-page">
-  {{template "role-header" (navigation "customer" "dashboard" .)}}
-  <main class="all-hairstyles-page">
-    <a class="all-hairstyles-back" href="/customer/dashboard">&larr; Back to home</a>
-    <h1>All hairstyles</h1>
-    <p>Browse styles shared by barbers across OG's Salon.</p>
+<body class="modern-customer-page customer-page">
+  {{template "role-header" (navigation "customer" "profile" .)}}
+  <main class="all-hairstyles-page" id="main-content">
+    <div class="hairstyles-page-header">
+      <a class="all-hairstyles-back" href="/customer/profile">&larr; Back to profile</a>
+      <span class="all-hairstyles-eyebrow">Hair Inspiration</span>
+      <h1>Hairstyle lookbook</h1>
+      <p class="hairstyles-subtitle">Browse styles shared by barbers across OG's Salon.</p>
+    </div>
     {{if .Styles}}
     <div class="all-hairstyles-grid">
       {{range .Styles}}
-      <a class="all-hairstyles-card" href="{{printf "/explore/%d" .BarberID}}">
+      <a class="all-hairstyles-card" href="{{printf "/explore/%d" .BarberID}}" aria-label="{{.Name}} by {{.BarberName}} - {{naira .Price}}">
         <div class="all-hairstyles-media">
-          {{if .Image}}<img src="{{.Image}}" alt="{{.Name}}" loading="lazy">{{else if .Video}}<video src="{{.Video}}" muted playsinline preload="metadata"></video>{{else}}<span>{{printf "%.1s" .Name}}</span>{{end}}
+          {{if .Image}}
+            <img src="{{.Image}}" alt="{{.Name}}" loading="lazy" width="320" height="240" decoding="async">
+          {{else if .Video}}
+            <video src="{{.Video}}" aria-label="Preview of {{.Name}}" muted playsinline preload="metadata"></video>
+          {{else}}
+            <span class="all-hairstyles-placeholder" aria-hidden="true">{{printf "%.1s" .Name}}</span>
+          {{end}}
+          <span class="hairstyles-media-tag" aria-hidden="true">{{naira .Price}}</span>
         </div>
-        <strong>{{.Name}}</strong>
-        <span class="all-hairstyles-barber">{{.BarberName}}</span>
-        <span class="all-hairstyles-price">{{naira .Price}}</span>
+        <div class="all-hairstyles-card-info">
+          <strong class="all-hairstyles-name">{{.Name}}</strong>
+          <span class="all-hairstyles-barber">{{.BarberName}}</span>
+          <div class="all-hairstyles-action">
+            <span class="all-hairstyles-price">{{naira .Price}}</span>
+            <span class="all-hairstyles-cta" aria-hidden="true">Book &rarr;</span>
+          </div>
+        </div>
       </a>
       {{end}}
     </div>
     {{else}}
-    <p class="all-hairstyles-empty">No hairstyles are available right now.</p>
+    <div class="all-hairstyles-empty-card">
+      <p class="all-hairstyles-empty">No hairstyles are available right now.</p>
+      <a class="customer-primary-button" href="/customer/barbers">Find a Barber &rarr;</a>
+    </div>
     {{end}}
   </main>
   {{template "public-footer" .}}
